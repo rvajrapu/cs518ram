@@ -1,4 +1,5 @@
 <?php
+  require_once("/includes/session.php");
   require_once("/includes/db_connection.php");
   require_once("/includes/functions.php");
   include("htmlheader.php");
@@ -11,7 +12,7 @@
     
 		$username = trim($_POST["username"]);
 		$password = trim($_POST["password"]);
-		
+		$result_uid = find_uid($username);
 		$result = find_user($username);
 	?>
     <?php
@@ -22,14 +23,18 @@
 				// successful login
 				$userpwd = find_pwd($username);
 				if ($userpwd["pass_code"] == $password) {
-					header("Location: http://localhost/Questra/basic.php?username=" . $username);
+					$_SESSION["uid"] = (int)$result_uid["u_id"];
+					$_SESSION["username"] = $username;
+					header("Location: http://localhost/Questra/post_question.php?username=" . $username);
 				}
 				else {
-					header("Location: http://localhost/Questra/index.php?error=Invalidpassword");
+					$_SESSION["message"] = "Invalid Password";
+					redirect_to("index.php");
 				} 
 
 			} else {
-				header("Location: http://localhost/Questra/index.php?username=" . $username);
+				$_SESSION["message"] = "User is not registered";
+				redirect_to("index.php");
 			}
         }
       ?>

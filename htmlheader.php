@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet">
     <script src="js/jquery.js"></script>
 
     

@@ -1,9 +1,9 @@
 <?php
+  require_once("/includes/session.php");
   require_once("htmlheader.php");
 ?>
     <div  id="errormsg" role="alert">
-     <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> 
-          
+       <?php echo message(); ?>
     </div>
     <div class="container">
 

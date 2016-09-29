@@ -1,12 +1,13 @@
 <?php
-  require_once("/includes/db_connection.php");
+  require_once("/includes/session.php");
   require_once("/includes/functions.php");
   include("htmlheader.php");
+  include("/includes/nav.php");
 ?>
 
     <div class="container">
 
-    <?php var_dump($_SESSION) ?>  
+    <?php var_dump($_SESSION); ?>  
 
     </div> <!-- /container -->
 
@@ -14,8 +15,3 @@
     <link href="css/signin.css" rel="stylesheet">
 
 
-<?php
-// 4. Release returned data
-  	mysqli_free_result($result);
-  	require_once("footer.php");
-?>

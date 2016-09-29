@@ -1,12 +1,12 @@
 <?php
   require_once("/includes/db_connection.php");
   require_once("/includes/functions.php");
-  include("htmlheader.php");
+  require_once("htmlheader.php");
 ?>
 
     <div class="container">
 
-    <?php var_dump($_SESSION) ?>  
+    <?php var_dump($_POST) ?>  
 
     </div> <!-- /container -->
 
