@@ -13,9 +13,17 @@
                     <li>
                         <a href="#">About</a>
                     </li>
-                    <li>
-                        <a href="#">Sign In</a>
-                    </li>
+                    <?php if(!logged_in()){ ?>
+                        <li>
+                        <a href="index.php">Sign In</a>
+                        </li>
+                    <?php } ?>
+                    <?php if(logged_in()){ ?>
+                        <li>
+                        <a href="logout.php">Sign Out</a>
+                        </li>
+                    <?php } ?>
+                    
                     <li>
                         <a href="#">Contact Us</a>
                     </li>

@@ -4,26 +4,32 @@
   include("htmlheader.php");
   include("/includes/nav.php");
 ?>
+<?php confirm_logged_in(); ?>
 
+    <div  id="errormsg" role="alert">
+       <?php echo message(); ?>
+    </div>
     <div class="container">
 
     <div class="bs-example" data-example-id="basic-forms"> 
-      <form class="form-horizontal" action="#">
-
+      <form class="form-horizontal" action="#" method ="post" id="postquestion" name = "myform">
       <div class="form-group">
         <label for="Title">Title</label>
-        <input type="text" class="form-control" placeholder="Enter Title" autofocus>
+        <input type="text" class="form-control" placeholder="Enter Title" id="questiontitle" name="questiontitle" autofocus>
+        <p class='help-block'></p>
       </div>
       <div class="form-group">
         <label for="Question">Enter Question</label>
+        <input type="hidden" name="forid" id="textedit" />
+        <!--The text editor goes here -->  
         <div class="summernote">
-           
+         
         </div>
-      
+        <p class='help-block'></p>
       </div>
       <div class="form-group">
         <label for="Title">Tags</label>
-        <select class="form-control">
+        <select class="form-control" name="questiontag">
           <option>Science</option>
           <option>Mathematics</option>
           <option>Politics</option>
@@ -46,6 +52,7 @@
   <link href="css/postquestion.css" rel="stylesheet">
   <link href="libs/summernote/summernote.css" rel="stylesheet">
   <script src="libs/summernote/summernote.js"></script>
+  <script src="js/validations.js"></script>
 
 <?php
   require_once("footer.php");

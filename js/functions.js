@@ -29,3 +29,21 @@ function checkpresence(a,id) {
 		return true;
   }
 }
+
+  function post_question(formdata){
+
+    $.ajax({
+        url: 'post_question_ajax.php',
+        type: 'post',
+        data: {myData:formdata},
+        success: function(data) {
+            alert("Question Posted");
+            location.reload();
+          
+        },
+        error: function(xhr, desc, err) {
+          console.log(xhr);
+          console.log("Details: " + desc + "\nError:" + err);
+        }
+      }); // end ajax call
+  }

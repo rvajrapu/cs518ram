@@ -48,3 +48,34 @@
 	  	header("Location: " . $new_location);
 	  	exit;
 	}
+
+	function insert_question($title,$question,$tag,$uid) {
+		global $connection;
+		
+		$query  = "INSERT INTO ptl_questions ";
+		$query .= "(Q_TITLE, Q_TEXT, Q_TAG, U_ID, CREATION_DATE) ";
+		$query .= "VALUES ('$title', '$question', '$tag', $uid, CURDATE()) ";
+		$result_id = mysqli_query($connection, $query);
+		error_log("Inside query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		// confirm_query($result_id);
+		if($result_id) {
+			$_SESSION["message"] = "Question Posted";
+			return true;
+
+		} else {
+			$_SESSION["message"] = "Database Error";
+			return false;
+		}
+		
+	}
+	
+	function logged_in() {
+		return isset($_SESSION['uid']);
+	}
+	
+	function confirm_logged_in() {
+		if (!logged_in()) {
+			redirect_to("index.php");
+		}
+	}
+	?>
