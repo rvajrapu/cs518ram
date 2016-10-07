@@ -6,15 +6,13 @@
 ?>
 
 
-
-
 <div class="container-fluid">
   <p></p>
   <div class="row">
 
   	<div class="col-sm-2"> </div>
 
-    <div class="col-sm-8" style="background-color:lavenderblush;">    
+    <div class="col-sm-8" style="background-color:#fff;";">    
    		 <div class="col-sm-12">
     		<div class="col-sm-12"> 
     			
@@ -30,7 +28,7 @@
 				die("Database Connection failed: " . mysqli_connect_error() . " (" . mysqli_connect_errno() . ")");
 				}
 
-				$query  = "SELECT UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE,Q_TAG FROM PTL_QUESTIONS LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID GROUP BY PTL_QUESTIONS.Q_ID";
+				$query  = "SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID FROM PTL_QUESTIONS LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID GROUP BY PTL_QUESTIONS.Q_ID";
 				$result = mysqli_query($connection,$query);
 				if(!$result){die("Database query failed.");}
 				?>
@@ -38,9 +36,11 @@
 				<p>
 				</p>
   				<ul class="nav nav-tabs">
+  				<p></p>
     				<li class="active"><a href="#">Top Questions</a></li>
     				<li><a href="#">Un-Answered</a></li>
   				</ul>
+  				<p></p>
 
   				<div class="col-sm-12" >
 					<div>
@@ -50,14 +50,14 @@
 
 						<div>
 		 		 		<?php
-		  				while($row = mysqli_fetch_assoc($result))
+		  				while($row = mysqli_fetch_assoc($result))	
 		  				{
+		  					$question_id = $row["Q_ID"];
 
 						echo "<div class='row'>";
 
-
-  						echo "<div class='col-xs-12 col-sm-6 col-md-8'> <div> <a href='#'>" . $row["Q_TITLE"] . "</a> </div> <br>  <button type='button' class='btn btn-primary btn-xs'>" . $row["Q_TAG"] . " </button> </div>";
-  											    echo "<div class='col-xs-6 col-md-4'> 
+  						echo "<div class='col-xs-12 col-sm-6 col-md-8'> <div> <a href='view_question.php?q_id=".$question_id."'>" . $row["Q_TITLE"] . "</a> </div> <br>  <button type='button' class='btn btn-primary btn-xs'>" . $row["Q_TAG"] . " </button> </div>";
+  						echo "<div class='col-xs-6 col-md-4'> 
 					          <button type='button' class='btn btn-primary btn-sm'>" . $row["UP_VOTE"] . "<br>" . "Votes" . " </button> 
 					          <button type='button' class='btn btn-primary btn-sm' style='background-color:#5fba7d;''>" . $row["ANSWERS_COUNT"] . "<br>" . "Answers" . " </button> 
 					          <button type='button' class='btn btn-primary btn-sm'>" . $row["VIEWS"] . "<br>" . "Views" . " </button> </div>";
@@ -66,6 +66,8 @@
 			  			}
 		  				?>
 		  				</div>
+
+
 
 		  			</div>
 				</div>

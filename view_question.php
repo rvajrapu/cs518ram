@@ -11,9 +11,12 @@
         <p></p>
         <div class="row">
             <div class="col-sm-2"></div>
-            <div class="col-sm-8" style="background-color:lavenderblush;">
+            <div class="col-sm-8" style="background-color:#fff;">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
+                        <?php 
+                        $ques_id = trim($_GET["q_id"]);                    
+                        ?> 
                         <?php 
                                             // Opening Database Connection  
                                             $dbhost = "localhost";
@@ -28,8 +31,18 @@
 
                                       // Need to Question ID Input from another page  ****************************************************************************        
 
-                                            $query_1  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, UP_VOTE, DOWN_VOTE, BA_FLAG FROM PTL_QUESTIONS LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID WHERE PTL_QUESTIONS.Q_ID = 1 ORDER BY PTL_ANSWERS.A_ID";
-                                            $query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG FROM PTL_QUESTIONS WHERE PTL_QUESTIONS.Q_ID = 1";
+                                            $query_1  = "
+                                                        SELECT Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG,PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE 
+                                                        FROM PTL_ANSWERS 
+                                                        LEFT OUTER JOIN PTL_QUESTIONS ON PTL_ANSWERS.Q_ID = PTL_QUESTIONS.Q_ID 
+                                                        LEFT OUTER JOIN PTL_USERS ON PTL_ANSWERS.U_ID = PTL_USERS.U_ID
+                                                        WHERE PTL_QUESTIONS.Q_ID = $ques_id ORDER BY PTL_ANSWERS.A_ID";
+
+                                            $query_2  = "SELECT  Q_TITLE, Q_TEXT, Q_TAG, PTL_QUESTIONS.CREATION_DATE,FIRST_NAME
+                                                         FROM PTL_QUESTIONS 
+                                                         LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID =  PTL_USERS.U_ID
+                                                         WHERE PTL_QUESTIONS.Q_ID = $ques_id";
+
                                             $result_1 = mysqli_query($connection,$query_1);
                                             $result_2 = mysqli_query($connection,$query_2);
                                             if(!$result_1){die("Database query failed.");}
@@ -40,8 +53,9 @@
 
                             <?php        
                                           // Need to Question Title Input from another page  ****************************************************************************
-                                          echo "<h2>How to Auto-Increment PK in MYSQL</h2>";
-                                          echo "<hr>";
+                                    $row_2 = mysqli_fetch_assoc($result_2);                                         
+                                    echo "<h2>".$row_2['Q_TITLE']."</h2>";
+                                    echo "<hr>";
 
                             ?>
 
@@ -70,11 +84,24 @@
                                 <div class="col-sm-10" >
                                     <?php
 
-                                    $row_2 = mysqli_fetch_assoc($result_2);
+                                  //  $row_2 = mysqli_fetch_assoc($result_2);
                                     echo $row_2["Q_TEXT"];
                                     echo "<p></p>";
 
                                     ?>
+
+                                </div>
+
+                                <div class="row">
+                                  <div class="col-sm-3"> </div>
+                                  <div class="col-sm-6"> </div>
+                                  <div class="col-sm-2"  style="background-color:#e0eaf1;">
+                                      <p></p>
+                                      <div>Posted on: <a><?php echo $row_2["CREATION_DATE"] ?></a></div>
+                                      <div>Posted by: <a><?php echo $row_2["FIRST_NAME"] ?></a></div>
+                                      <p></p>
+                                  </div>
+                                  <div class="col-sm-1"> </div>
                                 </div>
 
                                 <div class="col-sm-1" > </div>
@@ -83,7 +110,6 @@
                                 <p></p>
                                 <h3>Answer</h3>
                                 <hr/>
-
 
                                     <?php
 
@@ -110,6 +136,25 @@
                                 
                                     echo "</div>";
                                     echo "</div>";
+
+                                    echo '                                
+                                          <div class="row">
+                                          <div class="col-sm-3"> 
+                                          <p></p>
+
+                                          <button type="button" class="btn btn-secondary">Correct Answer</button>
+
+                                          </div>
+                                          <div class="col-sm-6"> </div>
+                                          <div class="col-sm-2"  style="background-color:#e0eaf1;">
+                                              <p></p>
+                                              <div>Ans on: <a>' . $row_1["CREATION_DATE"] . '</a></div>
+                                              <div>Ans by: <a>' . $row_1["FIRST_NAME"] . '</a></div>
+                                              <p></p>
+                                          </div>
+                                          <div class="col-sm-1"> </div>
+                                        </div>';
+
                                     echo "<hr/>";
 
                                     }
@@ -123,20 +168,21 @@
                                         </div>
                                         <div class="col-sm-10">
                                             <h3>Your Answer</h3>
+                                            
                                             <div class="summernote">
 
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Submit Answer</button>  
+                                            <button type="submit" class="btn btn-primary"> Post Your Answer</button>  
                                         </div>
                                     </div>
-
+                                    <p></p>
 
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-2"></div>
+            <div class="col-sm-2"> </div>
         </div>
     </div>
 
@@ -146,6 +192,7 @@
           height: 200,                 // set editor height
         });
     });
+
 </script>
 
 <link href="css/postquestion.css" rel="stylesheet">
