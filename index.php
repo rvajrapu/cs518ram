@@ -1,4 +1,5 @@
 <?php
+  echo 'hello'; exit;
   require_once("/includes/session.php");
   require_once("htmlheader.php");
 ?>
