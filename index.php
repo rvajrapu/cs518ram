@@ -1,9 +1,4 @@
-<?php
-  echo 'hello'; exit;
-  require_once("/includes/session.php");
-  require_once("htmlheader.php");
-  
-?>
+
     <div  id="errormsg" role="alert">
        <?php echo message(); ?>
     </div>
