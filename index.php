@@ -1,6 +1,6 @@
 
     <div  id="errormsg" role="alert">
-       <?php echo message(); ?>
+       
     </div>
     <div class="container">
 
