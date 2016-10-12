@@ -1,6 +1,9 @@
-
+<?php
+  include("./includes/session.php");
+  include("./htmlheader.php");
+?>
     <div  id="errormsg" role="alert">
-       
+       <?php echo message(); ?>
     </div>
     <div class="container">
 
@@ -32,5 +35,5 @@
 
 
 <?php
-  require_once("footer.php");
+  include("./footer.php");
 ?>
