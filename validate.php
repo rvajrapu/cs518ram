@@ -26,7 +26,7 @@
 				if ($userpwd["pass_code"] == $password) {
 					$_SESSION["uid"] = (int)$result_uid["u_id"];
 					$_SESSION["username"] = $username;
-					header("Location: http://localhost/Questra/post_question.php?username=" . $username);
+					redirect_to("post_question.php");
 				}
 				else {
 					$_SESSION["message"] = "Invalid Password";
