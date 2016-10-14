@@ -1,8 +1,8 @@
 <?php
-  require_once("/includes/session.php");
-  require_once("/includes/db_connection.php");
-  require_once("/includes/functions.php");
-  include("htmlheader.php");
+  include("./includes/session.php");
+  include("./includes/db_connection.php");
+  include("./includes/functions.php");
+  include("./htmlheader.php");
 ?>
 
     <div class="container">

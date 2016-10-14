@@ -1,5 +1,5 @@
-<?php require_once("/includes/session.php"); ?>
-<?php require_once("/includes/functions.php"); ?>
+<?php include("./includes/session.php"); ?>
+<?php include("./includes/functions.php"); ?>
 
 
 

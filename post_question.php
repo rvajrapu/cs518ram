@@ -1,8 +1,8 @@
 <?php
-  require_once("/includes/session.php");
-  require_once("/includes/functions.php");
-  include("htmlheader.php");
-  include("/includes/nav.php");
+  include("./includes/session.php");
+  include("./includes/functions.php");
+  include("./htmlheader.php");
+  include("./includes/nav.php");
 ?>
 <?php confirm_logged_in(); ?>
 

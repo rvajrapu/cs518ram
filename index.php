@@ -1,6 +1,6 @@
 <?php
-  require_once("/includes/session.php");
-  require_once("htmlheader.php");
+  include("./includes/session.php");
+  include("./htmlheader.php");
 ?>
     <div  id="errormsg" role="alert">
        <?php echo message(); ?>
@@ -35,5 +35,5 @@
 
 
 <?php
-  require_once("footer.php");
+  include("./footer.php");
 ?>
