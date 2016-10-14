@@ -46,3 +46,23 @@ $.fn.serializeObject = function()
     });
     return o;
 };
+
+//post answer from view_question
+
+$( "#postanswer" ).submit(function( event ) {
+  var formData = $("#postanswer").serializeObject();
+  var temp_makrup = $('.summernote').summernote('code');
+  var makrup = $.trim(temp_makrup);
+  formData['answer'] = makrup;
+  
+  if ((!checkpresence(makrup,"textedit"))){
+
+    return false;
+  }
+  else{
+    console.log("Form validated")
+    event.preventDefault();
+    post_answer(formData);
+  }
+
+  });

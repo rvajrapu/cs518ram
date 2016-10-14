@@ -7,19 +7,20 @@
 
     <div class="container">
 
-    <?php var_dump($_POST); 
+    <?php  
     
     
 		$username = trim($_POST["username"]);
 		$password = trim($_POST["password"]);
 		$result_uid = find_uid($username);
-		$result = find_user($username);
+		$subject = find_user($username);
 	?>
     <?php
         // 3. Use returned data (if any)
-        while($subject = mysqli_fetch_assoc($result)) {
+        
+        
           // output data from each row
-      		if ($subject["user_id"] == $username) {
+      		if ($subject) {
 				// successful login
 				$userpwd = find_pwd($username);
 				if ($userpwd["pass_code"] == $password) {
@@ -34,9 +35,10 @@
 
 			} else {
 				$_SESSION["message"] = "User is not registered";
+        //error_log("Inside Validate\n" . $subject , 3, "C:/xampp/apache/logs/error.log");
 				redirect_to("index.php");
 			}
-        }
+        
       ?>
     </div> <!-- /container -->
       <?php

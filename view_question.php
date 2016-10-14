@@ -1,8 +1,9 @@
 <?php
-  require_once("/includes/session.php");
-  require_once("/includes/functions.php");
-  include("htmlheader.php");
-  include("/includes/nav.php");
+  include("./includes/session.php");
+  include("./includes/db_connection.php");
+  include("./includes/functions.php");
+  include("./htmlheader.php");
+  include("/includes/nav.php");    
 ?>
 
 
@@ -16,37 +17,8 @@
                     <div class="col-sm-12">
                         <?php 
                         $ques_id = trim($_GET["q_id"]);                    
-                        ?> 
-                        <?php 
-                                            // Opening Database Connection  
-                                            $dbhost = "localhost";
-                                            $dbuser = "root";
-                                            $dbpass = "";
-                                            $dbname = "phpmyadmin";
-                                            $connection = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-                                
-                                            if(mysqli_connect_errno()){
-                                            die("Database Connection failed: " . mysqli_connect_error() . " (" . mysqli_connect_errno() . ")");
-                                            }
-
-                                      // Need to Question ID Input from another page  ****************************************************************************        
-
-                                            $query_1  = "
-                                                        SELECT Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG,PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE 
-                                                        FROM PTL_ANSWERS 
-                                                        LEFT OUTER JOIN PTL_QUESTIONS ON PTL_ANSWERS.Q_ID = PTL_QUESTIONS.Q_ID 
-                                                        LEFT OUTER JOIN PTL_USERS ON PTL_ANSWERS.U_ID = PTL_USERS.U_ID
-                                                        WHERE PTL_QUESTIONS.Q_ID = $ques_id ORDER BY PTL_ANSWERS.A_ID";
-
-                                            $query_2  = "SELECT  Q_TITLE, Q_TEXT, Q_TAG, PTL_QUESTIONS.CREATION_DATE,FIRST_NAME
-                                                         FROM PTL_QUESTIONS 
-                                                         LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID =  PTL_USERS.U_ID
-                                                         WHERE PTL_QUESTIONS.Q_ID = $ques_id";
-
-                                            $result_1 = mysqli_query($connection,$query_1);
-                                            $result_2 = mysqli_query($connection,$query_2);
-                                            if(!$result_1){die("Database query failed.");}
-                                            if(!$result_2){die("Database query failed.");}
+                        $result_1 = get_result_1($ques_id);
+                        $result_2 = get_result_2($ques_id);
                          ?>
                         <p></p>
                         <div class = 'row'>
@@ -168,11 +140,14 @@
                                         </div>
                                         <div class="col-sm-10">
                                             <h3>Your Answer</h3>
-                                            
+                                            <form  action="#" method ="post" id="postanswer" name = "myform">
+                                            <input type="hidden" name="forid" id="textedit" value= <?php echo $ques_id ?> />
                                             <div class="summernote">
 
                                             </div>
-                                            <button type="submit" class="btn btn-primary"> Post Your Answer</button>  
+                                            <button type="submit" class="btn btn-primary"> Post Your Answer</button>
+                                            <p class='help-block'></p>
+                                            </form>  
                                         </div>
                                     </div>
                                     <p></p>
@@ -197,11 +172,10 @@
 
 <link href="css/postquestion.css" rel="stylesheet">
 <link href="libs/summernote/summernote.css" rel="stylesheet">
-<script src="libs/summernote/summernote.js"> </script>    
+<script src="libs/summernote/summernote.js"> </script> 
+<script src="js/validations.js"></script>   
 
 
     <link href="css/signin.css" rel="stylesheet"><?php
       require_once("footer.php");
     ?>
-</body>
-</html>

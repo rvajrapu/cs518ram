@@ -1,10 +1,10 @@
 <?php
-  require_once("/includes/session.php");
-  require_once("/includes/functions.php");
-  include("htmlheader.php");
-  include("/includes/nav.php");
+  include("./includes/session.php");
+  include("./includes/db_connection.php");
+  include("./includes/functions.php");
+  include("./htmlheader.php");
+  include("/includes/nav.php");  
 ?>
-
 
 <div class="container-fluid">
   <p></p>
@@ -21,7 +21,7 @@
 				$dbhost = "localhost";
 				$dbuser = "root";
 				$dbpass = "";
-				$dbname = "phpmyadmin";
+				$dbname = "question_forum";
 				$connection = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 	
 				if(mysqli_connect_errno()){

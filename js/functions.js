@@ -47,3 +47,21 @@ function checkpresence(a,id) {
         }
       }); // end ajax call
   }
+
+    function post_answer(formdata){
+
+    $.ajax({
+        url: 'post_answer_ajax.php',
+        type: 'post',
+        data: {myData:formdata},
+        success: function(data) {
+            alert("Answer Posted");
+            location.reload();
+          
+        },
+        error: function(xhr, desc, err) {
+          console.log(xhr);
+          console.log("Details: " + desc + "\nError:" + err);
+        }
+      }); // end ajax call
+  }

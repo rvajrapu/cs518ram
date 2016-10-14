@@ -11,9 +11,15 @@
 		
 		$query  = "SELECT user_id ";
 		$query .= "FROM ptl_users ";
+		$query .= "WHERE user_id = '$userid' ";
+		$query .= "LIMIT 1";
 		$result_set = mysqli_query($connection, $query);
 		confirm_query($result_set);
-		return $result_set;
+		if($result_user = mysqli_fetch_assoc($result_set)) {
+			return $result_user;
+		} else {
+			return null;
+		}
 	}
 
 
@@ -68,6 +74,25 @@
 		}
 		
 	}
+	function insert_answer($answer,$qid,$uid) {
+		global $connection;
+		
+		$query  = "INSERT INTO ptl_answers ";
+		$query .= "(A_TEXT, Q_ID, U_ID, CREATION_DATE) ";
+		$query .= "VALUES ('$answer', '$qid', $uid, CURDATE()) ";
+		$result_id = mysqli_query($connection, $query);
+		error_log("Inside query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		// confirm_query($result_id);
+		if($result_id) {
+			$_SESSION["message"] = "Answer Posted";
+			return true;
+
+		} else {
+			$_SESSION["message"] = "Database Error";
+			return false;
+		}
+		
+	}
 	
 	function logged_in() {
 		return isset($_SESSION['uid']);
@@ -78,4 +103,39 @@
 			redirect_to("index.php");
 		}
 	}
+
+	function get_result_1($ques_id) {
+		                                 	global $connection;   
+                                            $query_1  = "
+                                                        SELECT Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG,PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE 
+                                                        FROM PTL_ANSWERS 
+                                                        LEFT OUTER JOIN PTL_QUESTIONS ON PTL_ANSWERS.Q_ID = PTL_QUESTIONS.Q_ID 
+                                                        LEFT OUTER JOIN PTL_USERS ON PTL_ANSWERS.U_ID = PTL_USERS.U_ID
+                                                        WHERE PTL_QUESTIONS.Q_ID = $ques_id ORDER BY PTL_ANSWERS.A_ID
+														";
+														 
+											$result_1 = mysqli_query($connection,$query_1);
+											
+                                            if(!$result_1){die("Database query failed.");}
+											
+											return ($result_1);		
+	}
+	
+	function get_result_2($ques_id) {
+		global $connection;
+                                            $query_2  = "
+														 SELECT  Q_TITLE, Q_TEXT, Q_TAG, PTL_QUESTIONS.CREATION_DATE,FIRST_NAME
+                                                         FROM PTL_QUESTIONS 
+                                                         LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID =  PTL_USERS.U_ID
+                                                         WHERE PTL_QUESTIONS.Q_ID = $ques_id
+														";
+														 
+                                            $result_2 = mysqli_query($connection,$query_2);
+											
+                                            if(!$result_2){die("Database query failed.");}
+											
+											return ($result_2);
+		
+	}
+
 	?>
