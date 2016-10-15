@@ -17,6 +17,7 @@
     		<div class="col-sm-12"> 
     			
     			<?php 
+    			$uid = $_SESSION["uid"];
 				// Opening Database Connection	
 				$dbhost = "localhost";
 				$dbuser = "root";
@@ -32,6 +33,7 @@
 						   FROM PTL_QUESTIONS 
 						   LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID 
 						   LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID
+						   WHERE PTL_QUESTIONS.U_ID = " . $uid . " 
 						   GROUP BY PTL_QUESTIONS.Q_ID";
 				$result = mysqli_query($connection,$query);
 				if(!$result){die("Database query failed.");}
@@ -106,9 +108,6 @@
 
   </div>
 </div>
-
-
-
 
     <!-- Custom styles for this page -->
     <link href="css/signin.css" rel="stylesheet">
