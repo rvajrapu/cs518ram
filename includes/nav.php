@@ -6,22 +6,22 @@
             <!--  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
                 <ul class="nav navbar-nav">
                         <li>
-                        <a href="landing_page.php">Questra Community</a>
+                        <a href="index.php">Questra Community</a>
                         </li>
                         <li>                
                         <li>
-                        <a href="index.php">About us</a>
+                        <a href="#">About us</a>
                         </li>
                         <li>
-                        <a href="index.php">Register</a>
+                        <a href="#">Register</a>
                         </li>  
                         <li>
-                        <a href="index.php">Tour</a>
+                        <a href="#">Tour</a>
                         </li>
 
                     <?php if(!logged_in()){ ?>
                         <li>
-                        <a href="index.php">Sign In</a>
+                        <a href="login.php">Sign In</a>
                         </li>
                     <?php } ?>
                     <?php if(logged_in()){ ?>
@@ -50,7 +50,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="landing_page.php">Questions</a>
+                        <a class="page-scroll" href="index.php">Questions</a>
                     </li>
                     <?php if(logged_in()){ ?>
                     <li>

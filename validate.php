@@ -26,17 +26,17 @@
 				if ($userpwd["pass_code"] == $password) {
 					$_SESSION["uid"] = (int)$result_uid["u_id"];
 					$_SESSION["username"] = $username;
-					redirect_to("landing_page.php");
+					redirect_to("index.php");
 				}
 				else {
 					$_SESSION["message"] = "Invalid Password";
-					redirect_to("index.php");
+					redirect_to("login.php");
 				} 
 
 			} else {
 				$_SESSION["message"] = "User is not registered";
         //error_log("Inside Validate\n" . $subject , 3, "C:/xampp/apache/logs/error.log");
-				redirect_to("index.php");
+				redirect_to("login.php");
 			}
         
       ?>
