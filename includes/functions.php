@@ -161,35 +161,24 @@
 
 	function get_result_1($ques_id) {
 		                                 	global $connection;   
-                                            $query_1  = "
-                                                        SELECT 
-														Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG,PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE, PTL_ANSWERS.A_ID,
-														CASE
-															WHEN BA_ID = PTL_ANSWERS.A_ID THEN 1
-															ELSE NULL
-															END AS TOP_AID
-                                                        FROM PTL_ANSWERS 
-                                                        LEFT OUTER JOIN PTL_QUESTIONS ON PTL_ANSWERS.Q_ID = PTL_QUESTIONS.Q_ID 
-                                                        LEFT OUTER JOIN PTL_USERS ON PTL_ANSWERS.U_ID = PTL_USERS.U_ID
-                                                        WHERE PTL_QUESTIONS.Q_ID = $ques_id ORDER BY TOP_AID desc ,PTL_ANSWERS.A_ID
-														";
-														 
+											$query  = "SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID, ";
+											$query .= "PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON ";
+											$query .= "FROM PTL_QUESTIONS ";
+											$query .= "LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID ";
+											$query .= "LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID ";
+											$query .= "GROUP BY PTL_QUESTIONS.Q_ID ";														 
 											$result_1 = mysqli_query($connection,$query_1);
-											
-                                            if(!$result_1){die("Database query failed.");}
+											if(!$result_1){die("Database query failed.");}
 											
 											return ($result_1);		
 	}
 	
 	function get_result_2($ques_id) {
 		global $connection;
-                                            $query_2  = "
-														 SELECT  Q_TITLE, Q_TEXT, Q_TAG, PTL_QUESTIONS.CREATION_DATE,FIRST_NAME,PTL_QUESTIONS.U_ID,BA_ID 
-                                                         FROM PTL_QUESTIONS 
-                                                         LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID =  PTL_USERS.U_ID
-                                                         WHERE PTL_QUESTIONS.Q_ID = $ques_id
-														";
-														 
+											$query_2  = "SELECT  Q_TITLE, Q_TEXT, Q_TAG, PTL_QUESTIONS.CREATION_DATE,FIRST_NAME,PTL_QUESTIONS.U_ID,BA_ID ";
+											$query_2 .= "FROM PTL_QUESTIONS "; 
+											$query_2 .= "LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID =  PTL_USERS.U_ID ";
+											$query_2 .= "WHERE PTL_QUESTIONS.Q_ID = $ques_id ";
                                             $result_2 = mysqli_query($connection,$query_2);
 											
                                             if(!$result_2){die("Database query failed.");}
@@ -203,12 +192,11 @@
 											global $connection;
 													if(isset($user_id)) 
 														{														 
-										    $query  = "
-													   SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID,
-													          PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON
-													   FROM PTL_QUESTIONS 
-													   LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID 
-													   LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID WHERE PTL_QUESTIONS.U_ID = " . $user_id . " GROUP BY PTL_QUESTIONS.Q_ID";													   
+														$query  = "SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID, ";
+														$query .= "PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON ";
+														$query .= "FROM PTL_QUESTIONS "; 
+														$query .= "LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID "; 
+														$query .= "LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID WHERE PTL_QUESTIONS.U_ID = " . $user_id . " GROUP BY PTL_QUESTIONS.Q_ID";		   
 														}																			
 														 
                                             $result = mysqli_query($connection,$query);
@@ -222,14 +210,11 @@
 	function get_landing_questions() {
 											global $connection;
 													 	 
-                                            $query  = "
-													   SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID,
-													          PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON
-													   FROM PTL_QUESTIONS 
-													   LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID 
-													   LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID
-													   GROUP BY PTL_QUESTIONS.Q_ID													   
-														";
+														$query  = "SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID, ";
+														$query .= "PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON ";
+														$query .= "FROM PTL_QUESTIONS "; 
+														$query .= "LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID "; 
+														$query .= "LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID GROUP BY PTL_QUESTIONS.Q_ID";
 														 
                                             $result = mysqli_query($connection,$query);
 											
