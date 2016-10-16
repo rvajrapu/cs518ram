@@ -5,6 +5,12 @@
 			die("Database query failed.");
 		}
 	}
+	function test_input($data) {
+  		$data = trim($data);
+  		$data = stripslashes($data);
+  		$data = htmlspecialchars($data);
+  		return $data;
+    }
 	
 	function find_user($userid) {
 		global $connection;
@@ -116,7 +122,11 @@
 
 		//error_log("\nbest_answer" . $ba_id . $u_id , 3, "C:/xampp/apache/logs/error.log");
 		if (verify_asker($u_id) && ($a_id == $ba_id)) {
-			return '<i class="fa fa-check-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true"></i>';
+			$output = '<i class="fa fa-check-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true" onclick="best_answer(this)"></i>';
+			$output .= '<input type="hidden" name="forid" id="a_id" value = '.$a_id.' />';
+			$output .= '<input type="hidden" name="forid" id="u_id" value = '.$u_id.' />';
+			$output .= '<input type="hidden" name="forid" id="q_id" value = '.$q_id.' />';
+			return $output;
 		}
 		if (verify_asker($u_id) && !($a_id == $ba_id)) {
 			$output ='<i class="fa fa-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true" onclick="best_answer(this)"></i>';

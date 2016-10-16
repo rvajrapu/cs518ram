@@ -81,8 +81,9 @@ function checkpresence(a,id) {
         type: 'post',
         data: {myData:data_answer},
         success: function(data) {
-            
-            location.reload();
+          
+            $( ".fa.fa-check-square-o.fa-3x" ).attr('class', 'fa fa-square-o fa-3x');
+            $( formdata ).attr('class', 'fa fa-check-square-o fa-3x');
           
         },
         error: function(xhr, desc, err) {

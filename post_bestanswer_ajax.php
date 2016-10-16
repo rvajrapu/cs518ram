@@ -8,11 +8,11 @@
     <div class="container">
 
     <?php $obj = $_POST['myData'];
-    
+
     $a_id = $obj["a_id"];
     $q_id = $obj["q_id"];
     $uid = $_SESSION["uid"];
-    error_log("\nInside best answer" . $a_id , 3, "C:/xampp/apache/logs/error.log");
+    //error_log("\nInside best answer" . $a_id , 3, "C:/xampp/apache/logs/error.log");
 
     if (update_answer($a_id,$q_id,$uid)){
 
