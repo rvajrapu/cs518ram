@@ -9,7 +9,12 @@
     <div  id="errormsg" role="alert">
        <?php echo message(); ?>
     </div>
-    <div class="container">
+    <br><br><br>
+  <div class="row">
+
+    <div class="col-sm-4"> </div>
+
+    <div class="col-sm-4">
 
     <div class="bs-example" data-example-id="basic-forms"> 
       <form class="form-horizontal" action="#" method ="post" id="postquestion" name = "myform">
@@ -37,10 +42,14 @@
           <option>Other</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">Submit Question</button>  
+      <button type="submit" class="btn btn-primary">Post Question</button>  
       </form>  
       </div>
     </div> <!-- /container -->
+        <div class="col-sm-4"> </div>
+</div>
+
+
     <script>
     $(document).ready(function() {
         $('.summernote').summernote({

@@ -1,14 +1,17 @@
 <?php
   include("./includes/session.php");
   include("./htmlheader.php");
+  include("./includes/functions.php");
+  include("/includes/nav.php");   
 ?>
     <div  id="errormsg" role="alert">
        <?php echo message(); ?>
     </div>
+    <br><br><br><br><br>
     <div class="container">
-
+    <img src="pics/Questra_Logo_4.png" class="center-block" alt="Questra Community" width="300" height="100">
       <form class="form-signin" id="signin" method ="post" action="validate.php">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <!-- <h2 class="form-signin-heading">  Sign into Questra</h2> -->
         <div class="form-group">
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" id="inputEmail" class="form-control" placeholder="Email address" name ="username" autofocus />

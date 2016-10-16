@@ -1,24 +1,18 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-
+            <div class="navbar-header">
+                
+                <a class="navbar-brand" href="#">
+                    <img src="pics/Quest.png" alt="">
+                </a>
+            </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <!--  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                        <li>
-                        <a href="landing_page.php">Questra Community</a>
-                        </li>
-                        <li>                
-                        <li>
-                        <a href="index.php">About us</a>
-                        </li>
-                        <li>
-                        <a href="index.php">Register</a>
-                        </li>  
-                        <li>
-                        <a href="index.php">Tour</a>
-                        </li>
-
+                    <li>
+                        <a href="#">About</a>
+                    </li>
                     <?php if(!logged_in()){ ?>
                         <li>
                         <a href="index.php">Sign In</a>
@@ -30,22 +24,26 @@
                         </li>
                     <?php } ?>
                     
+                    <li>
+                        <a href="#">Contact Us</a>
+                    </li>
                 </ul>
-           <!-- </div> -->
+            </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
 </nav>
 <div class="page-header">
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-3">
+    <!--
+        <div class="col-sm-4">
             <a href="#" class="header-brand">
-            <img src="pics/Logomakr_7FCfRF.png" alt="" width="421" height="62">
+            <img src="pics/Questra_Logo_4.png" alt="">
             </a>
         </div>
-        <div class="col-sm-7 hidden-xs">
-        <ul class="nav navbar-nav">
+    -->
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+        <ul class="nav navbar-nav navbar-right">
                     <li class="hidden active">
                         <a href="#page-top"></a>
                     </li>
@@ -60,8 +58,7 @@
                     </li>
         </ul>
         </div>
-        <div class="col-sm-1"></div>
-    </div>    
+ 
 </div>
     <!-- Custom styles for this page -->
     <link href="css/nav.css" rel="stylesheet">

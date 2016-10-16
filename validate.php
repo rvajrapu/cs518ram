@@ -26,7 +26,7 @@
 				if ($userpwd["pass_code"] == $password) {
 					$_SESSION["uid"] = (int)$result_uid["u_id"];
 					$_SESSION["username"] = $username;
-					redirect_to("post_question.php");
+					redirect_to("landing_page.php");
 				}
 				else {
 					$_SESSION["message"] = "Invalid Password";
