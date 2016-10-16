@@ -219,7 +219,7 @@
 	function get_landing_questions() {
 											global $connection;
 													 	 
-													 	$query  = "SELECT 1 AS UP_VOTE, 1 AS ANSWERS_COUNT, 1 AS VIEWS, 1 AS Q_TITLE, 1 AS Q_TAG, 1 AS Q_ID, 1 AS FIRST_NAME,1 AS Q_CREATED_ON FROM DUAL" ;
+										$query  = "SELECT 1 AS UP_VOTE, 1 AS ANSWERS_COUNT, 1 AS VIEWS, 1 AS Q_TITLE, 1 AS Q_TAG, 1 AS Q_ID, 1 AS FIRST_NAME,1 AS Q_CREATED_ON FROM PTL_QUESTIONS" ;
 														//$query  = "SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID, ";
 														//$query .= "PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON ";
 														//$query .= "FROM PTL_QUESTIONS "; 
