@@ -3,7 +3,7 @@
   include("./includes/db_connection.php");
   include("./includes/functions.php");
   include("./htmlheader.php");
-  include("/includes/nav.php");    
+  include("./includes/nav.php");    
 ?>
 
 

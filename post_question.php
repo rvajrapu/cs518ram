@@ -6,10 +6,12 @@
 ?>
 <?php confirm_logged_in(); ?>
 
+    <div class="container">
+    <br><br>
+
     <div  id="errormsg" role="alert">
        <?php echo message(); ?>
     </div>
-    <div class="container">
 
     <div class="bs-example" data-example-id="basic-forms"> 
       <form class="form-horizontal" action="#" method ="post" id="postquestion" name = "myform">
