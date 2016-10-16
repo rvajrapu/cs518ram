@@ -17,26 +17,10 @@
     		<div class="col-sm-12"> 
     			
     			<?php 
-    			$uid = $_SESSION["uid"];
-				// Opening Database Connection	
-				$dbhost = "localhost";
-				$dbuser = "root";
-				$dbpass = "";
-				$dbname = "question_forum";
-				$connection = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-	
-				if(mysqli_connect_errno()){
-				die("Database Connection failed: " . mysqli_connect_error() . " (" . mysqli_connect_errno() . ")");
-				}
+    			$user_id= $_SESSION["uid"];
+                                 
+                        $result = get_questions($user_id);
 
-				$query  = "SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID,PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON
-						   FROM PTL_QUESTIONS 
-						   LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID 
-						   LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID
-						   WHERE PTL_QUESTIONS.U_ID = " . $uid . " 
-						   GROUP BY PTL_QUESTIONS.Q_ID";
-				$result = mysqli_query($connection,$query);
-				if(!$result){die("Database query failed.");}
 				?>
 
 				<p>
