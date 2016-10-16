@@ -152,7 +152,7 @@
 	function get_result_1($ques_id) {
 		                                 	global $connection;   
                                             $query_1  = "
-                                                        SELECT A_ID,Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG,PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE 
+                                                        SELECT A_ID,Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG, PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE 
                                                         FROM PTL_ANSWERS 
                                                         LEFT OUTER JOIN PTL_QUESTIONS ON PTL_ANSWERS.Q_ID = PTL_QUESTIONS.Q_ID 
                                                         LEFT OUTER JOIN PTL_USERS ON PTL_ANSWERS.U_ID = PTL_USERS.U_ID
