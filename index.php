@@ -2,7 +2,7 @@
   include("./includes/session.php");
   include("./htmlheader.php");
   include("./includes/functions.php");
-  include("/includes/nav.php");   
+  include("./includes/nav.php");   
 ?>
     <div  id="errormsg" role="alert">
        <?php echo message(); ?>
