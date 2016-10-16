@@ -26,6 +26,7 @@ function checkpresence(a,id) {
 		return false
 	}
 	else {
+    $( '#'+id ).siblings('.help-block').html("");
 		return true;
   }
 }
@@ -81,7 +82,7 @@ function checkpresence(a,id) {
         type: 'post',
         data: {myData:data_answer},
         success: function(data) {
-          
+
             $( ".fa.fa-check-square-o.fa-3x" ).attr('class', 'fa fa-square-o fa-3x');
             $( formdata ).attr('class', 'fa fa-check-square-o fa-3x');
           
