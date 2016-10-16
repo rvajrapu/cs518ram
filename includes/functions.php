@@ -162,6 +162,7 @@
 	function get_result_1($ques_id) {
 		                                 	global $connection;
 
+
 											$query_1  = "SELECT ";
 											$query_1 .= "Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG, ";
 											$query_1 .= "PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE, PTL_ANSWERS.A_ID, ";
@@ -182,7 +183,7 @@
 	
 	function get_result_2($ques_id) {
 		global $connection;
-											$query_2  = "SELECT  Q_TITLE, Q_TEXT, Q_TAG, PTL_QUESTIONS.CREATION_DATE,FIRST_NAME,PTL_QUESTIONS.U_ID,BA_ID ";
+											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, PTL_QUESTIONS.CREATION_DATE,FIRST_NAME,PTL_QUESTIONS.U_ID,BA_ID ";
 											$query_2 .= "FROM PTL_QUESTIONS "; 
 											$query_2 .= "LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID =  PTL_USERS.U_ID ";
 											$query_2 .= "WHERE PTL_QUESTIONS.Q_ID = $ques_id ";
@@ -218,11 +219,12 @@
 	function get_landing_questions() {
 											global $connection;
 													 	 
-														$query  = "SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID, ";
-														$query .= "PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON ";
-														$query .= "FROM PTL_QUESTIONS "; 
-														$query .= "LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID "; 
-														$query .= "LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID GROUP BY PTL_QUESTIONS.Q_ID";
+													 	$query  = "SELECT 1 AS UP_VOTE, 1 AS ANSWERS_COUNT, 1 AS VIEWS, 1 AS Q_TITLE, 1 AS Q_TAG, 1 AS Q_ID, 1 AS FIRST_NAME,1 AS Q_CREATED_ON FROM DUAL" ;
+														//$query  = "SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID, ";
+														//$query .= "PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON ";
+														//$query .= "FROM PTL_QUESTIONS "; 
+														//$query .= "LEFT OUTER JOIN PTL_USERS ON 'PTL_QUESTIONS.U_ID'=PTL_USERS.U_ID "; 
+														//$query .= "LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID GROUP BY PTL_QUESTIONS.Q_ID";
 														 
                                             $result = mysqli_query($connection,$query);
 											
