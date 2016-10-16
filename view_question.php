@@ -19,7 +19,7 @@
                         $ques_id = trim($_GET["q_id"]);                    
                         $result_1 = get_result_1($ques_id);
                         $result_2 = get_result_2($ques_id);
-                         ?>
+                        ?>
                         <p></p>
                         <div class = 'row'>
 

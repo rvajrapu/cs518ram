@@ -9,7 +9,7 @@
     </div>
     <br><br><br><br><br>
     <div class="container">
-    <img src="pics/Questra_Logo_4.png" class="center-block" alt="Questra Community" width="300" height="100">
+    <img src="pics/Logomakr_6AwGmn.png" class="center-block" alt="Questra Community" width="200" height="169">
       <form class="form-signin" id="signin" method ="post" action="validate.php">
         <!-- <h2 class="form-signin-heading">  Sign into Questra</h2> -->
         <div class="form-group">

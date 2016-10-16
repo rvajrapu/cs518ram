@@ -62,8 +62,8 @@
 		$query .= "(Q_TITLE, Q_TEXT, Q_TAG, U_ID, CREATION_DATE) ";
 		$query .= "VALUES ('$title', '$question', '$tag', $uid, CURDATE()) ";
 		$result_id = mysqli_query($connection, $query);
-		error_log("Inside query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
-		// confirm_query($result_id);
+		//error_log("Inside query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		confirm_query($result_id);
 		if($result_id) {
 			$_SESSION["message"] = "Question Posted";
 			return true;
@@ -82,7 +82,7 @@
 		$query .= "VALUES ('$answer', '$qid', $uid, CURDATE()) ";
 		$result_id = mysqli_query($connection, $query);
 		//error_log("Inside query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
-		// confirm_query($result_id);
+		confirm_query($result_id);
 		if($result_id) {
 			$_SESSION["message"] = "Answer Posted";
 			return true;
@@ -149,11 +149,16 @@
 	function get_result_1($ques_id) {
 		                                 	global $connection;   
                                             $query_1  = "
-                                                        SELECT A_ID,Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG,PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE 
+                                                        SELECT 
+														Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG,PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE, PTL_ANSWERS.A_ID,
+														CASE
+															WHEN BA_ID = PTL_ANSWERS.A_ID THEN 1
+															ELSE NULL
+															END AS TOP_AID
                                                         FROM PTL_ANSWERS 
                                                         LEFT OUTER JOIN PTL_QUESTIONS ON PTL_ANSWERS.Q_ID = PTL_QUESTIONS.Q_ID 
                                                         LEFT OUTER JOIN PTL_USERS ON PTL_ANSWERS.U_ID = PTL_USERS.U_ID
-                                                        WHERE PTL_QUESTIONS.Q_ID = $ques_id ORDER BY PTL_ANSWERS.A_ID
+                                                        WHERE PTL_QUESTIONS.Q_ID = $ques_id ORDER BY TOP_AID desc ,PTL_ANSWERS.A_ID
 														";
 														 
 											$result_1 = mysqli_query($connection,$query_1);
@@ -179,5 +184,46 @@
 											return ($result_2);
 		
 	}
+
+
+	function get_questions($user_id) {
+											global $connection;
+													if(isset($user_id)) 
+														{														 
+										    $query  = "
+													   SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID,
+													          PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON
+													   FROM PTL_QUESTIONS 
+													   LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID 
+													   LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID WHERE PTL_QUESTIONS.U_ID = " . $user_id . " GROUP BY PTL_QUESTIONS.Q_ID";													   
+														}																			
+														 
+                                            $result = mysqli_query($connection,$query);
+											
+                                            if(!$result){die("Database query failed.");}
+											
+											return ($result);
+		
+	}
+
+	function get_landing_questions() {
+											global $connection;
+													 	 
+                                            $query  = "
+													   SELECT PTL_QUESTIONS.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, PTL_QUESTIONS.Q_ID,
+													          PTL_USERS.FIRST_NAME AS FIRST_NAME,PTL_QUESTIONS.CREATION_DATE AS Q_CREATED_ON
+													   FROM PTL_QUESTIONS 
+													   LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID 
+													   LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID
+													   GROUP BY PTL_QUESTIONS.Q_ID													   
+														";
+														 
+                                            $result = mysqli_query($connection,$query);
+											
+                                            if(!$result){die("Database query failed.");}
+											
+											return ($result);
+	}
+
 
 	?>
