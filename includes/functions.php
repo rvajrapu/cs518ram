@@ -152,16 +152,12 @@
 	function get_result_1($ques_id) {
 		                                 	global $connection;   
                                             $query_1  = "
-<<<<<<< HEAD
-                                                        SELECT A_ID,Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG, PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE 
-=======
                                                         SELECT 
 														Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, PTL_ANSWERS.UP_VOTE, PTL_ANSWERS.DOWN_VOTE, BA_FLAG,PTL_USERS.FIRST_NAME,PTL_ANSWERS.CREATION_DATE, PTL_ANSWERS.A_ID,
 														CASE
 															WHEN BA_ID = PTL_ANSWERS.A_ID THEN 1
 															ELSE NULL
 															END AS TOP_AID
->>>>>>> 23da913465efc0c947b93493834bdba09fef5065
                                                         FROM PTL_ANSWERS 
                                                         LEFT OUTER JOIN PTL_QUESTIONS ON PTL_ANSWERS.Q_ID = PTL_QUESTIONS.Q_ID 
                                                         LEFT OUTER JOIN PTL_USERS ON PTL_ANSWERS.U_ID = PTL_USERS.U_ID
