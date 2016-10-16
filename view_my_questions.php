@@ -17,6 +17,7 @@
     		<div class="col-sm-12"> 
     			
     			<?php 
+    			$uid = $_SESSION["uid"];
 				// Opening Database Connection	
 				$dbhost = "localhost";
 				$dbuser = "root";
@@ -32,6 +33,7 @@
 						   FROM PTL_QUESTIONS 
 						   LEFT OUTER JOIN PTL_USERS ON PTL_QUESTIONS.U_ID=PTL_USERS.U_ID 
 						   LEFT OUTER JOIN PTL_ANSWERS ON PTL_QUESTIONS.Q_ID = PTL_ANSWERS.Q_ID
+						   WHERE PTL_QUESTIONS.U_ID = " . $uid . " 
 						   GROUP BY PTL_QUESTIONS.Q_ID";
 				$result = mysqli_query($connection,$query);
 				if(!$result){die("Database query failed.");}
@@ -41,7 +43,7 @@
 				</p>
   				<ul class="nav nav-tabs">
   				<p></p>
-    				<li class="active"><a href="#"><b>Top Questions</b></a></li>
+    				<li class="active"><a href="#"><b>My Questions</b></a></li>
     				<!--<li><a href="#">Un-Answered</a></li>-->
   				</ul>
   				<p></p>
@@ -78,8 +80,8 @@
 
 							      <div class='col-xs-6 col-md-2' style='background-color:#e0eaf1;'>
 								        <p></p>
-	                                    <div>Posted on: <a>" . $row["FIRST_NAME"] . "</a></div>
-	                                    <div>Posted by: <a>" . $row["Q_CREATED_ON"] . "</a></div>
+	                                    <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a></div>
+	                                    <div>Posted by: <a> You </a></div>
 	                                    <p></p>
 								  </div>	
 
@@ -106,9 +108,6 @@
 
   </div>
 </div>
-
-
-
 
     <!-- Custom styles for this page -->
     <link href="css/signin.css" rel="stylesheet">
