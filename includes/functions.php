@@ -106,7 +106,7 @@
 
 	function verify_asker($u_id) {
 		//error_log("\nverify_asker" . $u_id . $_SESSION["uid"], 3, "C:/xampp/apache/logs/error.log");
-		if ($_SESSION["uid"] == $u_id) {
+		if (isset($_SESSION['uid']) && $_SESSION["uid"] == $u_id) {
 			
 			return true;
 		}
@@ -124,6 +124,9 @@
 			$output .= '<input type="hidden" name="forid" id="u_id" value = '.$u_id.' />';
 			$output .= '<input type="hidden" name="forid" id="q_id" value = '.$q_id.' />';
 			return $output;
+		}
+		if (!verify_asker($u_id) && ($a_id == $ba_id)) {
+			return '<i class="fa fa-check-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true"></i>';
 		}
 
 	}
