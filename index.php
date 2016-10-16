@@ -1,42 +1,101 @@
 <?php
   include("./includes/session.php");
-  include("./htmlheader.php");
+  include("./includes/db_connection.php");
   include("./includes/functions.php");
-  include("./includes/nav.php");   
+  include("./htmlheader.php");
+  include("./includes/nav.php");  
 ?>
-    <div  id="errormsg" role="alert">
-       <?php echo message(); ?>
-    </div>
-    <br><br><br><br><br>
-    <div class="container">
-    <img src="pics/Logomakr_6AwGmn.png" class="center-block" alt="Questra Community" width="200" height="169">
-      <form class="form-signin" id="signin" method ="post" action="validate.php">
-        <!-- <h2 class="form-signin-heading">  Sign into Questra</h2> -->
-        <div class="form-group">
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" id="inputEmail" class="form-control" placeholder="Email address" name ="username" autofocus />
-        <p class='help-block'></p>
-        </div>
-        <div class="form-group">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" />
-        <p class='help-block'></p>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
 
-    </div> <!-- /container -->
+<div class="container-fluid">
+  <p></p>
+  <div class="row">
+
+  	<div class="col-sm-2"> </div>
+
+    <div class="col-sm-8" style="background-color:#fff;";">    
+   		 <div class="col-sm-12">
+    		<div class="col-sm-12"> 
+    		
+                        <?php                 
+                        $result = get_landing_questions();
+                        ?>
+
+				<p>
+				</p>
+  				<ul class="nav nav-tabs">
+  				<p></p>
+    				<li class="active"><a href="#"><b>Top Questions</b></a></li>
+    				<!--<li><a href="#">Un-Answered</a></li>-->
+  				</ul>
+  				<p></p>
+
+  				<div class="col-sm-12" >
+					<div>
+
+						<p></p>
+
+
+						<div>
+		 		 		<?php
+		  				while($row = mysqli_fetch_assoc($result))	
+		  				{
+		  					$question_id = $row["Q_ID"];
+
+						echo "<div class='row'>
+
+	  							  <div class='col-xs-6 col-md-3'> 
+							           <button type='button' class='btn btn-sm' border-color: #eeeeee;> " . $row["UP_VOTE"] . "<br>" . "Votes" . " </button> 
+							           <button type='button' class='btn btn-sm' style='background-color:#5fba7d;border-color: #eeeeee;' >" . $row["ANSWERS_COUNT"] . "<br>" . "Answers" . " </button> 
+							           <button type='button' class='btn btn-sm' border-color: #eeeeee;>" . $row["VIEWS"] . "<br>" . "Views" . " </button> 
+						          </div>
+
+
+	  						      <div class='col-xs-12 col-sm-7 col-md-6'> 
+	  						           <div> 
+	  						               <a href='view_question.php?q_id=".$question_id."'>" . $row["Q_TITLE"] . "</a> 
+	  						           </div> 
+	  						           <br>  
+	  						           <button type='button' class='btn btn-sm' border-color: #eeeeee;>" . $row["Q_TAG"] . " </button> 
+	  						      </div>
+
+
+							      <div class='col-xs-6 col-md-2' style='background-color:#e0eaf1;'>
+								        <p></p>
+	                                    <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a></div>
+	                                    <div>Posted by: <a>" . $row["FIRST_NAME"] . "</a></div>
+	                                    <p></p>
+								  </div>	
+
+							  </div> <hr/>";
+			  			}
+		  				?>
+		  				</div>
+
+
+
+		  			</div>
+				</div>
+    		</div>
+    	</div>
+    </div>
+
+
+    <div class="col-sm-2" "> 
+
+
+    </div>
+
+    <div class="col-sm-1"> </div>
+
+  </div>
+</div>
+
+
+
 
     <!-- Custom styles for this page -->
     <link href="css/signin.css" rel="stylesheet">
-    <script src="js/validations.js"></script>
-
 
 <?php
-  include("./footer.php");
+  require_once("footer.php");
 ?>
