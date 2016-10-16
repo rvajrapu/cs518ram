@@ -5,7 +5,7 @@
 			die("Database query failed.");
 		}
 	}
-	function test_input($data) {
+	function verify_input($data) {
   		$data = trim($data);
   		$data = stripslashes($data);
   		$data = htmlspecialchars($data);
