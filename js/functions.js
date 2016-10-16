@@ -37,7 +37,7 @@ function checkpresence(a,id) {
         type: 'post',
         data: {myData:formdata},
         success: function(data) {
-            alert("Question Posted");
+            
             location.reload();
           
         },
@@ -55,7 +55,7 @@ function checkpresence(a,id) {
         type: 'post',
         data: {myData:formdata},
         success: function(data) {
-            alert("Answer Posted");
+            
             location.reload();
           
         },
@@ -65,3 +65,30 @@ function checkpresence(a,id) {
         }
       }); // end ajax call
   }
+
+      function best_answer(formdata){
+        var element = $( formdata ).siblings();
+        var data_answer = {};
+        var element1 = element[1].value;
+        data_answer['a_id'] = element[1].value;
+        data_answer['u_id'] = element[2].value;
+        data_answer['q_id'] = element[3].value;
+        console.log(data_answer);
+
+        
+        $.ajax({
+        url: 'post_bestanswer_ajax.php',
+        type: 'post',
+        data: {myData:data_answer},
+        success: function(data) {
+            
+            location.reload();
+          
+        },
+        error: function(xhr, desc, err) {
+          console.log(xhr);
+          console.log("Details: " + desc + "\nError:" + err);
+        }
+      }); // end ajax call
+  } 
+

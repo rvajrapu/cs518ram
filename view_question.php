@@ -25,7 +25,8 @@
 
                             <?php        
                                           // Need to Question Title Input from another page  ****************************************************************************
-                                    $row_2 = mysqli_fetch_assoc($result_2);                                         
+                                    $row_2 = mysqli_fetch_assoc($result_2);
+                                                                             
                                     echo "<h2>".$row_2['Q_TITLE']."</h2>";
                                     echo "<hr>";
 
@@ -112,11 +113,10 @@
                                     echo '                                
                                           <div class="row">
                                           <div class="col-sm-3"> 
-                                          <p></p>
-
-                                          <button type="button" class="btn btn-secondary">Correct Answer</button>
-
-                                          </div>
+                                          <p></p>';
+                                    //echo $row_2["BA_ID"] . $row_2['U_ID'];
+                                    echo best_answer($row_1["A_ID"],$row_2["BA_ID"],$row_2['U_ID'],$ques_id);
+                                    echo  '</div>
                                           <div class="col-sm-6"> </div>
                                           <div class="col-sm-2"  style="background-color:#e0eaf1;">
                                               <p></p>
