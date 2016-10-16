@@ -15,6 +15,7 @@
 	function find_user($userid) {
 		global $connection;
 		
+		$userid = verify_input($userid);
 		$query  = "SELECT user_id ";
 		$query .= "FROM ptl_users ";
 		$query .= "WHERE user_id = '$userid' ";
@@ -31,7 +32,8 @@
 
 	function find_pwd($userid) {
 		global $connection;
-		
+
+		$userid = verify_input($userid);
 		$query  = "SELECT pass_code ";
 		$query .= "FROM ptl_users ";
 		$query .= "WHERE user_id = '$userid' ";
@@ -42,6 +44,7 @@
 	function find_uid($userid) {
 		global $connection;
 		
+		$userid = verify_input($userid);
 		$query  = "SELECT u_id ";
 		$query .= "FROM ptl_users ";
 		$query .= "WHERE user_id = '$userid' ";
@@ -64,6 +67,9 @@
 	function insert_question($title,$question,$tag,$uid) {
 		global $connection;
 		
+		$title = verify_input($title);
+		$question = verify_input($question);
+		$tag = verify_input($tag);
 		$query  = "INSERT INTO ptl_questions ";
 		$query .= "(Q_TITLE, Q_TEXT, Q_TAG, U_ID, CREATION_DATE) ";
 		$query .= "VALUES ('$title', '$question', '$tag', $uid, CURDATE()) ";
@@ -82,7 +88,8 @@
 	}
 	function insert_answer($answer,$qid,$uid) {
 		global $connection;
-		
+		$answer = verify_input($answer);
+		$qid = verify_input($qid);
 		$query  = "INSERT INTO ptl_answers ";
 		$query .= "(A_TEXT, Q_ID, U_ID, CREATION_DATE) ";
 		$query .= "VALUES ('$answer', '$qid', $uid, CURDATE()) ";
@@ -142,7 +149,7 @@
 	}
 	function update_answer($a_id,$q_id,$uid) {
 		global $connection;
-		
+		$q_id = verify_input($q_id);
 		$query  = "UPDATE ptl_questions SET ";
 		$query .= "BA_ID = '$a_id' ";
 		$query .= "WHERE Q_ID = '$q_id' AND U_ID = '$uid' ";

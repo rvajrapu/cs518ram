@@ -52,9 +52,11 @@
                     <li>
                         <a class="page-scroll" href="landing_page.php">Questions</a>
                     </li>
+                    <?php if(!logged_in()){ ?>
                     <li>
                         <a class="page-scroll" href="view_my_questions.php">My Questions</a>
                     </li>
+                    <?php } ?>
                     <li>
                         <a class="page-scroll" href="post_question.php">Ask Question</a>
                     </li>

@@ -132,7 +132,7 @@
                                     }
                                     ?>
 
-
+                                    <?php if(!logged_in()){ ?>
                                     <p></p>
                                     <div class="row">                            
                                         <div class="col-sm-1">                                            
@@ -151,6 +151,7 @@
                                         </div>
                                     </div>
                                     <p></p>
+                                    <?php } ?>
 
                         </div>
                     </div>
