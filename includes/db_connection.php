@@ -1,7 +1,7 @@
 <?php
 	define("DB_SERVER", "localhost");
-	define("DB_USER", "root");
-	define("DB_PASS", "");
+	define("DB_USER", "admin");
+	define("DB_PASS", "M0n@rch$");
 	define("DB_NAME", "question_forum");
 
   // 1. Create a database connection
