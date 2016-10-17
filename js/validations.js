@@ -14,8 +14,9 @@ $( "#signin" ).submit(function( event ) {
 $( "#postquestion" ).submit(function( event ) {
 	var formData = $("#postquestion").serializeObject();
 	var temp_makrup = $('.summernote').summernote('code');
-	var makrup = $.trim(temp_makrup);
-	formData['question'] = makrup;
+	var makrup = $('.note-editable.panel-body').text();
+  makrup = $.trim(makrup);
+	formData['question'] = temp_makrup;
 	
   if ((!checkpresence(this[0].value,"questiontitle"))
     ||(!checkpresence(makrup,"textedit"))){
@@ -52,8 +53,9 @@ $.fn.serializeObject = function()
 $( "#postanswer" ).submit(function( event ) {
   var formData = $("#postanswer").serializeObject();
   var temp_makrup = $('.summernote').summernote('code');
-  var makrup = $.trim(temp_makrup);
-  formData['answer'] = makrup;
+  var makrup = $('.note-editable.panel-body').text();
+  makrup = $.trim(makrup);
+  formData['answer'] = temp_makrup;
   
   if ((!checkpresence(makrup,"textedit"))){
 
