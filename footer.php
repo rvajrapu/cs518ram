@@ -7,7 +7,7 @@
   <footer class="footer" style="background-color: #222222"  >
       <div class="container"  >
         <p class="text-muted">        
-                      <a href="index.php">Home</a> | <a href="#">About us</a> | <a href="#">Contact us</a> | <a href="#">Feedback</a> | <a href="#">Policy & Terms</a> | <a href="landing_page.php">© 2016 Questra Community, Inc.</a>
+                      <a href="index.php">Home</a> | <a href="#">About us</a> | <a href="#">Contact us</a> | <a href="#">Feedback</a> | <a href="#">Policy & Terms</a> | <a href="index.php">© 2016 Questra Community, Inc.</a>
 
         </p>
       </div>

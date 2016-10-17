@@ -3343,19 +3343,19 @@ fieldset[disabled] .btn-warning.focus {
 }
 .btn-danger {
   color: #fff;
-  background-color: #d9534f;
-  border-color: #d43f3a;
+  background-color: #ffa463;
+  border-color: #ffa463;
 }
 .btn-danger:focus,
 .btn-danger.focus {
   color: #fff;
-  background-color: #c9302c;
-  border-color: #761c19;
+  background-color: #ffa463;
+  border-color: #ffa463;
 }
 .btn-danger:hover {
   color: #fff;
-  background-color: #c9302c;
-  border-color: #ac2925;
+  background-color: #ffa463;
+  border-color: #ffa463;
 }
 .btn-danger:active,
 .btn-danger.active,

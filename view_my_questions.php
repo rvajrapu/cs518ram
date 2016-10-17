@@ -23,14 +23,15 @@
 
 				?>
 
-				<p>
-				</p>
+				<p></p>
   				<ul class="nav nav-tabs">
   				<p></p>
-    				<li class="active"><a href="#"><b>My Questions</b></a></li>
+  				<br>
+    				<li class="active"><a href="#"><h4><b>View My Questions</b></h4></a></li>
     				<!--<li><a href="#">Un-Answered</a></li>-->
   				</ul>
   				<p></p>
+  				<br>
 
   				<div class="col-sm-12" >
 					<div>
@@ -48,17 +49,17 @@
 
 	  							  <div class='col-xs-6 col-md-3'> 
 							           <button type='button' class='btn btn-sm' border-color: #eeeeee;> " . $row["UP_VOTE"] . "<br>" . "Votes" . " </button> 
-							           <button type='button' class='btn btn-sm' style='background-color:#5fba7d;border-color: #eeeeee;' >" . $row["ANSWERS_COUNT"] . "<br>" . "Answers" . " </button> 
+							           <button type='button' class='btn btn-sm' style='background-color:rgba(127, 230, 161, 0.77);border-color: #eeeeee;' >" . $row["ANSWERS_COUNT"] . "<br>" . "Answers" . " </button> 
 							           <button type='button' class='btn btn-sm' border-color: #eeeeee;>" . $row["VIEWS"] . "<br>" . "Views" . " </button> 
 						          </div>
 
 
-	  						      <div class='col-xs-12 col-sm-7 col-md-6'> 
+	  						      <div class='col-xs-12 col-sm-7 col-md-7'> 
 	  						           <div> 
 	  						               <a href='view_question.php?q_id=".$question_id."'>" . $row["Q_TITLE"] . "</a> 
 	  						           </div> 
 	  						           <br>  
-	  						           <button type='button' class='btn btn-sm' border-color: #eeeeee;>" . $row["Q_TAG"] . " </button> 
+	  						           <button type='button' class='btn btn-sm' style='background-color:#d6ecff;'>" . $row["Q_TAG"] . " </button> 
 	  						      </div>
 
 

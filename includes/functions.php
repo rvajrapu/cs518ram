@@ -30,6 +30,21 @@
 	}
 
 
+	function find_username($userid) {
+		global $connection;
+		
+		$userid = verify_input($userid);
+		$query  = "SELECT first_name ";
+		$query .= "FROM ptl_users ";
+		$query .= "WHERE u_id = $userid ";
+
+		$result_username = mysqli_query($connection, $query);
+		confirm_query($result_username);
+		return ($result_username);
+	}
+
+
+
 	function find_pwd($userid) {
 		global $connection;
 
@@ -41,6 +56,8 @@
 		confirm_query($result_userset);
 		return mysqli_fetch_assoc($result_userset);
 	}
+
+
 	function find_uid($userid) {
 		global $connection;
 		
@@ -233,7 +250,8 @@
 														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
 														$query .= "FROM ptl_questions "; 
 														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
-														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID GROUP BY ptl_questions.Q_ID";
+														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID GROUP BY ptl_questions.Q_ID ";
+														$query .= "ORDER BY ptl_questions.CREATION_DATE desc limit 10";
 														 
                                             $result = mysqli_query($connection,$query);
 											

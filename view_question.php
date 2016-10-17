@@ -88,9 +88,9 @@
 
                                     while($row_1 = mysqli_fetch_assoc($result_1))
                                     {
-                                    echo "<div class = 'row'>";
-                                    echo "<div class='col-sm-1'>";
-                                    echo "
+                                    echo "<div class = 'row' >
+                                          <div class='col-sm-1'>
+                                    
                                               <button type='button' class='btn btn-success btn-number' data-type='plus' data-field='quant[2]'>
                                               <span class='glyphicon glyphicon-plus'></span>
                                               </button>
@@ -100,20 +100,22 @@
                                               <button type='button' class='btn btn-danger btn-number'  data-type='minus' data-field='quant[2]'>
                                               <span class='glyphicon glyphicon-minus'></span>
                                               </button>
-                                         ";
-                                    echo "</div>";
+                                        
+                                          </div>
 
-                                    echo "<div class='col-sm-10'>";
+                                          <div class='col-sm-10' style='background-color:#eee;'> <br>" .
                                    
-                                    echo       $row_1["A_TEXT"] ;
+                                          $row_1["A_TEXT"] .
                                 
-                                    echo "</div>";
-                                    echo "</div>";
+                                         " <br>
+                                         <br>
+                                            </div>       
+                                          </div>
+                                          <br>
 
-                                    echo '                                
-                                          <div class="row">
-                                          <div class="col-sm-3"> 
-                                          <p></p>';
+                                          <div class='row'>
+                                          <div class='col-sm-3'> 
+                                          <p></p>";
                                     //echo $row_2["BA_ID"] . $row_2['U_ID'];
                                     echo best_answer($row_1["A_ID"],$row_2["BA_ID"],$row_2['U_ID'],$ques_id);
                                     echo  '</div>
