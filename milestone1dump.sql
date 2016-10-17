@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2016 at 03:08 AM
+-- Generation Time: Oct 17, 2016 at 01:17 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -50,13 +50,8 @@ INSERT INTO `ptl_answers` (`A_ID`, `A_TEXT`, `Q_ID`, `U_ID`, `UP_VOTE`, `DOWN_VO
 (1, 'You can use AUTO_INCREMENT function like below \r \r USER_ID INT NOT NULL AUTO_INCREMENT', 1, 2, 1, NULL, '1', NULL, '2016-04-04', NULL, NULL),
 (2, 'Yes, we can use AUTO_INCREMENT function. This improves the performance and leverages the usage of additional database objects.', 1, 3, 1, NULL, NULL, NULL, '2016-04-04', NULL, NULL),
 (3, 'Hi There, Test ''code'' snippet\r <br>\r \r <code><span class="pln">print_r</span><span class="pun">(</span><span class="pln">$questionnaire</span><span class="pun">);</span><span class="pln">\r \r array</span><span class="pun">(</span><span class="pln">\r       </span><span class="str">''question 1''</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> array</span><span class="pun">(</span><span class="str">''yes''</span><span class="pun">,</span><span class="str">''no''</span><span class="pun">),</span><span class="pln">\r       </span><span class="str">''question 2''</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> array</span><span class="pun">(</span><span class="str">''yes''</span><span class="pun">,</span><span class="str">''no''</span><span class="pun">),</span><span class="pln">\r       </span><span class="str">''question 3''</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> array</span><span class="pun">(</span><span class="str">''yes''</span><span class="pun">,</span><span class="str">''no''</span><span class="pun">),</span><span class="pln">\r       </span><span class="pun">...</span><span class="pln">etc\r </span><span class="pun">)</span></code>', 1, 2, 2, NULL, NULL, NULL, '2016-04-04', NULL, NULL),
-(4, 'New Answer', 1, 1, NULL, NULL, NULL, NULL, '2016-10-14', NULL, NULL),
-(5, 'Next New Answer', 1, 1, NULL, NULL, NULL, NULL, '2016-10-14', NULL, NULL),
-(6, '2nd Answer', 3, 3, NULL, NULL, NULL, NULL, '2016-10-15', NULL, NULL),
-(7, '3rd Answer', 3, 3, NULL, NULL, NULL, NULL, '2016-10-15', NULL, NULL),
-(8, '1st Answer', 2, 3, NULL, NULL, NULL, NULL, '2016-10-15', NULL, NULL),
-(9, '<p>2nd Answer</p><p><br></p>', 2, 3, NULL, NULL, NULL, NULL, '2016-10-15', NULL, NULL),
-(10, '<b>Best Answer</b>', 2, 3, NULL, NULL, NULL, NULL, '2016-10-15', NULL, NULL);
+(4, 'Hi, This is a test answer.', 1, 2, NULL, NULL, NULL, NULL, '2016-10-15', NULL, NULL),
+(5, 'dfgfhjgjhgkjgk', 3, 2, NULL, NULL, NULL, NULL, '2016-10-15', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -85,11 +80,18 @@ CREATE TABLE `ptl_questions` (
 --
 
 INSERT INTO `ptl_questions` (`Q_ID`, `Q_TITLE`, `Q_TEXT`, `Q_TAG`, `U_ID`, `BA_ID`, `CREATED_BY`, `CREATION_DATE`, `LAST_UPDATED_BY`, `LAST_UPDATION_DATE`, `VIEWS`, `UP_VOTE`, `DOWN_VOTE`) VALUES
-(1, 'How to Auto-Increment PK in MYSQL', 'I am aware of Database Sequence and Trigger functionality to generate Auto Incemented Sequences in Primary Key Column. Is there any simple and similar funtionality in MySQL.\n\nCREATE OR REPLACE TRIGGER TEST_SEQ_TRIGGER\nBEFORE INSERT ON TESTUSER.EMPLOYEE\nFOR EACH ROW\nBEGIN\n	IF :new.SSN IS NULL THEN\n		SELECT TEST_SEQUENCE.nextval INTO :new.SSN FROM DUAL;\n	END IF;\nEND;\n\nAny suggestions are much appreciated.', 'MySQL', 2, 3, 'phpmyadmin', '2016-10-04', 'phpmyadmin', '0000-00-00', 2, 1, NULL),
-(2, 'How to Create Navbar in BootStrap', 'How to Create Navbar in BootStrap with a dropdown and search bar.', 'BOOTSTRAP', 3, 10, 'phpmyadmin', '0000-00-00', 'phpmyadmin', '0000-00-00', 0, 1, NULL),
+(1, 'How to Auto-Increment PK in MYSQL', 'I am aware of Database Sequence and Trigger functionality to generate Auto Incemented Sequences in Primary Key Column. Is there any simple and similar funtionality in MySQL.\n\nCREATE OR REPLACE TRIGGER TEST_SEQ_TRIGGER\nBEFORE INSERT ON TESTUSER.EMPLOYEE\nFOR EACH ROW\nBEGIN\n	IF :new.SSN IS NULL THEN\n		SELECT TEST_SEQUENCE.nextval INTO :new.SSN FROM DUAL;\n	END IF;\nEND;\n\nAny suggestions are much appreciated.', 'MySQL', 2, 4, 'phpmyadmin', '2016-10-04', 'phpmyadmin', '0000-00-00', 2, 1, NULL),
+(2, 'How to Create Navbar in BootStrap', 'How to Create Navbar in BootStrap with a dropdown and search bar.', 'BOOTSTRAP', 3, NULL, 'phpmyadmin', '0000-00-00', 'phpmyadmin', '0000-00-00', 0, 1, NULL),
 (3, 'How to generate Emails using Shell Script.', 'I have a requirement to generate emails to 1000 users in a program. I tried this through Java but I am getting Heap Space issues. I am looking for an alternative scripting. Please suggest ! Have a nice day.', 'UNIX', 2, NULL, 'phpmyadmin', '0000-00-00', 'phpmyadmin', '0000-00-00', 0, 2, NULL),
 (4, 'C++ program compiles and runs in codeblocks, but can''t compile it in terminal', 'I created a C++ project that contains several source files and header files. The program compiles and runs well in codeblocks, but I can''t compile it in terminal.\n\nAll the files are in the same folder.\n\nHere are the command I enter:\n\nclang++ -std=c++11 main.cpp file1.cpp file1.h \nIt shows:\n\nclang: warning: treating ''c-header'' input as ''c++-header'' when in C++ mode, this behavior is deprecated', 'C++', 3, NULL, 'phpmyadmin', '0000-00-00', 'phpmyadmin', '0000-00-00', 1, 3, NULL),
-(5, 'Fast algorithm to write data from a std::vector to a text file', 'I currently write a set of doubles from a vector to a text file like this:\n\nstd::ofstream fout;\nfout.open("vector.txt");\n\nfor (l = 0; l < vector.size(); l++)\n    fout << std::setprecision(10) << vector.at(l) << std::endl;\n\nfout.close();\nBut this is taking a lot of time to finish. Is there a faster or more efficient way to do this? I would love to see and learn it.', 'C++', 2, NULL, 'phpmyadmin', '0000-00-00', 'phpmyadmin', '0000-00-00', 1, 1, NULL);
+(5, 'Fast algorithm to write data from a std::vector to a text file', 'I currently write a set of doubles from a vector to a text file like this:\n\nstd::ofstream fout;\nfout.open("vector.txt");\n\nfor (l = 0; l < vector.size(); l++)\n    fout << std::setprecision(10) << vector.at(l) << std::endl;\n\nfout.close();\nBut this is taking a lot of time to finish. Is there a faster or more efficient way to do this? I would love to see and learn it.', 'C++', 2, NULL, 'phpmyadmin', '0000-00-00', 'phpmyadmin', '0000-00-00', 1, 1, NULL),
+(6, 'Sample test Question for verifying summernote.', '<p><br></p><table class="table table-bordered"><tbody><tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr><tr><td><br></td><td><br></td><td><br></td><td><br></td><td><br></td></tr></tbody></table><p>\n         \n        </p>', 'Science', 2, NULL, NULL, '2016-10-15', NULL, NULL, NULL, NULL, NULL),
+(7, 'dasdsdasd', 'ddsadasds', 'Science', 2, NULL, NULL, '2016-10-16', NULL, NULL, NULL, NULL, NULL),
+(8, 'ewarerferer', 'rearerearer', 'Science', 2, NULL, NULL, '2016-10-16', NULL, NULL, NULL, NULL, NULL),
+(9, 'rearerererae', 'arerearserr', 'Science', 2, NULL, NULL, '2016-10-16', NULL, NULL, NULL, NULL, NULL),
+(10, 'rearerere', 'raereareare', 'Science', 2, NULL, NULL, '2016-10-16', NULL, NULL, NULL, NULL, NULL),
+(11, 'reraerere', 'arerearear', 'Science', 2, NULL, NULL, '2016-10-16', NULL, NULL, NULL, NULL, NULL),
+(12, 'rearerare', 'rearaererser', 'Science', 2, NULL, NULL, '2016-10-16', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,23 @@ CREATE TABLE `ptl_users` (
 INSERT INTO `ptl_users` (`U_ID`, `USER_ID`, `PASS_CODE`, `ACTIVE`, `CREATED_BY`, `CREATION_DATE`, `LAST_UPDATED_BY`, `LAST_UPDATION_DATE`, `LAST_LOGIN_DATE`, `USER_ROLE`, `FIRST_NAME`, `LAST_NAME`) VALUES
 (1, 'Admin', 'Admin', 'Y', NULL, NULL, NULL, NULL, NULL, 'Admin', 'Admin', 'Admin'),
 (2, 'Raja', 'Harsha', 'Y', NULL, NULL, NULL, NULL, NULL, 'User', 'Raja Harsha', 'Chinta'),
-(3, 'Ram', 'Vajrapu', 'Y', NULL, NULL, NULL, NULL, NULL, 'User', 'Ram Manoj', 'Vajrapu');
+(3, 'Ram', 'Vajrapu', 'Y', NULL, NULL, NULL, NULL, NULL, 'User', 'Ram Manoj', 'Vajrapu'),
+(4, 'admin', 'cs518pa$$', '', NULL, NULL, NULL, NULL, NULL, 'User', 'admin', ''),
+(5, 'jbrunelle', 'M0n@rch$', '', NULL, NULL, NULL, NULL, NULL, 'User', 'jbrunelle', ''),
+(6, 'pvenkman', 'imadoctor', '', NULL, NULL, NULL, NULL, NULL, 'User', 'pvenkman', ''),
+(7, 'rstantz', '"; INSERT INTO Customers (CustomerName,Address,Cit', '', NULL, NULL, NULL, NULL, NULL, 'User', 'rstantz', ''),
+(8, 'dbarrett', 'fr1ed3GGS', '', NULL, NULL, NULL, NULL, NULL, 'User', 'dbarrett', ''),
+(9, 'ltully', '<!--<i>', '', NULL, NULL, NULL, NULL, NULL, 'User', 'ltully', ''),
+(10, 'espengler', 'don''t cross the streams', '', NULL, NULL, NULL, NULL, NULL, 'User', 'espengler', ''),
+(11, 'janine', '--!drop tables;', '', NULL, NULL, NULL, NULL, NULL, 'User', 'janine', ''),
+(12, 'winston', 'zeddM0r3', '', NULL, NULL, NULL, NULL, NULL, 'User', 'winston', ''),
+(13, 'gozer', 'd3$truct0R', '', NULL, NULL, NULL, NULL, NULL, 'User', 'gozer', ''),
+(14, 'slimer', 'f33dM3', '', NULL, NULL, NULL, NULL, NULL, 'User', 'slimer', ''),
+(15, 'zuul', '105"; DROP TABLE', '', NULL, NULL, NULL, NULL, NULL, 'User', 'zuul', ''),
+(16, 'keymaster', 'n0D@na', '', NULL, NULL, NULL, NULL, NULL, 'User', 'keymaster', ''),
+(17, 'gatekeeper', '$l0r', '', NULL, NULL, NULL, NULL, NULL, 'User', 'gatekeeper', ''),
+(18, 'staypuft', 'm@r$hM@ll0w', '', NULL, NULL, NULL, NULL, NULL, 'User', 'staypuft', ''),
+(19, 'SQL_Ingection', 'UPDATE PTL_USERS SET FIRST_NAME = USER_ID, USER_RO', '', NULL, NULL, NULL, NULL, NULL, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -180,17 +198,17 @@ ALTER TABLE `user_table`
 -- AUTO_INCREMENT for table `ptl_answers`
 --
 ALTER TABLE `ptl_answers`
-  MODIFY `A_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `A_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `ptl_questions`
 --
 ALTER TABLE `ptl_questions`
-  MODIFY `Q_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Q_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `ptl_users`
 --
 ALTER TABLE `ptl_users`
-  MODIFY `U_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `U_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `user_table`
 --
