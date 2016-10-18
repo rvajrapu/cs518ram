@@ -18,8 +18,8 @@ $( "#postquestion" ).submit(function( event ) {
   makrup = $.trim(makrup);
 	formData['question'] = temp_makrup;
 	
-  if ((!checkpresence(this[0].value,"questiontitle"))
-    ||(!checkpresence(makrup,"textedit"))){
+  if ((!checkpresence(this[0].value,"questiontitle"))||(!validate_min_lengths(this[0].value,10,"questiontitle"))
+    ||(!checkpresence(makrup,"textedit"))||(!validate_min_lengths(makrup,20,"textedit"))){
 
     return false;
   }
@@ -57,7 +57,7 @@ $( "#postanswer" ).submit(function( event ) {
   makrup = $.trim(makrup);
   formData['answer'] = temp_makrup;
   
-  if ((!checkpresence(makrup,"textedit"))){
+  if ((!checkpresence(makrup,"textedit"))||(!validate_min_lengths(makrup,20,"textedit"))){
 
     return false;
   }

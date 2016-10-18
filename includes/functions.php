@@ -131,11 +131,11 @@
 		//error_log("Inside query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
 		confirm_query($result_id);
 		if($result_id) {
-			$_SESSION["message"] = "Answer Posted";
+			//$_SESSION["message"] = "Answer Posted";
 			return true;
 
 		} else {
-			$_SESSION["message"] = "Database Error";
+			//$_SESSION["message"] = "Database Error";
 			return false;
 		}
 		
