@@ -72,7 +72,7 @@ function checkpresence(a,id) {
         var data_answer = {};
         var element1 = element[1].value;
         data_answer['a_id'] = element[1].value;
-        data_answer['u_id'] = element[2].value;
+        data_answer['ba_id'] = element[2].value;
         data_answer['q_id'] = element[3].value;
         console.log(data_answer);
 
@@ -82,9 +82,15 @@ function checkpresence(a,id) {
         type: 'post',
         data: {myData:data_answer},
         success: function(data) {
-
-            $( ".fa.fa-check-square-o.fa-3x" ).attr('class', 'fa fa-square-o fa-3x');
+            if($.trim(data) == 'ok'){
+              $( ".fa.fa-check-square-o.fa-3x" ).attr('class', 'fa fa-square-o fa-3x');
             $( formdata ).attr('class', 'fa fa-check-square-o fa-3x');
+            element[2].value = data_answer['a_id'];
+            }
+            if($.trim(data) == 'notok'){
+              $( formdata ).attr('class', 'fa fa-square-o fa-3x');
+              element[2].value = '0';
+            }
           
         },
         error: function(xhr, desc, err) {

@@ -6,12 +6,18 @@
 		}
 	}
 	function verify_input($data) {
-  		$data = trim($data);
-  		$data = stripslashes($data);
+		global $connection;
   		$data = htmlspecialchars($data);
+  		$data = mysqli_real_escape_string($connection,$data);
   		return $data;
     }
 	
+	function verify_output($data) {
+
+  		$data = stripcslashes($data);
+  		$data = htmlspecialchars_decode($data);
+  		return $data;
+    }
 	function find_user($userid) {
 		global $connection;
 		
@@ -20,6 +26,7 @@
 		$query .= "FROM ptl_users ";
 		$query .= "WHERE user_id = '$userid' ";
 		$query .= "LIMIT 1";
+
 		$result_set = mysqli_query($connection, $query);
 		confirm_query($result_set);
 		if($result_user = mysqli_fetch_assoc($result_set)) {
@@ -148,14 +155,14 @@
 		if (verify_asker($u_id) && ($a_id == $ba_id)) {
 			$output = '<i class="fa fa-check-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true" onclick="best_answer(this)"></i>';
 			$output .= '<input type="hidden" name="forid" id="a_id" value = '.$a_id.' />';
-			$output .= '<input type="hidden" name="forid" id="u_id" value = '.$u_id.' />';
+			$output .= '<input type="hidden" name="forid" id="u_id" value = '.$ba_id.' />';
 			$output .= '<input type="hidden" name="forid" id="q_id" value = '.$q_id.' />';
 			return $output;
 		}
 		if (verify_asker($u_id) && !($a_id == $ba_id)) {
 			$output ='<i class="fa fa-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true" onclick="best_answer(this)"></i>';
 			$output .= '<input type="hidden" name="forid" id="a_id" value = '.$a_id.' />';
-			$output .= '<input type="hidden" name="forid" id="u_id" value = '.$u_id.' />';
+			$output .= '<input type="hidden" name="forid" id="u_id" value = '.$ba_id.' />';
 			$output .= '<input type="hidden" name="forid" id="q_id" value = '.$q_id.' />';
 			return $output;
 		}

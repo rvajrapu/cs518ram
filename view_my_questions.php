@@ -56,7 +56,7 @@
 
 	  						      <div class='col-xs-12 col-sm-7 col-md-7'> 
 	  						           <div> 
-	  						               <a href='view_question.php?q_id=".$question_id."'>" . $row["Q_TITLE"] . "</a> 
+	  						               <a href='view_question.php?q_id=".$question_id."'>" . verify_output($row["Q_TITLE"]) . "</a> 
 	  						           </div> 
 	  						           <br>  
 	  						           <button type='button' class='btn btn-sm' style='background-color:#d6ecff;'>" . $row["Q_TAG"] . " </button> 

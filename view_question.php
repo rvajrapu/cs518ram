@@ -27,7 +27,7 @@
                                           // Need to Question Title Input from another page  ****************************************************************************
                                     $row_2 = mysqli_fetch_assoc($result_2);
                                                                              
-                                    echo "<h2>".$row_2['Q_TITLE']."</h2>";
+                                    echo "<h2>".verify_output($row_2['Q_TITLE'])."</h2>";
                                     echo "<hr>";
 
                             ?>
@@ -58,7 +58,7 @@
                                     <?php
 
                                   //  $row_2 = mysqli_fetch_assoc($result_2);
-                                    echo $row_2["Q_TEXT"];
+                                    echo verify_output($row_2["Q_TEXT"]);
                                     echo "<p></p>";
 
                                     ?>
@@ -105,7 +105,7 @@
 
                                           <div class='col-sm-10' style='background-color:#eee;'> <br>" .
                                    
-                                          $row_1["A_TEXT"] .
+                                          verify_output($row_1["A_TEXT"]) .
                                 
                                          " <br>
                                          <br>

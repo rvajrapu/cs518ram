@@ -2,46 +2,25 @@
   include("./includes/session.php");
   include("./includes/db_connection.php");
   include("./includes/functions.php");
-  include("./htmlheader.php");
-?>
-
-    <div class="container">
-
-    <?php $obj = $_POST['myData'];
+  //include("./htmlheader.php");
+$obj = $_POST['myData'];
 
     $a_id = $obj["a_id"];
+    $ba_id = $obj["ba_id"];
     $q_id = $obj["q_id"];
     $uid = $_SESSION["uid"];
+    $message = 'ok';
     //error_log("\nInside best answer" . $a_id , 3, "C:/xampp/apache/logs/error.log");
+
+    if($a_id == $ba_id){
+      $a_id = '0';
+      $message = 'notok';
+    }
 
     if (update_answer($a_id,$q_id,$uid)){
 
-        echo 'ok';
+        echo($message) ;
 
     }
     
-    
-    
-    
-    
-   
-
-    
-    ?>  
-
-    </div> <!-- /container -->
-
-    <!-- Custom styles for this page -->
-    <link href="css/signin.css" rel="stylesheet">
-   
-
-
-<?php
-// 4. Release returned data
-    mysqli_free_result($result);
-    require_once("footer.php");
-?> 
-
-    
-
-
+    ?>

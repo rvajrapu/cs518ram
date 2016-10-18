@@ -9,16 +9,18 @@
 
     <?php  
     
-    
-		$username = trim($_POST["username"]);
-		$password = trim($_POST["password"]);
+	if(isset($_POST)){
+		$username = $_POST["username"];
+		$password = $_POST["password"];
+
 		$result_uid = find_uid($username);
 		$subject = find_user($username);
+		print_r($subject);
 	?>
     <?php
         // 3. Use returned data (if any)
         
-        
+
           // output data from each row
       		if ($subject) {
 				// successful login
@@ -38,12 +40,12 @@
         //error_log("Inside Validate\n" . $subject , 3, "C:/xampp/apache/logs/error.log");
 				redirect_to("login.php");
 			}
-        
+    }
       ?>
     </div> <!-- /container -->
       <?php
       // 4. Release returned data
-      mysqli_free_result($result);
+      //mysqli_free_result($result);
     ?>
 
     <!-- Custom styles for this page -->
