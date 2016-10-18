@@ -10,40 +10,40 @@
     <?php  
 
     if(isset($_SESSION['uid'])) {
-    	redirect_to('index.php');
+      redirect_to('index.php');
     }
     
-	if(isset($_POST)){
-		$username = $_POST["username"];
-		$password = $_POST["password"];
+  if(isset($_POST)){
+    $username = $_POST["username"];
+    $password = $_POST["password"];
 
-		$result_uid = find_uid($username);
-		$subject = find_user($username);
-		print_r($subject);
-	?>
+    $result_uid = find_uid($username);
+    $subject = find_user($username);
+    print_r($subject);
+  ?>
     <?php
         // 3. Use returned data (if any)
         
 
           // output data from each row
-      		if ($subject) {
-				// successful login
-				$userpwd = find_pwd($username);
-				if (verify_input_login($userpwd["pass_code"]) == verify_output_login($password)) {
-					$_SESSION["uid"] = (int)$result_uid["u_id"];
-					$_SESSION["username"] = $username;
-					redirect_to("index.php");
-				}
-				else {
-					$_SESSION["message"] = "Invalid Password";
-					redirect_to("login.php");
-				} 
+          if ($subject) {
+        // successful login
+        $userpwd = find_pwd($username);
+        if ($userpwd["pass_code"] == $password) {
+          $_SESSION["uid"] = (int)$result_uid["u_id"];
+          $_SESSION["username"] = $username;
+          redirect_to("index.php");
+        }
+        else {
+          $_SESSION["message"] = "Invalid Password";
+          redirect_to("login.php");
+        } 
 
-			} else {
-				$_SESSION["message"] = "User is not registered";
+      } else {
+        $_SESSION["message"] = "User is not registered";
         //error_log("Inside Validate\n" . $subject , 3, "C:/xampp/apache/logs/error.log");
-				redirect_to("login.php");
-			}
+        redirect_to("login.php");
+      }
     }
       ?>
     </div> <!-- /container -->
