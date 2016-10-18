@@ -29,7 +29,7 @@
       		if ($subject) {
 				// successful login
 				$userpwd = find_pwd($username);
-				if (verify_input($userpwd["pass_code"]) == verify_output($password)) {
+				if (verify_input_login($userpwd["pass_code"]) == verify_output_login($password)) {
 					$_SESSION["uid"] = (int)$result_uid["u_id"];
 					$_SESSION["username"] = $username;
 					redirect_to("index.php");

@@ -11,11 +11,21 @@
   		$data = mysqli_real_escape_string($connection,$data);
   		return $data;
     }
+    function verify_input_login($data) {
+		global $connection;
+  		$data = mysqli_real_escape_string($connection,$data);
+  		return $data;
+    }
 	
 	function verify_output($data) {
 
   		$data = stripcslashes($data);
   		$data = htmlspecialchars_decode($data);
+  		return $data;
+    }
+    function verify_output_login($data) {
+
+  		$data = stripcslashes($data);
   		return $data;
     }
 	function find_user($userid) {
