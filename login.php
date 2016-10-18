@@ -1,9 +1,14 @@
 <?php
   include("./includes/session.php");
-  include("./htmlheader.php");
   include("./includes/functions.php");
+  if(isset($_SESSION['uid'])) {
+      redirect_to('index.php');
+    }
+  include("./htmlheader.php");
+  
   include("./includes/nav.php");   
 ?>
+
 <br><br><br>
     <div  id="errormsg" role="alert">
        <?php echo message(); ?>

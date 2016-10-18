@@ -8,6 +8,10 @@
     <div class="container">
 
     <?php  
+
+    if(isset($_SESSION['uid'])) {
+    	redirect_to('index.php');
+    }
     
 	if(isset($_POST)){
 		$username = $_POST["username"];

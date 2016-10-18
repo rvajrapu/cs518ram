@@ -16,6 +16,9 @@
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <?php 
+                        if (!isset($_GET["q_id"])){
+                          redirect_to('index.php');
+                        }
                         $ques_id = trim($_GET["q_id"]);                    
                         $result_1 = get_result_1($ques_id);
                         $result_2 = get_result_2($ques_id);
