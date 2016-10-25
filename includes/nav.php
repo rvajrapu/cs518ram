@@ -20,7 +20,7 @@
                         </li>                    
                         
                         <li>
-                        <a href="#">Register</a>
+                        <a href="newuser_register.php">Register</a>
                         </li>
 
                         <li>

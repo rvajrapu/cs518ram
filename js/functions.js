@@ -20,6 +20,15 @@ function validate_min_lengths(field,minlength,id) {
     return false;
   }
 }
+function validate_match(field,checkfield,id) {
+  if(field == checkfield){
+    return true;
+  }
+  else {
+    $( '#'+id ).siblings('.help-block').html("Did not match");
+    return false;
+  }
+}
 function checkpresence(a,id) {
 	if (a.length == 0||a == null) {
 		$( '#'+id ).siblings('.help-block').html("This field should not be left blank");
