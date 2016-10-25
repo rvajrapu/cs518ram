@@ -163,7 +163,7 @@
 
 		//error_log("\nbest_answer" . $ba_id . $u_id , 3, "C:/xampp/apache/logs/error.log");
 		if (verify_asker($u_id) && ($a_id == $ba_id)) {
-			$output = '<i class="fa fa-check-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true" onclick="best_answer(this)"></i>';
+			$output  = '<i class="fa fa-check-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true" onclick="best_answer(this)"></i>';
 			$output .= '<input type="hidden" name="forid" id="a_id" value = '.$a_id.' />';
 			$output .= '<input type="hidden" name="forid" id="u_id" value = '.$ba_id.' />';
 			$output .= '<input type="hidden" name="forid" id="q_id" value = '.$q_id.' />';
@@ -179,8 +179,8 @@
 		if (!verify_asker($u_id) && ($a_id == $ba_id)) {
 			return '<i class="fa fa-check-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true"></i>';
 		}
+}
 
-	}
 	function update_answer($a_id,$q_id,$uid) {
 		global $connection;
 		$q_id = verify_input($q_id);
@@ -206,7 +206,7 @@
 
 		                                 	$q_id = verify_input($ques_id);
 											$query_1  = "SELECT ";
-											$query_1 .= "Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, ptl_answers.UP_VOTE, ptl_answers.DOWN_VOTE, BA_FLAG, ";
+											$query_1 .= "Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, A_ID, ptl_answers.UP_VOTE, ptl_answers.DOWN_VOTE, BA_FLAG, ";
 											$query_1 .= "ptl_users.FIRST_NAME,ptl_answers.CREATION_DATE, ptl_answers.A_ID, ";
 											$query_1 .= "CASE ";
 											$query_1 .= "WHEN BA_ID = ptl_answers.A_ID THEN 1 ";
@@ -277,4 +277,39 @@
 											return ($result);
 	}
 
+	function get_ans_vote_count($a_id) {
+											global $connection;
+													 	 
+											$query  = "SELECT  sum(VOTE) AS V_COUNT FROM ptl_a_votes WHERE A_ID = $a_id GROUP BY A_ID";
+														 
+                                            $result = mysqli_query($connection,$query);
+											
+                                            if(!$result){die("Database query failed.");}
+											
+											return ($result);
+	}
+
+
+function vote_ins_upd($a_id,$u_id,$vote){ 
+ $check_rec = mysql_query("SELECT count(*) as rowexist FROM ptl_a_votes WHERE A_ID = $a_id AND U_ID = $uid") or die(mysql_error()); 
+ $fetch_rec = mysql_fetch_array($check_rec);
+
+if ($fetch_rec['rowexist'] > 0) 
+     {
+      mysql_query("UPDATE ptl_a_votes SET VOTE = 1 WHERE A_ID = $a_id AND U_ID = $uid");  
+     } 
+else {
+      mysql_query("INSERT INTO ptl_a_votes (A_ID, U_ID, VOTE) values ($a_id,$uid,$vote)");
+     }
+ }
+
+
+function up_vote(){
+
+	$message = "Hi";
+	return($message);
+}
+
+
 	?>
+

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2016 at 09:35 PM
+-- Generation Time: Oct 18, 2016 at 08:36 PM
 -- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -67,34 +67,6 @@ INSERT INTO `ptl_answers` (`A_ID`, `A_TEXT`, `Q_ID`, `U_ID`, `UP_VOTE`, `DOWN_VO
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ptl_a_votes`
---
-
-CREATE TABLE `ptl_a_votes` (
-  `V_ID` int(11) NOT NULL,
-  `A_ID` int(11) NOT NULL,
-  `U_ID` int(11) NOT NULL,
-  `VOTE` int(10) DEFAULT NULL,
-  `CREATED_BY` varchar(50) DEFAULT NULL,
-  `CREATION_DATE` date DEFAULT NULL,
-  `LAST_UPDATED_BY` varchar(50) DEFAULT NULL,
-  `LAST_UPDATION_DATE` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ptl_a_votes`
---
-
-INSERT INTO `ptl_a_votes` (`V_ID`, `A_ID`, `U_ID`, `VOTE`, `CREATED_BY`, `CREATION_DATE`, `LAST_UPDATED_BY`, `LAST_UPDATION_DATE`) VALUES
-(1, 1, 2, 1, NULL, NULL, NULL, NULL),
-(2, 1, 3, -1, NULL, NULL, NULL, NULL),
-(3, 1, 4, 1, NULL, NULL, NULL, NULL),
-(4, 1, 5, 1, NULL, NULL, NULL, NULL),
-(5, 2, 2, -1, NULL, NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `ptl_questions`
 --
 
@@ -119,7 +91,7 @@ CREATE TABLE `ptl_questions` (
 --
 
 INSERT INTO `ptl_questions` (`Q_ID`, `Q_TITLE`, `Q_TEXT`, `Q_TAG`, `U_ID`, `BA_ID`, `CREATED_BY`, `CREATION_DATE`, `LAST_UPDATED_BY`, `LAST_UPDATION_DATE`, `VIEWS`, `UP_VOTE`, `DOWN_VOTE`) VALUES
-(1, 'How to Auto-Increment PK in MYSQL', 'I am aware of Database Sequence and Trigger functionality to generate Auto Incemented Sequences in Primary Key Column. Is there any simple and similar funtionality in MySQL.\n\nCREATE OR REPLACE TRIGGER TEST_SEQ_TRIGGER\nBEFORE INSERT ON TESTUSER.EMPLOYEE\nFOR EACH ROW\nBEGIN\n	IF :new.SSN IS NULL THEN\n		SELECT TEST_SEQUENCE.nextval INTO :new.SSN FROM DUAL;\n	END IF;\nEND;\n\nAny suggestions are much appreciated.', 'MySQL', 2, 3, 'phpmyadmin', '2016-10-04', 'phpmyadmin', '0000-00-00', 2, 1, NULL),
+(1, 'How to Auto-Increment PK in MYSQL', 'I am aware of Database Sequence and Trigger functionality to generate Auto Incemented Sequences in Primary Key Column. Is there any simple and similar funtionality in MySQL.\n\nCREATE OR REPLACE TRIGGER TEST_SEQ_TRIGGER\nBEFORE INSERT ON TESTUSER.EMPLOYEE\nFOR EACH ROW\nBEGIN\n	IF :new.SSN IS NULL THEN\n		SELECT TEST_SEQUENCE.nextval INTO :new.SSN FROM DUAL;\n	END IF;\nEND;\n\nAny suggestions are much appreciated.', 'MySQL', 2, 1, 'phpmyadmin', '2016-10-04', 'phpmyadmin', '0000-00-00', 2, 1, NULL),
 (2, 'How to Create Navbar in BootStrap', 'How to Create Navbar in BootStrap with a dropdown and search bar.', 'BOOTSTRAP', 3, NULL, 'phpmyadmin', '0000-00-00', 'phpmyadmin', '0000-00-00', 0, 1, NULL),
 (3, 'How to generate Emails using Shell Script.', 'I have a requirement to generate emails to 1000 users in a program. I tried this through Java but I am getting Heap Space issues. I am looking for an alternative scripting. Please suggest ! Have a nice day.', 'UNIX', 2, 5, 'phpmyadmin', '0000-00-00', 'phpmyadmin', '0000-00-00', 0, 2, NULL),
 (4, 'C++ program compiles and runs in codeblocks, but can''t compile it in terminal', 'I created a C++ project that contains several source files and header files. The program compiles and runs well in codeblocks, but I can''t compile it in terminal.\n\nAll the files are in the same folder.\n\nHere are the command I enter:\n\nclang++ -std=c++11 main.cpp file1.cpp file1.h \nIt shows:\n\nclang: warning: treating ''c-header'' input as ''c++-header'' when in C++ mode, this behavior is deprecated', 'C++', 3, NULL, 'phpmyadmin', '0000-00-00', 'phpmyadmin', '0000-00-00', 1, 3, NULL),
@@ -131,7 +103,7 @@ INSERT INTO `ptl_questions` (`Q_ID`, `Q_TITLE`, `Q_TEXT`, `Q_TAG`, `U_ID`, `BA_I
 (10, 'rearerere', 'raereareare', 'Science', 2, NULL, NULL, '2016-10-16', NULL, NULL, NULL, NULL, NULL),
 (11, 'reraerere', 'arerearear', 'Science', 2, NULL, NULL, '2016-10-16', NULL, NULL, NULL, NULL, NULL),
 (12, 'rearerare', 'rearaererser', 'Science', 2, NULL, NULL, '2016-10-16', NULL, NULL, NULL, NULL, NULL),
-(13, 'What causes a rainbow?', '&lt;span style=&quot;color: rgb(95, 92, 92); font-family: Muli, helvetica, san-serif;&quot;&gt;Although light looks colorless, it is made up of many colors-red, orange, yellow, green, blue, indigo and violet. These colors are known as the spectrum. When light shines into water, the rays of light refract, or bend, at different angles. Different colors bend at different angles--red bends the least and violet the most. When light passes through a raindrop at a certain angle, the rays separate into the colors of the spectrum-and you see a beautiful rainbow.&lt;/span&gt;', 'Science', 2, 9, NULL, '2016-10-18', NULL, NULL, NULL, NULL, NULL),
+(13, 'What causes a rainbow?', '&lt;span style=&quot;color: rgb(95, 92, 92); font-family: Muli, helvetica, san-serif;&quot;&gt;Although light looks colorless, it is made up of many colors-red, orange, yellow, green, blue, indigo and violet. These colors are known as the spectrum. When light shines into water, the rays of light refract, or bend, at different angles. Different colors bend at different angles--red bends the least and violet the most. When light passes through a raindrop at a certain angle, the rays separate into the colors of the spectrum-and you see a beautiful rainbow.&lt;/span&gt;', 'Science', 2, NULL, NULL, '2016-10-18', NULL, NULL, NULL, NULL, NULL),
 (14, 'Mrs. Rodger got a weekly raise of $145. If she gets paid every other week, write an integer describing how the raise will affect her paycheck.', '&lt;p&gt;&lt;span style=&quot;font-family: Verdana, Geneva, sans-serif; font-size: 12.6px;&quot;&gt;Mrs. Rodger got a weekly raise of $145. If she gets paid every other week, write an integer describing how the raise will affect her paycheck.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: Verdana, Geneva, sans-serif; font-size: 12.6px;&quot;&gt;Please help me with an answer !&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Raja Harsha.&lt;/p&gt;', 'Mathematics', 2, NULL, NULL, '2016-10-18', NULL, NULL, NULL, NULL, NULL),
 (15, 'Should I send LinkedIn connection requests to people I donâ€™t know?', '&lt;ul style=&quot;color: rgb(102, 102, 102); font-family: Vollkorn, sans-serif; font-size: 21px;&quot;&gt;&lt;li&gt;&lt;strong&gt;My thoughts are below and my Quick Answer is:&lt;/strong&gt;&amp;nbsp;No&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Slightly Longer Answer:&lt;/strong&gt;&amp;nbsp;Technically you shouldnâ€™t send connection requests to people you donâ€™t know, but there are exceptions to this rule. Itâ€™s up to you whether you want to accept connection requests from people you donâ€™t know- there are some advantages and disadvantages in this.&lt;/li&gt;&lt;/ul&gt;', 'Social', 6, 0, NULL, '2016-10-18', NULL, NULL, NULL, NULL, NULL),
 (16, 'Can a vegan diet cause lupus patient to go into remission?', '&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 0);&quot;&gt;Can a vegan diet cause lupus patient to go into remission?&lt;/span&gt;&lt;/p&gt;&lt;p&gt;- Rstantz&lt;/p&gt;&lt;p&gt;\n         \n        &lt;/p&gt;', 'Science', 7, NULL, NULL, '2016-10-18', NULL, NULL, NULL, NULL, NULL),
@@ -185,6 +157,26 @@ INSERT INTO `ptl_users` (`U_ID`, `USER_ID`, `PASS_CODE`, `ACTIVE`, `CREATED_BY`,
 (18, 'staypuft', 'm@r$hM@ll0w', '', NULL, NULL, NULL, NULL, NULL, 'User', 'staypuft', ''),
 (19, 'SQL_Ingection', 'UPDATE PTL_USERS SET FIRST_NAME = USER_ID, USER_RO', '', NULL, NULL, NULL, NULL, NULL, '', '', '');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_table`
+--
+
+CREATE TABLE `user_table` (
+  `id` int(11) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `user_role` varchar(20) NOT NULL,
+  `user_id` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_table`
+--
+
+INSERT INTO `user_table` (`id`, `password`, `user_role`, `user_id`) VALUES
+(1, 'Admin', 'Admin', 'Admin');
+
 --
 -- Indexes for dumped tables
 --
@@ -196,14 +188,6 @@ ALTER TABLE `ptl_answers`
   ADD PRIMARY KEY (`A_ID`),
   ADD KEY `FK2PTL_USERS_2` (`U_ID`),
   ADD KEY `FK2PTL_QUESTIONS` (`Q_ID`);
-
---
--- Indexes for table `ptl_a_votes`
---
-ALTER TABLE `ptl_a_votes`
-  ADD PRIMARY KEY (`V_ID`),
-  ADD KEY `FK2PTL_USERS_3` (`U_ID`),
-  ADD KEY `FK2PTL_ANSWERS_1` (`A_ID`);
 
 --
 -- Indexes for table `ptl_questions`
@@ -219,6 +203,12 @@ ALTER TABLE `ptl_users`
   ADD PRIMARY KEY (`U_ID`);
 
 --
+-- Indexes for table `user_table`
+--
+ALTER TABLE `user_table`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -227,11 +217,6 @@ ALTER TABLE `ptl_users`
 --
 ALTER TABLE `ptl_answers`
   MODIFY `A_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
---
--- AUTO_INCREMENT for table `ptl_a_votes`
---
-ALTER TABLE `ptl_a_votes`
-  MODIFY `V_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `ptl_questions`
 --
@@ -243,6 +228,11 @@ ALTER TABLE `ptl_questions`
 ALTER TABLE `ptl_users`
   MODIFY `U_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
+-- AUTO_INCREMENT for table `user_table`
+--
+ALTER TABLE `user_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- Constraints for dumped tables
 --
 
@@ -252,13 +242,6 @@ ALTER TABLE `ptl_users`
 ALTER TABLE `ptl_answers`
   ADD CONSTRAINT `FK2PTL_QUESTIONS` FOREIGN KEY (`Q_ID`) REFERENCES `ptl_questions` (`Q_ID`),
   ADD CONSTRAINT `FK2PTL_USERS_2` FOREIGN KEY (`U_ID`) REFERENCES `ptl_users` (`U_ID`);
-
---
--- Constraints for table `ptl_a_votes`
---
-ALTER TABLE `ptl_a_votes`
-  ADD CONSTRAINT `FK2PTL_ANSWERS_1` FOREIGN KEY (`A_ID`) REFERENCES `ptl_answers` (`A_ID`),
-  ADD CONSTRAINT `FK2PTL_USERS_3` FOREIGN KEY (`U_ID`) REFERENCES `ptl_users` (`U_ID`);
 
 --
 -- Constraints for table `ptl_questions`

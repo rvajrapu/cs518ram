@@ -41,19 +41,12 @@
                             <div class = "row">
                                 <p></p>
                                 <div class="col-sm-1" >
-
-
-                                  <!--<input type="text" name="quant[2]" class="form-control input-number" value="10" min="1" max="100">-->
                                   
-                                      <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                                          <span class="glyphicon glyphicon-plus"></span>
-                                      </button>
-                                  
-                                      <p></p>
-
-                                      <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
-                                        <span class="glyphicon glyphicon-minus"></span>
-                                      </button>
+                                    <div class="vote chev">
+                                        <div class="increment up"></div>
+                                        <div class="increment down"></div>                                  
+                                        <div class="count">0</div>
+                                    </div>
 
                                 </div>
 
@@ -91,19 +84,30 @@
 
                                     while($row_1 = mysqli_fetch_assoc($result_1))
                                     {
-                                    echo "<div class = 'row' >
-                                          <div class='col-sm-1'>
-                                    
-                                              <button type='button' class='btn btn-success btn-number' data-type='plus' data-field='quant[2]'>
-                                              <span class='glyphicon glyphicon-plus'></span>
-                                              </button>
-                                          
-                                              <p></p>
+                                    $a_id = $row_1["A_ID"];  
+                                    //echo $a_id;
+                                    $vote_row = get_ans_vote_count($a_id);                                    
+                                    $vote_array = mysqli_fetch_assoc($vote_row);
+                                    //echo $vote_array["V_COUNT"];
 
-                                              <button type='button' class='btn btn-danger btn-number'  data-type='minus' data-field='quant[2]'>
-                                              <span class='glyphicon glyphicon-minus'></span>
-                                              </button>
+                                    echo "<div class = 'row' >
+                                          <div class='col-sm-1' id='votes'>
+                                    
+                                    <div class='vote chev'>
+                                        <div class='increment up'></div>
+                                        <div class='increment down'></div>                                  
+                                        <div class='count'>";
+                                        if ($vote_array["V_COUNT"] != NULL) 
+                                             {
+                                             echo $vote_array["V_COUNT"]; 
+                                             } 
+                                        else {
+                                             echo 0;
+                                             } ;                                      
+                                        echo "</div>
+                                    </div>";
                                         
+                                        echo "
                                           </div>
 
                                           <div class='col-sm-10' style='background-color:#eee;'> <br>" .
@@ -176,12 +180,14 @@
 
 </script>
 
+<link href="css/view_question.css" rel="stylesheet">
 <link href="css/postquestion.css" rel="stylesheet">
 <link href="libs/summernote/summernote.css" rel="stylesheet">
+<link href="css/signin.css" rel="stylesheet">
+
 <script src="libs/summernote/summernote.js"> </script> 
 <script src="js/validations.js"></script>   
 
-
-    <link href="css/signin.css" rel="stylesheet"><?php
+<?php
       require_once("footer.php");
-    ?>
+?>

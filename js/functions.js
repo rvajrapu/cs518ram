@@ -109,3 +109,32 @@ function checkpresence(a,id) {
       }); // end ajax call
   } 
 
+  $(function()
+    {
+      $(".increment").click(function()
+        {
+          var count = parseInt($("~ .count", this).text());
+          if($(this).hasClass("up")) 
+            {
+              var count = count + 1;
+              $("~ .count", this).text(count);
+            } 
+            else 
+            {
+              var count = count - 1;
+              $("~ .count", this).text(count);     
+            }    
+          $(this).parent().addClass("bump");
+          setTimeout(function()
+         {
+           $(this).parent().removeClass("bump");    
+         }, 400);
+       });
+   });
+
+
+//                                    <div class="vote roundrect">
+//                                        <div class="increment up"></div>
+//                                        <div class="increment down"></div>                                  
+//                                        <div class="count">0</div>
+//                                    </div>
