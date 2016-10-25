@@ -19,12 +19,12 @@
         </div>
         <div class="form-group">
           <label for="Title">Email</label>
-          <input type="text" class="form-control" placeholder="Enter Email" id="email" name="email" />
+          <input type="text" class="form-control" placeholder="Enter Email" id="newemail" name="email" />
           <p class='help-block'></p>
         </div>
         <div class="form-group">
           <label for="Title">Password</label>
-          <input type="password" class="form-control" placeholder="Enter Password" id="password" name="password" />
+          <input type="password" class="form-control" placeholder="Enter Password" id="newpassword" name="password" />
           <p class='help-block'></p>
         </div>
         <div class="form-group">
@@ -45,37 +45,13 @@
 
     </div> <!-- /container -->
 
-       <!-- <table class="table table-bordered table-responsive">
-       
-          <tr>
-           <td><label class="control-label">Username.</label></td>
-              <td><input class="form-control" type="text" name="user_name" placeholder="Enter Username" value="<?php echo $username; ?>" /></td>
-          </tr>
-          
-          <tr>
-           <td><label class="control-label">Profession(Job).</label></td>
-              <td><input class="form-control" type="text" name="user_job" placeholder="Your Profession" value="<?php echo $userjob; ?>" /></td>
-          </tr>
-          
-          <tr>
-           <td><label class="control-label">Profile Img.</label></td>
-              <td><input class="input-group" type="file" name="user_image" accept="image/*" /></td>
-          </tr>
-          
-          <tr>
-              <td colspan="2"><button type="submit" name="btnsave" class="btn btn-default">
-              </span> &nbsp; Submit
-              </button>
-              </td>
-          </tr>
-          
-          </table> -->
+
           
 
 
     <!-- Custom styles for this page -->
     <link href="css/postquestion.css" rel="stylesheet">
-    
+    <script src="js/validations.js"></script>
 
 
 <?php

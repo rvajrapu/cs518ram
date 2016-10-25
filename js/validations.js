@@ -31,6 +31,28 @@ $( "#postquestion" ).submit(function( event ) {
 
   });
 
+
+//For new user registration
+
+$( "#newuser" ).submit(function( event ) {
+  var formData = $("#newuser").serializeObject();
+  
+  if ((!checkpresence(this[0].value,"username"))||(!validate_min_lengths(this[0].value,5,"username"))
+    ||(!checkpresence(this[1].value,"newemail"))||(!validateEmail(this[1].value,"newemail"))
+    ||(!checkpresence(this[2].value,"newpassword"))||(!validate_min_lengths(this[2].value,5,"newpassword"))
+    ||(!checkpresence(this[3].value,"duppassword"))||(!validate_match(this[3].value,this[2].value,"duppassword"))
+    ) {
+
+    return false;
+  }
+  else{
+    console.log("Form validated");
+    event.preventDefault();
+    post_question(formData);
+  }
+
+  });
+
 $.fn.serializeObject = function()
 {
     var o = {};
