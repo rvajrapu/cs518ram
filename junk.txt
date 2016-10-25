@@ -1,0 +1,69 @@
+var error = [];
+$( "#signin" ).submit(function( event ) {
+
+  if (!checkpresence(this[0].value)) {
+    $("#inputEmail").parent().addClass('has-error');
+    error.push("Please enter email");
+  }
+  if (checkpresence(this[0].value) ){
+    if (!validateEmail(this[0].value)){
+      $("#inputEmail").parent().addClass('has-error');
+      error.push("Invalid Email");
+    }
+  }
+  if (!checkpresence(this[1].value)) {
+    $("#inputPassword").parent().addClass('has-error');
+    error.push("Please enter password");
+  }
+  if (checkpresence(this[1].value)) {
+      if (!validate_min_lengths(this[1].value,5)){
+        $("#inputPassword").parent().addClass('has-error');
+        error.push("Password less than 5 characters");
+      }
+  }
+
+
+  if(error.length > 0){
+    var str = '<div class="alert alert-danger" role="alert">';
+    for (var i in error) {
+      str += '<i class="fa fa-exclamation-circle"></i>'+error[i]+'</br>';
+    }
+    $( "#errormsg" ).append(str+"</div>");
+    str = "";
+    return false;
+  }
+  else
+    return true;
+  
+  });
+
+  ||(!validateEmail(this[0].value,"inputEmail"))
+
+    For Alert Messages
+    http://stackoverflow.com/questions/23101966/bootstrap-alert-auto-close
+    <?php echo message(); ?>
+
+
+   
+
+
+
+
+
+     
+    
+
+      <?php
+        // 3. Use returned data (if any)
+        while($subject = mysqli_fetch_assoc($result)) {
+          // output data from each row
+      ?>
+          <li><?php echo $subject["user_id"] ; ?></li>
+      <?php
+        }
+      ?>
+    </div> <!-- /container -->
+      <?php
+      // 4. Release returned data
+      mysqli_free_result($result);
+    ?>
