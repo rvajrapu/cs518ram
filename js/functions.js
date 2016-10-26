@@ -75,6 +75,37 @@ function checkpresence(a,id) {
         }
       }); // end ajax call
   }
+    function verify_user(username){
+    return $.ajax({
+        url: 'verify_ajax.php',
+        type: 'post',
+        async: false,
+        data: {myData:username},
+
+        error: function(xhr, desc, err) {
+          console.log(xhr);
+          console.log("Details: " + desc + "\nError:" + err);
+        }
+      }); // end ajax call
+  }
+
+  function checkduplicate(value,id){
+  var validate = verify_user(value);
+  return validate.success(function(data){
+            if ($.trim(data) == "notok"){
+            $( '#'+id ).siblings('.help-block').html("User already exists");
+            
+            return false;
+          }
+          else {
+            return true;
+          }
+        });
+
+  }
+
+  
+  
 
       function best_answer(formdata){
         var element = $( formdata ).siblings();

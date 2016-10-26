@@ -120,6 +120,28 @@
 		}
 		
 	}
+	function insert_user($username,$email,$password,$userpic) {
+		global $connection;
+		
+		// $title = verify_input($title);
+		// $question = verify_input($question);
+		// $tag = verify_input($tag);
+		$query  = "INSERT INTO ptl_users ";
+		$query .= "(USER_ID, EMAIL, PASS_CODE, FIRST_NAME, CREATION_DATE, USER_IMAGE) ";
+		$query .= "VALUES ('$username', '$email', '$password', '$username', CURDATE(),'$userpic') ";
+		$result_id = mysqli_query($connection, $query);
+		//error_log("Inside query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		confirm_query($result_id);
+		if($result_id) {
+			$_SESSION["message"] = "User Created";
+			return true;
+
+		} else {
+			$_SESSION["message"] = "Database Error";
+			return false;
+		}
+		
+	}
 	function insert_answer($answer,$qid,$uid) {
 		global $connection;
 		$answer = verify_input($answer);
