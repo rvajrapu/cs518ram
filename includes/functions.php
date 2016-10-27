@@ -92,6 +92,24 @@
 		}
 		
 	}
+
+	function find_userdetails($userid) {
+		global $connection;
+		
+		$userid = verify_input($userid);
+		$query  = "SELECT user_id, email, first_name, user_image ";
+		$query .= "FROM ptl_users ";
+		$query .= "WHERE u_id = '$userid' ";
+		$query .= "LIMIT 1";
+		$result_id = mysqli_query($connection, $query);
+		confirm_query($result_id);
+		if($result_uid = mysqli_fetch_assoc($result_id)) {
+			return $result_uid;
+		} else {
+			return null;
+		}
+		
+	}
 	
 	function redirect_to($new_location) {
 	  	header("Location: " . $new_location);
@@ -141,6 +159,26 @@
 			return false;
 		}
 		
+	}
+
+	function update_user($uid,$email,$userpic) {
+		global $connection;
+		//$q_id = verify_input($q_id);
+		//$a_id = verify_input($a_id);
+		$query  = "UPDATE ptl_users SET ";
+		$query .= "EMAIL = '$email',USER_IMAGE = '$userpic'  ";
+		$query .= "WHERE U_ID = '$uid' ";
+		$result_id = mysqli_query($connection, $query);
+		error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		// confirm_query($result_id);
+		if($result_id) {
+			$_SESSION["message"] = "User details updated";
+			return true;
+
+		} else {
+			$_SESSION["message"] = "Database Error";
+			return false;
+		}
 	}
 	function insert_answer($answer,$qid,$uid) {
 		global $connection;
