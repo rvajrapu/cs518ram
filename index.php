@@ -46,7 +46,7 @@
 						echo "<div class='row'>
 
 	  							  <div class='col-xs-6 col-md-3'> 
-							           <button type='button' class='btn btn-sm'  > " . $row["UP_VOTE"] . "<br>" . "Votes" . " </button> 
+							           <button type='button' class='btn btn-sm'  > " . $row["V_COUNT"] . "<br>" . "Votes" . " </button> 
 							           <button type='button' class='btn btn-sm' style='background-color:rgba(127, 230, 161, 0.77);border-color: #eeeeee;' >" . $row["ANSWERS_COUNT"] . "<br>" . "Answers" . " </button> 
 							           <button type='button' class='btn btn-sm' border-color: #eeeeee;>" . $row["VIEWS"] . "<br>" . "Views" . " </button> 
 						          </div>

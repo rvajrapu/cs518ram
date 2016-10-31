@@ -109,20 +109,71 @@ function checkpresence(a,id) {
       }); // end ajax call
   } 
 
-  $(function()
-    {
-      $(".increment").click(function()
+
+
+      $(".increment").click(function( event )
         {
+          var element = $(this).siblings();
+
+          var data_ques = {};
+          data_ques['id'] = element[0].value;
+          data_ques['v_type'] = element[1].value;
+
+          console.log(data_ques);
+
+
           var count = parseInt($("~ .count", this).text());
           if($(this).hasClass("up")) 
-            {
-              var count = count + 1;
-              $("~ .count", this).text(count);
+            { 
+              data_ques['vote'] = 1;
+
+              $.ajax(
+              {
+              url: 'post_vote_ajax.php',
+              type:'post',
+              data: {myData:data_ques},
+
+              success: function(data) 
+                                    {
+    
+                                      q_votes =  $.trim(data);
+                                      if (q_votes == null || q_votes == ''){alert('Please login to vote.')}
+                                      else{
+                                        $(element[3]).html(q_votes);
+                                      }
+                                      
+                                    },
+
+              error: function(xhr, desc, err) {
+              console.log(xhr);
+              console.log("Details: " + desc + "\nError:" + err);},
+
+            });                                      
             } 
-            else 
+          else 
             {
-              var count = count - 1;
-              $("~ .count", this).text(count);     
+              data_ques['vote'] = -1;
+
+              $.ajax(
+              {
+              url: 'post_vote_ajax.php',
+              type:'post',
+              data: {myData:data_ques},
+              
+              success: function(data) 
+                                    {
+                                      q_votes =  $.trim(data);
+                                      if (q_votes == null || q_votes == ''){alert('Please login to vote.')}
+                                      else{
+                                        $(element[3]).html(q_votes);
+                                      }                                        
+                                    },
+              error: function(xhr, desc, err) {
+                                              console.log(xhr);
+                                              console.log("Details: " + desc + "\nError:" + err);
+                                              },
+
+            });                  
             }    
           $(this).parent().addClass("bump");
           setTimeout(function()
@@ -130,11 +181,3 @@ function checkpresence(a,id) {
            $(this).parent().removeClass("bump");    
          }, 400);
        });
-   });
-
-
-//                                    <div class="vote roundrect">
-//                                        <div class="increment up"></div>
-//                                        <div class="increment down"></div>                                  
-//                                        <div class="count">0</div>
-//                                    </div>

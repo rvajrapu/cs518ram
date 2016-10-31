@@ -5,10 +5,13 @@
   include("./htmlheader.php");
   include("./includes/nav.php");    
 ?>
-
+<link href="css/view_question.css" rel="stylesheet">
+<link href="css/postquestion.css" rel="stylesheet">
 
     <div class="container-fluid">
-
+      <div  id="errormsg" role="alert">
+       <?php echo message(); ?>
+      </div>
         <p></p>
         <div class="row">
             <div class="col-sm-2"></div>
@@ -16,6 +19,7 @@
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <?php 
+
                         if (!isset($_GET["q_id"])){
                           redirect_to('index.php');
                         }
@@ -27,7 +31,6 @@
                         <div class = 'row'>
 
                             <?php        
-                                          // Need to Question Title Input from another page  ****************************************************************************
                                     $row_2 = mysqli_fetch_assoc($result_2);
                                                                              
                                     echo "<h2>".verify_output($row_2['Q_TITLE'])."</h2>";
@@ -40,20 +43,18 @@
                         <div class="col-sm-12">
                             <div class = "row">
                                 <p></p>
-                                <div class="col-sm-1" >
-                                  
-                                    <div class="vote chev">
-                                        <div class="increment up"></div>
-                                        <div class="increment down"></div>                                  
-                                        <div class="count">0</div>
-                                    </div>
+                                <div class="col-sm-1" >                                
+
+                               <?php
+                               $v_type = 'Q';
+                               echo user_votes($ques_id,$v_type);
+                               ?>
 
                                 </div>
 
                                 <div class="col-sm-10" >
                                     <?php
 
-                                  //  $row_2 = mysqli_fetch_assoc($result_2);
                                     echo verify_output($row_2["Q_TEXT"]);
                                     echo "<p></p>";
 
@@ -86,28 +87,19 @@
                                     {
                                     $a_id = $row_1["A_ID"];  
                                     //echo $a_id;
-                                    $vote_row = get_ans_vote_count($a_id);                                    
-                                    $vote_array = mysqli_fetch_assoc($vote_row);
+                                    //$vote_row = get_ans_vote_count($a_id);                                    
+                                    //$vote_array = mysqli_fetch_assoc($vote_row);
                                     //echo $vote_array["V_COUNT"];
 
                                     echo "<div class = 'row' >
-                                          <div class='col-sm-1' id='votes'>
+                                          <div class='col-sm-1' id='votes'>";
+                                                                        
                                     
-                                    <div class='vote chev'>
-                                        <div class='increment up'></div>
-                                        <div class='increment down'></div>                                  
-                                        <div class='count'>";
-                                        if ($vote_array["V_COUNT"] != NULL) 
-                                             {
-                                             echo $vote_array["V_COUNT"]; 
-                                             } 
-                                        else {
-                                             echo 0;
-                                             } ;                                      
-                                        echo "</div>
-                                    </div>";
-                                        
-                                        echo "
+
+                                    $v_type = 'A';
+                                    echo user_votes($a_id,$v_type);                                    
+                                                                             
+                                    echo "
                                           </div>
 
                                           <div class='col-sm-10' style='background-color:#eee;'> <br>" .
@@ -115,14 +107,14 @@
                                           verify_output($row_1["A_TEXT"]) .
                                 
                                          " <br>
-                                         <br>
-                                            </div>       
-                                          </div>
-                                          <br>
+                                           <br>
+                                           </div>       
+                                           </div>
+                                           <br>
 
-                                          <div class='row'>
-                                          <div class='col-sm-3'> 
-                                          <p></p>";
+                                           <div class='row'>
+                                           <div class='col-sm-3'> 
+                                           <p></p>";
                                     //echo $row_2["BA_ID"] . $row_2['U_ID'];
                                     echo best_answer($row_1["A_ID"],$row_2["BA_ID"],$row_2['U_ID'],$ques_id);
                                     echo  '</div>
@@ -180,8 +172,7 @@
 
 </script>
 
-<link href="css/view_question.css" rel="stylesheet">
-<link href="css/postquestion.css" rel="stylesheet">
+
 <link href="libs/summernote/summernote.css" rel="stylesheet">
 <link href="css/signin.css" rel="stylesheet">
 

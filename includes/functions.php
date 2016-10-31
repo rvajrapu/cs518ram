@@ -240,6 +240,7 @@
 	}
 
 
+
 	function get_questions($user_id) {
 											global $connection;
 											$u_id = verify_input($user_id);
@@ -262,13 +263,20 @@
 
 	function get_landing_questions() {
 											global $connection;
-													 	 
-														$query  = "SELECT ptl_questions.UP_VOTE, CASE WHEN A_ID IS NULL THEN 0 ELSE COUNT(*) END AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID, ";
-														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
-														$query .= "FROM ptl_questions "; 
-														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
-														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID GROUP BY ptl_questions.Q_ID ";
-														$query .= "ORDER BY ptl_questions.CREATION_DATE desc limit 10";
+
+														$query  =  "SELECT 
+																	CASE WHEN A_ID IS NULL THEN 0 ELSE COUNT(*) END AS ANSWERS_COUNT, 
+																	VIEWS,ptl_questions.CREATION_DATE AS Q_CREATED_ON
+																	, Q_TITLE, Q_TAG, ptl_questions.Q_ID,ptl_users.FIRST_NAME AS FIRST_NAME, V_COUNT 
+																	FROM ptl_questions  
+																	LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID 
+																	LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID 
+																	LEFT OUTER JOIN 
+																	(SELECT  sum(VOTE) AS V_COUNT, Q_ID FROM ptl_user_votes  GROUP BY Q_ID) q_votes 
+																	ON ptl_questions.Q_ID = q_votes.Q_ID
+																	GROUP BY ptl_questions.Q_ID
+																	ORDER BY V_COUNT desc limit 5";
+
 														 
                                             $result = mysqli_query($connection,$query);
 											
@@ -277,39 +285,144 @@
 											return ($result);
 	}
 
-	function get_ans_vote_count($a_id) {
+
+
+	function user_votes($id,$v_type) {
+											$id      = $id;
+											//$u_id    = $_SESSION['uid'];
+											$v_type  = $v_type;
+
+											$votes   = get_vote_count($id,$v_type);
+											$output  = '<div class="vote chev" >';
+											$output .= '<input type="hidden" name="forid" id="id" value = '.$id.' />';
+											//$output .= '<input type="hidden" name="forid" id="u_id" value = '.$u_id.' />';
+											$output .= '<input type="hidden" name="forid" id="v_type" value = '.$v_type.' />';
+											$output .= '<div class="increment up"></div>';
+											$output .= '<div class="increment down"></div>';
+											$output .= '<div class="count">'.$votes.'</div>';
+											$output .= '</div>';
+
+											return $output;
+	}											
+
+
+
+
+	function get_vote_count($id,$v_type) {
+											global $connection;	
+											$votes = 0;
+											if ($v_type == 'Q'){
+												$query  = "SELECT  sum(VOTE) AS V_COUNT FROM ptl_user_votes WHERE Q_ID = $id AND V_TYPE = '$v_type'       GROUP BY Q_ID";
+												$result = mysqli_query($connection,$query);
+												if(!$result){die(" que_vote_count: Database query failed.");}
+												$votes_array = mysqli_fetch_assoc($result);
+											}		
+											elseif ($v_type == 'A') {
+											
+												$query  = "SELECT  sum(VOTE) AS V_COUNT FROM ptl_user_votes WHERE A_ID = $id AND V_TYPE = '$v_type'       GROUP BY A_ID";										
+												$result = mysqli_query($connection,$query);
+												if(!$result){die(" ans_vote_count: Database query failed.");}
+												$votes_array = mysqli_fetch_assoc($result);														
+											}										
+											else{};
+																						
+							                if ($votes_array["V_COUNT"] != NULL) 
+							                   {$votes = $votes_array["V_COUNT"];} 
+							                else {$votes = 0;};
+											
+											return ($votes);
+	}
+
+
+
+
+
+
+	function vote_ins_upd($id,$vote,$v_type) {
+
 											global $connection;
-													 	 
-											$query  = "SELECT  sum(VOTE) AS V_COUNT FROM ptl_a_votes WHERE A_ID = $a_id GROUP BY A_ID";
-														 
-                                            $result = mysqli_query($connection,$query);
-											
-                                            if(!$result){die("Database query failed.");}
-											
-											return ($result);
+											$u_id = $_SESSION['uid'];
+											$id = verify_input($id);
+											$u_id = verify_input($u_id);
+											$vote = verify_input($vote);
+											$v_type = verify_input($v_type);
+											//echo $u_id,$q_id;
+
+											if ( $v_type == 'Q' ){
+												$query_1  = "SELECT 1 AS rec_exists, VOTE FROM ptl_user_votes WHERE Q_ID = $id and U_ID = $u_id and V_TYPE = 'Q'";
+												//echo $query_1;
+												$result_1 = mysqli_query($connection,$query_1);
+
+												if(!$result_1){die("vote_ins_upd-query_1: Database query failed.");}
+
+												$records_1 = mysqli_fetch_assoc($result_1);
+
+												$new_vote = $records_1["VOTE"]+($vote);
+												$rec_exists = $records_1["rec_exists"];
+
+												//echo "rec_exists: ". $rec_exists ;
+
+
+												if(($new_vote == (-1) or $new_vote == 0 or $new_vote == 1) and $rec_exists == 1){
+																				$query  = "UPDATE ptl_user_votes SET VOTE = $new_vote,                  LAST_UPDATION_DATE = CURDATE() WHERE Q_ID = $id AND U_ID = $u_id AND V_TYPE='Q' ";	
+																				//echo $query;																			
+
+																				$result_id = mysqli_query($connection, $query);
+																				if(!$result_1){die("vote_ins_upd-Q-UPDATE: Database query failed.");}																				
+																				confirm_query($result_id);     
+											    }
+												elseif(($new_vote == (-1) or $new_vote == 0 or $new_vote == 1) and $rec_exists != 1){
+																				$query  = "INSERT INTO ptl_user_votes ";
+																				$query .= "(Q_ID, U_ID, VOTE, V_TYPE, CREATION_DATE) ";
+																				$query .= "VALUES ('$id', '$u_id', $vote, 'Q', CURDATE()) ";
+																				//echo $query;											
+
+																				$result_id = mysqli_query($connection, $query);
+																				confirm_query($result_id);  			
+												}
+												else {};
+											}
+
+											elseif ($v_type == 'A'){
+												$query_1  = "SELECT 1 AS rec_exists, VOTE FROM ptl_user_votes WHERE A_ID = $id and U_ID = $u_id and V_TYPE = 'A'";
+												//echo $query_1;
+												$result_1 = mysqli_query($connection,$query_1);
+
+												if(!$result_1){die("Answer vote_ins_upd-query_1: Database query failed.");}
+
+												$records_1 = mysqli_fetch_assoc($result_1);
+
+												$new_vote = $records_1["VOTE"]+($vote);
+												$rec_exists = $records_1["rec_exists"];
+
+												//echo "rec_exists: ". $rec_exists ;
+
+
+												if(($new_vote == (-1) or $new_vote == 0 or $new_vote == 1) and $rec_exists == 1){
+																				$query  = "UPDATE ptl_user_votes SET VOTE = $new_vote,                  LAST_UPDATION_DATE = CURDATE() WHERE A_ID = $id AND U_ID = $u_id AND V_TYPE='A' ";	
+																				//echo $query;																			
+
+																				$result_id = mysqli_query($connection, $query);
+																				if(!$result_1){die("vote_ins_upd-A-UPDATE: Database query failed.");}																				
+																				confirm_query($result_id);     
+											    }
+												elseif(($new_vote == (-1) or $new_vote == 0 or $new_vote == 1) and $rec_exists != 1){
+																				$query  = "INSERT INTO ptl_user_votes ";
+																				$query .= "(A_ID, U_ID, VOTE, V_TYPE, CREATION_DATE) ";
+																				$query .= "VALUES ('$id', '$u_id', $vote, 'A', CURDATE()) ";
+																				//echo $query;											
+
+																				$result_id = mysqli_query($connection, $query);
+																				confirm_query($result_id);  			
+												}
+												else {};
+
+											}
+
+											else {};
+
+											return true;
 	}
 
 
-function vote_ins_upd($a_id,$u_id,$vote){ 
- $check_rec = mysql_query("SELECT count(*) as rowexist FROM ptl_a_votes WHERE A_ID = $a_id AND U_ID = $uid") or die(mysql_error()); 
- $fetch_rec = mysql_fetch_array($check_rec);
-
-if ($fetch_rec['rowexist'] > 0) 
-     {
-      mysql_query("UPDATE ptl_a_votes SET VOTE = 1 WHERE A_ID = $a_id AND U_ID = $uid");  
-     } 
-else {
-      mysql_query("INSERT INTO ptl_a_votes (A_ID, U_ID, VOTE) values ($a_id,$uid,$vote)");
-     }
- }
-
-
-function up_vote(){
-
-	$message = "Hi";
-	return($message);
-}
-
-
-	?>
-
+?>
