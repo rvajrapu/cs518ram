@@ -8,6 +8,8 @@
 <link href="css/view_question.css" rel="stylesheet">
 <link href="css/postquestion.css" rel="stylesheet">
 
+<?php confirm_logged_in(); ?>
+
     <div class="container-fluid">
       <div  id="errormsg" role="alert">
        <?php echo message(); ?>
@@ -90,10 +92,7 @@
                                     while($row_1 = mysqli_fetch_assoc($result_1))
                                     {
                                     $a_id = $row_1["A_ID"];  
-                                    //echo $a_id;
-                                    //$vote_row = get_ans_vote_count($a_id);                                    
-                                    //$vote_array = mysqli_fetch_assoc($vote_row);
-                                    //echo $vote_array["V_COUNT"];
+
 
                                     echo "<div class = 'row' >
                                           <div class='col-sm-1' id='votes'>";
