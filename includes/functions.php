@@ -265,20 +265,19 @@
 		                                 	global $connection;
 
 		                                 	$q_id = verify_input($ques_id);
-											$query_1  = "SELECT ";
-											$query_1 .= "Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, A_ID, ptl_answers.UP_VOTE, ptl_answers.DOWN_VOTE, BA_FLAG, ";
-											$query_1 .= "ptl_users.FIRST_NAME,ptl_answers.CREATION_DATE, ptl_answers.A_ID, ";
-											$query_1 .= "CASE ";
-											$query_1 .= "WHEN BA_ID = ptl_answers.A_ID THEN 1 ";
-											$query_1 .= "ELSE NULL ";
-											$query_1 .= "END AS TOP_AID ";
-											$query_1 .= "FROM ptl_answers ";
-											$query_1 .= "LEFT OUTER JOIN ptl_questions ON ptl_answers.Q_ID = ptl_questions.Q_ID ";
-											$query_1 .= "LEFT OUTER JOIN ptl_users ON ptl_answers.U_ID = ptl_users.U_ID ";
-											$query_1 .= "WHERE ptl_questions.Q_ID = $q_id ORDER BY TOP_AID desc ,ptl_answers.A_ID ";
+
+		                                 	$query_1 = "SELECT 
+														Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, ptl_answers.A_ID, V_COUNT,
+														ptl_users.FIRST_NAME, ptl_answers.CREATION_DATE, ptl_answers.A_ID,
+														CASE WHEN BA_ID = ptl_answers.A_ID THEN 1 ELSE NULL END AS TOP_AID
+														FROM ptl_answers 
+														LEFT OUTER JOIN ptl_questions ON ptl_answers.Q_ID = ptl_questions.Q_ID 
+														LEFT OUTER JOIN ptl_users ON ptl_answers.U_ID = ptl_users.U_ID
+														LEFT OUTER JOIN (SELECT  sum(VOTE) AS V_COUNT, A_ID FROM ptl_user_votes  GROUP BY A_ID) 				 v_votes ON ptl_answers.A_ID = v_votes.A_ID
+														WHERE ptl_questions.Q_ID = $q_id ORDER BY TOP_AID desc , V_COUNT desc";
 
 											$result_1 = mysqli_query($connection,$query_1);
-											if(!$result_1){die("Database query failed.");}
+											if(!$result_1){die(" get_result_1: Database query failed.");}
 											
 											return ($result_1);		
 	}

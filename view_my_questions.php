@@ -5,7 +5,7 @@
   include("./htmlheader.php");
   include("./includes/nav.php");  
 ?>
-
+<?php confirm_logged_in(); ?>
 <div class="container-fluid">
   <p></p>
   <div class="row">
