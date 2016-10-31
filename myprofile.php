@@ -9,8 +9,11 @@
     if(!isset($_SESSION['uid'])) {
       redirect_to('index.php');
     }
+    if(!isset($_GET['uid'])) {
+      redirect_to('index.php');
+    }
 
-    $result_user = find_userdetails($_SESSION['uid']);
+    $result_user = find_userdetails($_GET['uid']);
 
    if(isset($_POST['updatedetails']))
     {
@@ -76,7 +79,7 @@
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
         <h3><?php echo $result_user['user_id']; ?></h3>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">Edit Details</button>
+        <?php if($_GET['uid'] == $_SESSION['uid']) { ?> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">Edit Details</button> <?php } ?>
         </div>
         
         </div>

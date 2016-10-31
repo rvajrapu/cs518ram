@@ -267,7 +267,7 @@
 		                                 	$q_id = verify_input($ques_id);
 											$query_1  = "SELECT ";
 											$query_1 .= "Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, A_ID, ptl_answers.UP_VOTE, ptl_answers.DOWN_VOTE, BA_FLAG, ";
-											$query_1 .= "ptl_users.FIRST_NAME,ptl_answers.CREATION_DATE, ptl_answers.A_ID, ";
+											$query_1 .= "ptl_users.FIRST_NAME,ptl_users.user_image AS user_image,ptl_answers.CREATION_DATE, ptl_answers.A_ID, ";
 											$query_1 .= "CASE ";
 											$query_1 .= "WHEN BA_ID = ptl_answers.A_ID THEN 1 ";
 											$query_1 .= "ELSE NULL ";
@@ -286,7 +286,7 @@
 	function get_result_2($ques_id) {
 											global $connection;
 											$q_id = verify_input($ques_id);
-											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, ptl_questions.CREATION_DATE,FIRST_NAME,ptl_questions.U_ID,BA_ID ";
+											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, ptl_users.user_image AS user_image, ptl_questions.CREATION_DATE,FIRST_NAME,ptl_questions.U_ID,BA_ID ";
 											$query_2 .= "FROM ptl_questions "; 
 											$query_2 .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID =  ptl_users.U_ID ";
 											$query_2 .= "WHERE ptl_questions.Q_ID = $q_id ";

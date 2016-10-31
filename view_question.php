@@ -14,8 +14,8 @@
       </div>
         <p></p>
         <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8" style="background-color:#fff;">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10" style="background-color:#fff;">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <?php 
@@ -64,11 +64,15 @@
 
                                 <div class="row">
                                   <div class="col-sm-3"> </div>
-                                  <div class="col-sm-6"> </div>
-                                  <div class="col-sm-2"  style="background-color:#e0eaf1;">
+                                  <div class="col-sm-5"> </div>
+                                  <div class="col-sm-3"  style="background-color:#e0eaf1;">
                                       <p></p>
-                                      <div>Posted on: <a><?php echo $row_2["CREATION_DATE"] ?></a></div>
-                                      <div>Posted by: <a><?php echo $row_2["FIRST_NAME"] ?></a></div>
+                                      <div style='background-color:#e0eaf1;width: 80%;'>
+                                      <img src='userimages/<?php echo $row_2["user_image"] ?>' width='35' height='40' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>
+                                      <div>Posted on: <a><?php echo $row_2["CREATION_DATE"] ?></a><br>Posted by: <a><?php echo $row_2["FIRST_NAME"] ?></a></div>
+
+                                      <!-- <div>Posted on: <a><?php echo $row_2["CREATION_DATE"] ?></a></div>
+                                      <div>Posted by: <a><?php echo $row_2["FIRST_NAME"] ?></a></div> -->
                                       <p></p>
                                   </div>
                                   <div class="col-sm-1"> </div>
@@ -118,11 +122,13 @@
                                     //echo $row_2["BA_ID"] . $row_2['U_ID'];
                                     echo best_answer($row_1["A_ID"],$row_2["BA_ID"],$row_2['U_ID'],$ques_id);
                                     echo  '</div>
-                                          <div class="col-sm-6"> </div>
-                                          <div class="col-sm-2"  style="background-color:#e0eaf1;">
+                                          <div class="col-sm-5"> </div>
+                                          <div class="col-sm-3"  style="background-color:#e0eaf1;">
                                               <p></p>
-                                              <div>Ans on: <a>' . $row_1["CREATION_DATE"] . '</a></div>
-                                              <div>Ans by: <a>' . $row_1["FIRST_NAME"] . '</a></div>
+                                              <div style="background-color:#e0eaf1;width: 80%;">
+                                              <img src="userimages/' . $row_1["user_image"] . '" width="35" height="40" style="float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;">
+                                              <div>Ans on: <a>' . $row_1["CREATION_DATE"] . '</a><br>Ans by: <a>' . $row_1["FIRST_NAME"] . '</a></div>
+                                              </div>
                                               <p></p>
                                           </div>
                                           <div class="col-sm-1"> </div>
@@ -158,8 +164,8 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-1"></div>
 
-            <div class="col-sm-2"> </div>
         </div>
     </div>
 
