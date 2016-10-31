@@ -39,6 +39,7 @@
                     $uname = find_username($userid);
                     $row = mysqli_fetch_assoc($uname);
                     $user_name = $row["first_name"];
+                    $result_user = find_userdetails($_SESSION['uid']);
                         ?>
 
                         <li>
@@ -48,10 +49,10 @@
                         <a href="logout.php">Sign Out</a>
                         </li>
                         <li>
-                        <img src="pics/Logomakr_4YeozF.png" width="35" height="40">
+                        <img src="userimages/<?php echo $result_user['user_image']; ?>" width="35" height="40">
                         </li>
                         <li>
-                        <a href="#"><?php echo $user_name ?></a>
+                        <a href="myprofile.php"><?php echo $user_name ?></a>
                         </li>
                         </li>
                     <?php } ?>

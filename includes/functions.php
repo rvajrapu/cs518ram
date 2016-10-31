@@ -92,6 +92,24 @@
 		}
 		
 	}
+
+	function find_userdetails($userid) {
+		global $connection;
+		
+		$userid = verify_input($userid);
+		$query  = "SELECT user_id, email, first_name, user_image ";
+		$query .= "FROM ptl_users ";
+		$query .= "WHERE u_id = '$userid' ";
+		$query .= "LIMIT 1";
+		$result_id = mysqli_query($connection, $query);
+		confirm_query($result_id);
+		if($result_uid = mysqli_fetch_assoc($result_id)) {
+			return $result_uid;
+		} else {
+			return null;
+		}
+		
+	}
 	
 	function redirect_to($new_location) {
 	  	header("Location: " . $new_location);
@@ -119,6 +137,48 @@
 			return false;
 		}
 		
+	}
+	function insert_user($username,$email,$password,$userpic) {
+		global $connection;
+		
+		// $title = verify_input($title);
+		// $question = verify_input($question);
+		// $tag = verify_input($tag);
+		$query  = "INSERT INTO ptl_users ";
+		$query .= "(USER_ID, EMAIL, PASS_CODE, FIRST_NAME, CREATION_DATE, USER_IMAGE) ";
+		$query .= "VALUES ('$username', '$email', '$password', '$username', CURDATE(),'$userpic') ";
+		$result_id = mysqli_query($connection, $query);
+		//error_log("Inside query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		confirm_query($result_id);
+		if($result_id) {
+			$_SESSION["message"] = "User Created";
+			return true;
+
+		} else {
+			$_SESSION["message"] = "Database Error";
+			return false;
+		}
+		
+	}
+
+	function update_user($uid,$email,$userpic) {
+		global $connection;
+		//$q_id = verify_input($q_id);
+		//$a_id = verify_input($a_id);
+		$query  = "UPDATE ptl_users SET ";
+		$query .= "EMAIL = '$email',USER_IMAGE = '$userpic'  ";
+		$query .= "WHERE U_ID = '$uid' ";
+		$result_id = mysqli_query($connection, $query);
+		error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		// confirm_query($result_id);
+		if($result_id) {
+			$_SESSION["message"] = "User details updated";
+			return true;
+
+		} else {
+			$_SESSION["message"] = "Database Error";
+			return false;
+		}
 	}
 	function insert_answer($answer,$qid,$uid) {
 		global $connection;
@@ -247,7 +307,7 @@
 											if(isset($user_id)) 
 														{														 
 														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID, ";
-														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
+														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
 														$query .= "FROM ptl_questions "; 
 														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
 														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.U_ID = '$u_id' GROUP BY ptl_questions.Q_ID";		   
@@ -266,8 +326,9 @@
 
 														$query  =  "SELECT 
 																	CASE WHEN A_ID IS NULL THEN 0 ELSE COUNT(*) END AS ANSWERS_COUNT, 
-																	VIEWS,ptl_questions.CREATION_DATE AS Q_CREATED_ON
-																	, Q_TITLE, Q_TAG, ptl_questions.Q_ID,ptl_users.FIRST_NAME AS FIRST_NAME, V_COUNT 
+																	VIEWS,ptl_questions.CREATION_DATE AS Q_CREATED_ON, 
+																	Q_TITLE, Q_TAG, ptl_questions.Q_ID,ptl_users.FIRST_NAME AS FIRST_NAME, 
+																	V_COUNT , ptl_users.user_image AS user_image
 																	FROM ptl_questions  
 																	LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID 
 																	LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID 
