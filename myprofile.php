@@ -155,6 +155,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 
        
 </div>
@@ -219,6 +220,10 @@
 <div class="col-sm-1"></div>
 
 </div>
+=======
+</div>
+          
+>>>>>>> 1a35574d1bae47b0f85ed84fae0b07eea122eb59
 
 
     <!-- Custom styles for this page -->
