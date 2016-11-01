@@ -167,7 +167,7 @@
 	function update_user($uid,$email,$userpic) {
 		global $connection;
 		//$q_id = verify_input($q_id);
-		//$a_id = verify_input($a_id);
+		$email = verify_input($email);
 		$query  = "UPDATE ptl_users SET ";
 		$query .= "EMAIL = '$email',USER_IMAGE = '$userpic'  ";
 		$query .= "WHERE U_ID = '$uid' ";
@@ -255,11 +255,11 @@
 		error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
 		// confirm_query($result_id);
 		if($result_id) {
-			$_SESSION["message"] = "Question Posted";
+			//$_SESSION["message"] = "Question Posted";
 			return true;
 
 		} else {
-			$_SESSION["message"] = "Database Error";
+			//$_SESSION["message"] = "Database Error";
 			return false;
 		}
 	}
