@@ -8,7 +8,7 @@
 <link href="css/view_question.css" rel="stylesheet">
 <link href="css/postquestion.css" rel="stylesheet">
 
-<?php confirm_logged_in(); ?>
+
 
     <div class="container-fluid">
       <div  id="errormsg" role="alert">
