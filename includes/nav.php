@@ -52,11 +52,7 @@
                         <img src="userimages/<?php echo $result_user['user_image']; ?>" width="35" height="40">
                         </li>
                         <li>
-<<<<<<< HEAD
                         <a href="myprofile.php?uid=<?php echo $userid ?>"><?php echo $user_name ?></a>
-=======
-                        <a href="myprofile.php"><?php echo $user_name ?></a>
->>>>>>> 1a35574d1bae47b0f85ed84fae0b07eea122eb59
                         </li>
                         </li>
                     <?php } ?>

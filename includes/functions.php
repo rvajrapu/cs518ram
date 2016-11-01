@@ -141,18 +141,12 @@
 	function insert_user($username,$email,$password,$userpic) {
 		global $connection;
 		
-<<<<<<< HEAD
 		$username = verify_input($username);
 		$email = verify_input($email);
 		$password = verify_input($password);
 		if($userpic == ''){
 			$userpic = 'default.png';
 		}
-=======
-		// $title = verify_input($title);
-		// $question = verify_input($question);
-		// $tag = verify_input($tag);
->>>>>>> 1a35574d1bae47b0f85ed84fae0b07eea122eb59
 		$query  = "INSERT INTO ptl_users ";
 		$query .= "(USER_ID, EMAIL, PASS_CODE, FIRST_NAME, CREATION_DATE, USER_IMAGE) ";
 		$query .= "VALUES ('$username', '$email', '$password', '$username', CURDATE(),'$userpic') ";
