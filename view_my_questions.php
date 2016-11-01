@@ -19,7 +19,7 @@
     			<?php 
     			$user_id= $_SESSION["uid"];
                                  
-                        $result = get_questions($user_id);
+                        $result = get_allquestions($user_id);
 
 				?>
 
