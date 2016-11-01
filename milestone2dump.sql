@@ -164,25 +164,25 @@ CREATE TABLE `ptl_users` (
 --
 
 INSERT INTO `ptl_users` (`U_ID`, `USER_ID`, `PASS_CODE`, `ACTIVE`, `CREATED_BY`, `CREATION_DATE`, `LAST_UPDATED_BY`, `LAST_UPDATION_DATE`, `LAST_LOGIN_DATE`, `USER_ROLE`, `FIRST_NAME`, `LAST_NAME`, `EMAIL`, `USER_IMAGE`) VALUES
-(1, 'Administrator', 'Administrator', 'Y', NULL, NULL, NULL, NULL, NULL, 'Admin', 'Admin', 'Admin', NULL, NULL),
-(2, 'Raja', 'Harsha', 'Y', NULL, NULL, NULL, NULL, NULL, 'User', 'Raja Harsha', 'Chinta', NULL, NULL),
-(3, 'Ram', 'Vajrapu', 'Y', NULL, NULL, NULL, NULL, NULL, 'User', 'Ram Manoj', 'Vajrapu', NULL, NULL),
-(4, 'admin', 'cs518pa$$', '', NULL, NULL, NULL, NULL, NULL, 'User', 'admin', '', NULL, NULL),
+(1, 'Administrator', 'Administrator', 'Y', NULL, NULL, NULL, NULL, NULL, 'Admin', 'Admin', 'Admin', NULL, 'default.png'),
+(2, 'Raja', 'Harsha', 'Y', NULL, NULL, NULL, NULL, NULL, 'User', 'Raja Harsha', 'Chinta', NULL, 'default.png'),
+(3, 'Ram', 'Vajrapu', 'Y', NULL, NULL, NULL, NULL, NULL, 'User', 'Ram Manoj', 'Vajrapu', NULL, '544889.jpg'),
+(4, 'admin', 'cs518pa$$', '', NULL, NULL, NULL, NULL, NULL, 'User', 'admin', '', NULL, 'default.png'),
 (5, 'jbrunelle', 'M0n@rch$', '', NULL, NULL, NULL, NULL, NULL, 'User', 'jbrunelle', '', NULL, NULL),
 (6, 'pvenkman', 'imadoctor', '', NULL, NULL, NULL, NULL, NULL, 'User', 'pvenkman', '', NULL, NULL),
-(7, 'rstantz', '"; INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2); --', '', NULL, NULL, NULL, NULL, NULL, 'User', 'rstantz', '', NULL, NULL),
-(8, 'dbarrett', 'fr1ed3GGS', '', NULL, NULL, NULL, NULL, NULL, 'User', 'dbarrett', '', NULL, NULL),
-(9, 'ltully', '<!--<i>', '', NULL, NULL, NULL, NULL, NULL, 'User', 'ltully', '', NULL, NULL),
-(10, 'espengler', 'don''t cross the streams', '', NULL, NULL, NULL, NULL, NULL, 'User', 'espengler', '', NULL, NULL),
-(11, 'janine', '--!drop tables;', '', NULL, NULL, NULL, NULL, NULL, 'User', 'janine', '', NULL, NULL),
-(12, 'winston', 'zeddM0r3', '', NULL, NULL, NULL, NULL, NULL, 'User', 'winston', '', NULL, NULL),
-(13, 'gozer', 'd3$truct0R', '', NULL, NULL, NULL, NULL, NULL, 'User', 'gozer', '', NULL, NULL),
-(14, 'slimer', 'f33dM3', '', NULL, NULL, NULL, NULL, NULL, 'User', 'slimer', '', NULL, NULL),
-(15, 'zuul', '105"; DROP TABLE', '', NULL, NULL, NULL, NULL, NULL, 'User', 'zuul', '', NULL, NULL),
-(16, 'keymaster', 'n0D@na', '', NULL, NULL, NULL, NULL, NULL, 'User', 'keymaster', '', NULL, NULL),
-(17, 'gatekeeper', '$l0r', '', NULL, NULL, NULL, NULL, NULL, 'User', 'gatekeeper', '', NULL, NULL),
-(18, 'staypuft', 'm@r$hM@ll0w', '', NULL, NULL, NULL, NULL, NULL, 'User', 'staypuft', '', NULL, NULL),
-(19, 'SQL_Ingection', 'UPDATE PTL_USERS SET FIRST_NAME = USER_ID, USER_RO', '', NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL);
+(7, 'rstantz', '"; INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2); --', '', NULL, NULL, NULL, NULL, NULL, 'User', 'rstantz', '', NULL, 'default.png'),
+(8, 'dbarrett', 'fr1ed3GGS', '', NULL, NULL, NULL, NULL, NULL, 'User', 'dbarrett', '', NULL, 'default.png'),
+(9, 'ltully', '<!--<i>', '', NULL, NULL, NULL, NULL, NULL, 'User', 'ltully', '', NULL, 'default.png'),
+(10, 'espengler', 'don''t cross the streams', '', NULL, NULL, NULL, NULL, NULL, 'User', 'espengler', '', NULL, 'default.png'),
+(11, 'janine', '--!drop tables;', '', NULL, NULL, NULL, NULL, NULL, 'User', 'janine', '', NULL, 'default.png'),
+(12, 'winston', 'zeddM0r3', '', NULL, NULL, NULL, NULL, NULL, 'User', 'winston', '', NULL, 'default.png'),
+(13, 'gozer', 'd3$truct0R', '', NULL, NULL, NULL, NULL, NULL, 'User', 'gozer', '', NULL, 'default.png'),
+(14, 'slimer', 'f33dM3', '', NULL, NULL, NULL, NULL, NULL, 'User', 'slimer', '', NULL, 'default.png'),
+(15, 'zuul', '105"; DROP TABLE', '', NULL, NULL, NULL, NULL, NULL, 'User', 'zuul', '', NULL, 'default.png'),
+(16, 'keymaster', 'n0D@na', '', NULL, NULL, NULL, NULL, NULL, 'User', 'keymaster', '', NULL, 'default.png'),
+(17, 'gatekeeper', '$l0r', '', NULL, NULL, NULL, NULL, NULL, 'User', 'gatekeeper', '', NULL, 'default.png'),
+(18, 'staypuft', 'm@r$hM@ll0w', '', NULL, NULL, NULL, NULL, NULL, 'User', 'staypuft', '', NULL, 'default.png'),
+(19, 'SQL_Ingection', 'UPDATE PTL_USERS SET FIRST_NAME = USER_ID, USER_RO', '', NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, 'default.png');
 
 -- --------------------------------------------------------
 
