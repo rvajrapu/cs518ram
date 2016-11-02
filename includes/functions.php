@@ -353,7 +353,7 @@
 											$v_type  = $v_type;
 
 											$votes   = get_vote_count($id,$v_type);
-											$output  = '<div class="vote chev" >';
+											$output  = '<div class="vote roundrect" >';
 											$output .= '<input type="hidden" name="forid" id="id" value = '.$id.' />';
 											//$output .= '<input type="hidden" name="forid" id="u_id" value = '.$u_id.' />';
 											$output .= '<input type="hidden" name="forid" id="v_type" value = '.$v_type.' />';
