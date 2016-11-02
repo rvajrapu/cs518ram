@@ -9,8 +9,11 @@
     if(!isset($_SESSION['uid'])) {
       redirect_to('index.php');
     }
+    if(!isset($_GET['uid'])) {
+      redirect_to('index.php');
+    }
 
-    $result_user = find_userdetails($_SESSION['uid']);
+    $result_user = find_userdetails($_GET['uid']);
 
    if(isset($_POST['updatedetails']))
     {
@@ -76,7 +79,7 @@
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
         <h3><?php echo $result_user['user_id']; ?></h3>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">Edit Details</button>
+        <?php if($_GET['uid'] == $_SESSION['uid']) { ?> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">Edit Details</button> <?php } ?>
         </div>
         
         </div>
@@ -152,8 +155,71 @@
             </div>
         </div>
     </div>
+
+       
 </div>
-          
+
+<div class="row">
+<div class="col-sm-1"></div>
+<div class="col-sm-10 well">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#myhome" aria-controls="home" role="tab" data-toggle="tab">My Questions</a></li>
+    <li role="presentation"><a href="#myans" aria-controls="profile" role="tab" data-toggle="tab">My Answered Questions</a></li>
+
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="myhome">
+		<p></p>
+ 		<?php
+		$user_id= $_GET['uid'];
+                         
+                $result = get_questions($user_id);
+		while($row = mysqli_fetch_assoc($result))	
+		{
+			$question_id = $row["Q_ID"];
+
+		echo "<div class='row'>
+
+				  <div class='col-xs-6 col-md-3'> 
+			           <button type='button' class='btn btn-sm' border-color: #eeeeee;> " . $row["UP_VOTE"] . "<br>" . "Votes" . " </button> 
+			           <button type='button' class='btn btn-sm' style='background-color:rgba(127, 230, 161, 0.77);border-color: #eeeeee;' >" . $row["ANSWERS_COUNT"] . "<br>" . "Answers" . " </button> 
+			           <button type='button' class='btn btn-sm' border-color: #eeeeee;>" . $row["VIEWS"] . "<br>" . "Views" . " </button> 
+		          </div>
+
+
+			      <div class='col-xs-12 col-md-6'> 
+			           <div> 
+			               <a href='view_question.php?q_id=".$question_id."'>" . verify_output($row["Q_TITLE"]) . "</a> 
+			           </div> 
+			           <br>  
+			           <button type='button' class='btn btn-sm' style='background-color:#d6ecff;'>" . $row["Q_TAG"] . " </button> 
+			      </div>
+
+
+			      <div class='col-xs-6 col-md-3'>
+				        <p></p>
+				        <div style='background-color:#e0eaf1;width: 80%;'>
+                        <img src='userimages/" . $row["user_image"] . "' width='35' height='40' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>
+                        <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a><br>Posted by: <a>" . $row["FIRST_NAME"] . "</a></div>
+                        <p></p></div>
+				  </div>	
+
+			  </div> <hr/>";
+		}
+		?>
+	</div>
+    <div role="tabpanel" class="tab-pane" id="myans">Coming Soon..</div>
+  </div>
+
+</div>
+<div class="col-sm-1"></div>
+
+</div>
+
 
 
     <!-- Custom styles for this page -->

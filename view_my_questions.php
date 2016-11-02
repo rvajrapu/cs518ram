@@ -13,13 +13,13 @@
   	<div class="col-sm-1"> </div>
 
     <div class="col-sm-10" style="background-color:#fff;";">    
-   		 <div class="col-sm-12">
+   		
     		<div class="col-sm-12"> 
     			
     			<?php 
     			$user_id= $_SESSION["uid"];
                                  
-                        $result = get_questions($user_id);
+                        $result = get_allquestions($user_id);
 
 				?>
 
@@ -81,7 +81,7 @@
 		  			</div>
 				</div>
     		</div>
-    	</div>
+    	
     </div>
 
 

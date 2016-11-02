@@ -7,7 +7,7 @@
 ?>
 <?php if(isset($_POST['questra']))
   {
-    error_log("Inside query\n" . $_POST['username'] , 3, "C:/xampp/apache/logs/error.log");
+    //error_log("Inside query\n" . $_POST['username'] , 3, "C:/xampp/apache/logs/error.log");
     $username = $_POST['username'];// user name
     $email = $_POST['email'];// user email
     
@@ -15,6 +15,10 @@
     $tmp_dir = $_FILES['user_image']['tmp_name'];
     $imgSize = $_FILES['user_image']['size'];
     
+    if(find_user($_POST['username']) != null){
+      $_SESSION["message"] = "Username already exists";
+      redirect_to('newuser_register.php');
+    }
     
 
     if(!empty($imgFile)){

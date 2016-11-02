@@ -169,6 +169,9 @@ function checkpresence(a,id) {
     
                                       q_votes =  $.trim(data);
                                       if (q_votes == null || q_votes == ''){alert('Please login to vote.')}
+                                      // if ($(element[3]).html() == q_votes) {
+                                      //   alert('Already upvoted')
+                                      // }
                                       else{
                                         $(element[3]).html(q_votes);
                                       }
@@ -195,6 +198,9 @@ function checkpresence(a,id) {
                                     {
                                       q_votes =  $.trim(data);
                                       if (q_votes == null || q_votes == ''){alert('Please login to vote.')}
+                                      // if ($(element[3]).html() == q_votes) {
+                                      //   alert('Already downvoted')
+                                      // }
                                       else{
                                         $(element[3]).html(q_votes);
                                       }                                        

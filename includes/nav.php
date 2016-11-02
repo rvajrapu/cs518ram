@@ -52,7 +52,7 @@
                         <img src="userimages/<?php echo $result_user['user_image']; ?>" width="35" height="40">
                         </li>
                         <li>
-                        <a href="myprofile.php"><?php echo $user_name ?></a>
+                        <a href="myprofile.php?uid=<?php echo $userid ?>"><?php echo $user_name ?></a>
                         </li>
                         </li>
                     <?php } ?>
@@ -78,13 +78,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="index.php">Questions</a>
+                        <a class="page-scroll" href="index.php">Trending</a>
                     </li>
-                    <?php if(logged_in()){ ?>
+                    
                     <li>
-                        <a class="page-scroll" href="view_my_questions.php">My Questions</a>
+                        <a class="page-scroll" href="view_my_questions.php">All Questions</a>
                     </li>
-                    <?php } ?>                  
+                                      
                     <li>
                         <a class="page-scroll" href="post_question.php">Ask Question</a>
                     </li>

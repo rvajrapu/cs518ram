@@ -141,9 +141,12 @@
 	function insert_user($username,$email,$password,$userpic) {
 		global $connection;
 		
-		// $title = verify_input($title);
-		// $question = verify_input($question);
-		// $tag = verify_input($tag);
+		$username = verify_input($username);
+		$email = verify_input($email);
+		$password = verify_input($password);
+		if($userpic == ''){
+			$userpic = 'default.png';
+		}
 		$query  = "INSERT INTO ptl_users ";
 		$query .= "(USER_ID, EMAIL, PASS_CODE, FIRST_NAME, CREATION_DATE, USER_IMAGE) ";
 		$query .= "VALUES ('$username', '$email', '$password', '$username', CURDATE(),'$userpic') ";
@@ -164,7 +167,7 @@
 	function update_user($uid,$email,$userpic) {
 		global $connection;
 		//$q_id = verify_input($q_id);
-		//$a_id = verify_input($a_id);
+		$email = verify_input($email);
 		$query  = "UPDATE ptl_users SET ";
 		$query .= "EMAIL = '$email',USER_IMAGE = '$userpic'  ";
 		$query .= "WHERE U_ID = '$uid' ";
@@ -252,11 +255,11 @@
 		error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
 		// confirm_query($result_id);
 		if($result_id) {
-			$_SESSION["message"] = "Question Posted";
+			//$_SESSION["message"] = "Question Posted";
 			return true;
 
 		} else {
-			$_SESSION["message"] = "Database Error";
+			//$_SESSION["message"] = "Database Error";
 			return false;
 		}
 	}
@@ -266,15 +269,17 @@
 
 		                                 	$q_id = verify_input($ques_id);
 
+
 		                                 	$query_1 = "SELECT 
 														Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, ptl_answers.A_ID, V_COUNT,
-														ptl_users.FIRST_NAME, ptl_answers.CREATION_DATE, ptl_answers.A_ID,
+														ptl_users.FIRST_NAME,ptl_users.user_image AS user_image, ptl_answers.CREATION_DATE, ptl_answers.A_ID, ptl_answers.U_ID,
 														CASE WHEN BA_ID = ptl_answers.A_ID THEN 1 ELSE NULL END AS TOP_AID
 														FROM ptl_answers 
 														LEFT OUTER JOIN ptl_questions ON ptl_answers.Q_ID = ptl_questions.Q_ID 
 														LEFT OUTER JOIN ptl_users ON ptl_answers.U_ID = ptl_users.U_ID
-														LEFT OUTER JOIN (SELECT  sum(VOTE) AS V_COUNT, A_ID FROM ptl_user_votes  GROUP BY A_ID) 				 v_votes ON ptl_answers.A_ID = v_votes.A_ID
+														LEFT OUTER JOIN (SELECT  sum(VOTE) AS V_COUNT, A_ID FROM ptl_user_votes  GROUP BY A_ID) v_votes ON ptl_answers.A_ID = v_votes.A_ID
 														WHERE ptl_questions.Q_ID = $q_id ORDER BY TOP_AID desc , V_COUNT desc";
+
 
 											$result_1 = mysqli_query($connection,$query_1);
 											if(!$result_1){die(" get_result_1: Database query failed.");}
@@ -285,7 +290,7 @@
 	function get_result_2($ques_id) {
 											global $connection;
 											$q_id = verify_input($ques_id);
-											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, ptl_questions.CREATION_DATE,FIRST_NAME,ptl_questions.U_ID,BA_ID ";
+											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, ptl_users.user_image AS user_image, ptl_questions.CREATION_DATE,FIRST_NAME,ptl_questions.U_ID,BA_ID ";
 											$query_2 .= "FROM ptl_questions "; 
 											$query_2 .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID =  ptl_users.U_ID ";
 											$query_2 .= "WHERE ptl_questions.Q_ID = $q_id ";
@@ -310,6 +315,25 @@
 														$query .= "FROM ptl_questions "; 
 														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
 														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.U_ID = '$u_id' GROUP BY ptl_questions.Q_ID";		   
+														}																			
+														 
+                                            $result = mysqli_query($connection,$query);
+											
+                                            if(!$result){die("Database query failed.");}
+											
+											return ($result);
+		
+	}
+	function get_allquestions($user_id) {
+											global $connection;
+											$u_id = verify_input($user_id);
+											if(isset($user_id)) 
+														{														 
+														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID, ";
+														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
+														$query .= "FROM ptl_questions "; 
+														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
+														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID GROUP BY ptl_questions.Q_ID";		   
 														}																			
 														 
                                             $result = mysqli_query($connection,$query);
