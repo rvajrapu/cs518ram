@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet">
     <link href="css/bootstrap-switch.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
-    <script src="js/bootstrap-switch.js"></script>
+    
 
     
     

@@ -68,6 +68,7 @@
 			      </div>
             <span>
             <button type='edit' class='btn btn-default'>Edit</button>
+            <button type='edit' class='btn btn-default'>Delete</button>
             <input type='checkbox' name='freeze-checkbox' data-on-text='Freeze' data-off-text='Unfreeze' checked> 
             </span>
 			      <div class='col-xs-6 col-md-3'>
