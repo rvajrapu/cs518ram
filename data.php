@@ -16,7 +16,7 @@
   }
   
  
-  $query = 'SELECT first_name FROM ptl_users';
+  $query = 'SELECT user_id FROM ptl_users';
  
   if(isset($_POST['query'])){
     $query .= ' WHERE first_name LIKE "%'.$_POST['query'].'%"';
@@ -27,8 +27,10 @@
   if($result = $mysqli->query($query)){
     // fetch object array
     while($obj = $result->fetch_object()) {
-      $return[] = $obj->first_name;
-    }
+      //$return[] = $obj->u_id;
+      $return[] = $obj->user_id;
+
+     }
     // free result set
     $result->close();
   }

@@ -1,3 +1,6 @@
+    <!-- <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="./assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"> -->
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,17 +11,19 @@
               
                         <li>
                         <a href="index.php">Questra</a>
-                        </li>         
-                        <li>
-                        <a href="index.php">About Us</a>
-                        </li>                         
+                        </li>                            
+                                                
 
                     <?php if(!logged_in()){ ?>
 
                         <li>
+                        <a href="index.php">About Us</a>
+                        </li>                     
+
+                        <li>
                         <a href="#">Contact Us</a>
                         </li>                    
-                        
+
                         <li>
                         <a href="newuser_register.php">Register</a>
                         </li>
@@ -41,10 +46,17 @@
                     $user_name = $row["first_name"];
                     $result_user = find_userdetails($_SESSION['uid']);
                         ?>
-
+<!--
                         <li>
                         <a href="#">Contact Us</a>
                         </li>                        
+-->                        
+                        <li>
+                            <form action="myprofile.php" method="get">
+                            <input name="uid" class="typeahead" type="text" data-provide="typeahead" autocomplete="off" placeholder = " Search Questra Users">
+                            </form>
+                        </li>
+
                         <li>
                         <a href="logout.php">Sign Out</a>
                         </li>
@@ -54,7 +66,8 @@
                         <li>
                         <a href="myprofile.php?uid=<?php echo $userid ?>"><?php echo $user_name ?></a>
                         </li>
-                        </li>
+
+
                     <?php } ?>
                     
                 </ul>
@@ -96,3 +109,31 @@
 <br>
     <!-- Custom styles for this page -->
     <link href="css/nav.css" rel="stylesheet">
+    <script src="./assets/jquery/jquery-3.1.1.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap3-typeahead.js"></script>
+ 
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('input.typeahead').typeahead({
+          source: function (query, process) {
+            $.ajax({
+              url: 'data.php',
+              type: 'POST',
+              dataType: 'JSON',
+              data: 'query=' + query,
+              success: function(data) {
+                console.log(data);
+                process(data);
+              }
+            });
+          }
+        });
+      });
+
+      $(document).keyup(function(e) {
+          if ($(".typeahead:focus") && (e.keyCode === 13)) {
+              $( "form:first" ).submit();
+          }
+       });
+
+    </script>
