@@ -5,6 +5,8 @@
   include("./htmlheader.php");
   include("./includes/nav.php");  
 ?>
+<link href="css/pagination.css" rel="stylesheet">
+
 <?php confirm_logged_in(); ?>
 <div class="container-fluid">
   <p></p>
@@ -18,8 +20,20 @@
     			
     			<?php 
     			$user_id= $_SESSION["uid"];
+
+    					$page = '';
+						$rec_limit = 5;
+				        if( isset($_GET{'page'} ) ) {
+				            $page = $_GET{'page'};
+
+				            $offset = $rec_limit * $page ;
+				         }
+				         else {
+				            $page = 0;
+				            $offset = 0;
+				         }
                                  
-                        $result = get_allquestions($user_id);
+                        $result = get_allquestions($user_id,$offset, $rec_limit);
 
 				?>
 
@@ -74,6 +88,16 @@
 							  </div> <hr/>";
 			  			}
 		  				?>
+
+		  				<?php
+		  				    $page_name = 'view_my_questions.php';
+		  				    $query_name = 'get_allquestions';
+		  				    $p1_name = 1;
+		  				    $p1_value = 1;
+							$cnt = get_row_count($query_name,$p1_name,$p1_value);
+							echo generate_pagination_buttons($rec_limit,$cnt,$page,$page_name,$p1_name,$p1_value);
+						?>
+
 		  				</div>
 
 

@@ -7,6 +7,7 @@
 ?>
 <link href="css/view_question.css" rel="stylesheet">
 <link href="css/postquestion.css" rel="stylesheet">
+<link href="css/pagination.css" rel="stylesheet">
 
 
 
@@ -25,8 +26,23 @@
                         if (!isset($_GET["q_id"])){
                           redirect_to('index.php');
                         }
+                        $page = '';
+                        $rec_limit = 3;
+
+                        if( isset($_GET{'page'} ) ) {
+                                $page = $_GET{'page'};
+
+                                $offset = $rec_limit * $page ;
+                        }
+                        else {
+                                $page = 0;
+                                $offset = 0;
+                        }
+
+
                         $ques_id = trim($_GET["q_id"]);                    
-                        $result_1 = get_result_1($ques_id);
+                        $result_1 = get_result_1($ques_id,$offset, $rec_limit);
+                        //echo $result_1;
                         $result_2 = get_result_2($ques_id);
                         ?>
                         <p></p>
@@ -133,9 +149,18 @@
                                           <div class="col-sm-1"> </div>
                                         </div>';
 
-                                    echo "<hr/>";
+                                    echo "<hr/>";                            
 
                                     }
+
+              $page_name = 'view_question.php';
+              $query_name = 'get_result_1';
+              $p1_name = 'q_id';
+              $p1_value = $ques_id;
+              $cnt = get_row_count($query_name,$p1_name,$p1_value);
+    
+              echo generate_pagination_buttons($rec_limit,$cnt,$page,$page_name,$p1_name,$p1_value);
+
                                     ?>
 
                                     <?php if(logged_in()){ ?>

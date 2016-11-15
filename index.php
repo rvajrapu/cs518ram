@@ -6,6 +6,8 @@
   include("./includes/nav.php");  
 ?>
 
+<link href="css/pagination.css" rel="stylesheet">
+
 <div class="container-fluid">
   <p></p>
   <div class="row">
@@ -16,8 +18,19 @@
    		 <div class="col-sm-12">
     		<div class="col-sm-12"> 
     		
-                        <?php                 
-                        $result = get_landing_questions();
+                        <?php  
+						$page = '';
+						$rec_limit = 5;
+				        if( isset($_GET{'page'} ) ) {
+				            $page = $_GET{'page'};
+
+				            $offset = $rec_limit * $page ;
+				         }
+				         else {
+				            $page = 0;
+				            $offset = 0;
+				         }
+                        $result = get_landing_questions($offset, $rec_limit);
                         ?>
 
 				<p>
@@ -35,7 +48,6 @@
 					<div>
 
 						<p></p>
-
 
 						<div>
 		 		 		<?php
@@ -72,6 +84,16 @@
 							  </div> <hr/>";
 			  			}
 		  				?>
+
+		  				<?php
+		  				    $page_name = 'index.php';
+		  				    $p1_name = 1;
+		  				    $p1_value = 1;
+		  				    $query_name = 'landing_page_questions';
+							$cnt = get_row_count($query_name,$p1_name,$p1_value);
+							echo generate_pagination_buttons($rec_limit,$cnt,$page,$page_name,$p1_name,$p1_value);
+						?>
+
 		  				</div>
 
 
@@ -95,6 +117,7 @@
 
     <!-- Custom styles for this page -->
     <link href="css/signin.css" rel="stylesheet">
+
 
 <?php
   require_once("footer.php");

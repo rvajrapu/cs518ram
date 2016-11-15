@@ -264,7 +264,7 @@
 		}
 	}
 
-	function get_result_1($ques_id) {
+	function get_result_1($ques_id,$offset, $rec_limit) {
 		                                 	global $connection;
 
 		                                 	$q_id = verify_input($ques_id);
@@ -278,7 +278,7 @@
 														LEFT OUTER JOIN ptl_questions ON ptl_answers.Q_ID = ptl_questions.Q_ID 
 														LEFT OUTER JOIN ptl_users ON ptl_answers.U_ID = ptl_users.U_ID
 														LEFT OUTER JOIN (SELECT  sum(VOTE) AS V_COUNT, A_ID FROM ptl_user_votes  GROUP BY A_ID) v_votes ON ptl_answers.A_ID = v_votes.A_ID
-														WHERE ptl_questions.Q_ID = $q_id ORDER BY TOP_AID desc , V_COUNT desc";
+														WHERE ptl_questions.Q_ID = $q_id ORDER BY TOP_AID desc , V_COUNT desc limit $offset, $rec_limit";
 
 
 											$result_1 = mysqli_query($connection,$query_1);
@@ -305,7 +305,7 @@
 
 
 
-	function get_questions($user_id) {
+	function get_questions($user_id,$offset, $rec_limit) {
 											global $connection;
 											$u_id = verify_input($user_id);
 											if(isset($user_id)) 
@@ -314,26 +314,9 @@
 														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
 														$query .= "FROM ptl_questions "; 
 														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
-														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.U_ID = '$u_id' GROUP BY ptl_questions.Q_ID";		   
-														}																			
-														 
-                                            $result = mysqli_query($connection,$query);
-											
-                                            if(!$result){die("Database query failed.");}
-											
-											return ($result);
-		
-	}
-	function get_allquestions($user_id) {
-											global $connection;
-											$u_id = verify_input($user_id);
-											if(isset($user_id)) 
-														{														 
-														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID, ";
-														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
-														$query .= "FROM ptl_questions "; 
-														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
-														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID GROUP BY ptl_questions.Q_ID";		   
+														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.U_ID = '$u_id' GROUP BY ptl_questions.Q_ID ";
+														$query .= "limit $offset, $rec_limit";	
+
 														}																			
 														 
                                             $result = mysqli_query($connection,$query);
@@ -344,7 +327,29 @@
 		
 	}
 
-	function get_landing_questions() {
+
+	function get_allquestions($user_id,$offset, $rec_limit) {
+											global $connection;
+											$u_id = verify_input($user_id);
+											if(isset($user_id)) 
+														{														 
+														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID, ";
+														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
+														$query .= "FROM ptl_questions "; 
+														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
+														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID GROUP BY ptl_questions.Q_ID ";
+														$query .= "limit $offset, $rec_limit";		   
+														}																			
+														 
+                                            $result = mysqli_query($connection,$query);
+											
+                                            if(!$result){die("Database query failed.");}
+											
+											return ($result);
+		
+	}
+
+	function get_landing_questions($offset, $rec_limit) {
 											global $connection;
 
 														$query  =  "SELECT 
@@ -359,7 +364,7 @@
 																	(SELECT  sum(VOTE) AS V_COUNT, Q_ID FROM ptl_user_votes  GROUP BY Q_ID) q_votes 
 																	ON ptl_questions.Q_ID = q_votes.Q_ID
 																	GROUP BY ptl_questions.Q_ID
-																	ORDER BY V_COUNT desc limit 5";
+																	ORDER BY V_COUNT desc limit $offset, $rec_limit";
 
 														 
                                             $result = mysqli_query($connection,$query);
@@ -509,4 +514,101 @@
 	}
 
 
+
+	function get_query($query_name,$p1_name,$p1_value) {
+
+			if ($query_name == 'landing_page_questions'){
+
+														$query  =  "SELECT COUNT(*) Q_CNT FROM (SELECT 
+																	CASE WHEN A_ID IS NULL THEN 0 ELSE COUNT(*) END AS ANSWERS_COUNT, 
+																	VIEWS,ptl_questions.CREATION_DATE AS Q_CREATED_ON, 
+																	Q_TITLE, Q_TAG, ptl_questions.Q_ID,ptl_users.FIRST_NAME AS FIRST_NAME, 
+																	V_COUNT , ptl_users.user_image AS user_image
+																	FROM ptl_questions  
+																	LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID 
+																	LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID 
+																	LEFT OUTER JOIN 
+																	(SELECT  sum(VOTE) AS V_COUNT, Q_ID FROM ptl_user_votes  GROUP BY Q_ID) q_votes 
+																	ON ptl_questions.Q_ID = q_votes.Q_ID
+																	GROUP BY ptl_questions.Q_ID
+																	ORDER BY V_COUNT desc) CNT";
+														}
+
+			elseif ($query_name == 'get_allquestions') {
+														$query  = "SELECT COUNT(*) Q_CNT FROM ";
+														$query .= "(SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID, ";
+														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
+														$query .= "FROM ptl_questions "; 
+														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
+														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID GROUP BY ptl_questions.Q_ID) CNT";																		
+																				}	
+			elseif ($query_name == 'get_questions')	{   
+														$query  = "SELECT COUNT(*) Q_CNT FROM (";
+														$query .= "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID, ";
+														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
+														$query .= "FROM ptl_questions "; 
+														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
+														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.U_ID = ".$p1_value." GROUP BY ptl_questions.Q_ID";
+														$query .= ") CNT";	
+
+													}
+
+			elseif ($query_name == 'get_result_1') {
+														$query =   "SELECT COUNT(*) Q_CNT FROM (  SELECT 
+																	Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, ptl_answers.A_ID, V_COUNT,
+																	ptl_users.FIRST_NAME,ptl_users.user_image AS user_image, ptl_answers.CREATION_DATE, 
+																	ptl_answers.U_ID,
+																	CASE WHEN BA_ID = ptl_answers.A_ID THEN 1 ELSE NULL END AS TOP_AID
+																	FROM ptl_answers 
+																	LEFT OUTER JOIN ptl_questions ON ptl_answers.Q_ID = ptl_questions.Q_ID 
+																	LEFT OUTER JOIN ptl_users ON ptl_answers.U_ID = ptl_users.U_ID
+																	LEFT OUTER JOIN (SELECT  sum(VOTE) AS V_COUNT, A_ID FROM ptl_user_votes  GROUP BY A_ID) v_votes ON ptl_answers.A_ID = v_votes.A_ID
+																	WHERE ptl_questions.Q_ID = ".$p1_value." ORDER BY TOP_AID desc , V_COUNT desc) CNT";
+			}																															
+
+			else {}
+			
+
+			return ($query);
+	}
+
+	function get_row_count($query_name,$p1_name,$p1_value) {
+											global $connection;
+											$query = get_query($query_name,$p1_name,$p1_value);														 
+                                            $result = mysqli_query($connection,$query);										
+                                            if(!$result){die("Database query failed.");}
+                                            $row = mysqli_fetch_assoc($result);											
+											$cnt = $row["Q_CNT"];	
+											return ($cnt);
+	}
+
+
+	function generate_pagination_buttons($rec_limit,$cnt,$page,$page_name,$p1_name,$p1_value) {
+         
+         $Buttons = ceil($cnt / $rec_limit);
+
+         $output  = "<div class='text-center'>";
+         $output .=  "<ul class='pagination'>";
+
+         if ($page == '') 
+         		{$output .= "<li><a class='active' href='".$page_name."?".$p1_name."=".$p1_value."'>Home</a></li>";}
+         else   
+         		{$output .= "<li><a href='".$page_name."?".$p1_name."=".$p1_value."''>Home</a></li>";}
+         
+         for($i=1;$i<=($Buttons-1);$i++){
+            if ($page==$i)
+            	{$output .= "<li><a class='active' href='".$page_name."?page=".$i."&".$p1_name."=".$p1_value."'>".$i."</a></li>";}
+            else 
+            	{$output .= "<li><a href='".$page_name."?page=".$i."&".$p1_name."=".$p1_value."'>".$i."</a></li>";}            
+         }
+
+         $output .= "</ul>";
+         $output .= "</div>";
+
+         return ($output);
+
+	}
+
 ?>
+
+

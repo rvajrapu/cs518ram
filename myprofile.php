@@ -5,6 +5,7 @@
   include("./htmlheader.php");
   include("./includes/nav.php");
 ?>
+<link href="css/pagination.css" rel="stylesheet">
 <?php
     if(!isset($_SESSION['uid'])) {
       redirect_to('index.php');
@@ -174,10 +175,21 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="myhome">
 		<p></p>
+
  		<?php
 		$user_id= $_GET['uid'];
-                         
-                $result = get_questions($user_id);
+    $page = '';
+    $rec_limit = 5;
+    if( isset($_GET{'page'} ) ) {
+        $page = $_GET{'page'};
+        $offset = $rec_limit * $page ;
+        }
+    else {
+         $page = 0;
+         $offset = 0;
+         }                     
+
+    $result = get_questions($user_id,$offset, $rec_limit);
 		while($row = mysqli_fetch_assoc($result))	
 		{
 			$question_id = $row["Q_ID"];
@@ -210,7 +222,18 @@
 
 			  </div> <hr/>";
 		}
-		?>
+
+
+              $page_name = 'myprofile.php';
+              $query_name = 'get_questions';     
+              $p1_name = 'uid';
+              $p1_value = $user_id;
+
+              $cnt = get_row_count($query_name,$p1_name,$p1_value);
+              //echo $cnt;
+              echo generate_pagination_buttons($rec_limit,$cnt,$page,$page_name,$p1_name,$p1_value);
+
+  ?>
 	</div>
     <div role="tabpanel" class="tab-pane" id="myans">Coming Soon..</div>
   </div>
