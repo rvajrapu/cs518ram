@@ -54,6 +54,7 @@
                         <li>
                         <a href="myprofile.php?uid=<?php echo $userid ?>"><?php echo $user_name ?></a>
                         </li>
+                        
                         </li>
                     <?php } ?>
                     
@@ -72,7 +73,7 @@
             <img src="pics/Logomakr_7FCfRF.png" alt="" width="421" height="62">
             </a>
         </div>
-        <div class="col-sm-7 hidden-xs">
+        <div class="col-sm-8 hidden-xs">
         <ul class="nav navbar-nav">
                     <li class="hidden active">
                         <a href="#page-top"></a>
@@ -88,9 +89,14 @@
                     <li>
                         <a class="page-scroll" href="post_question.php">Ask Question</a>
                     </li>
+                    <?php if(logged_in()){ ?>
+                    <li>
+                        <a class="page-scroll"  href="Admin.php">Administration</a>
+                    </li>
+                    <?php } ?>
         </ul>
         </div>
-        <div class="col-sm-1"></div>
+        
     </div>    
 </div>
 <br>
