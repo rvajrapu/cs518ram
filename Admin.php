@@ -6,6 +6,7 @@
   include("./includes/nav.php");
 ?>
 <link href="css/pagination.css" rel="stylesheet">
+<script src="js/bootstrap-switch.js"></script>
 
 <div class="container">
 <div  id="errormsg" role="alert">
@@ -65,9 +66,10 @@
 			           <button type='button' class='btn btn-sm' style='background-color:#d6ecff;'>" . $row["Q_TAG"] . " </button>
                  
 			      </div>
+            <span>
             <button type='edit' class='btn btn-default'>Edit</button>
             <input type='checkbox' name='freeze-checkbox' data-on-text='Freeze' data-off-text='Unfreeze' checked> 
-
+            </span>
 			      <div class='col-xs-6 col-md-3'>
 				        <p></p>
 				        <div style='background-color:#e0eaf1;width: 80%;'>
