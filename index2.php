@@ -8,7 +8,9 @@
   <body>
  
     <div class="container">
-      <input class="typeahead" type="text" data-provide="typeahead" autocomplete="off">
+      <form action="myprofile.php" method="get">
+        <input name="uid" class="typeahead" type="text" data-provide="typeahead" autocomplete="off">
+      </form>
 
     </div>
 
@@ -34,13 +36,10 @@
       });
 
       $(document).keyup(function(e) {
-    if ($(".input:focus") && (e.keyCode === 13)) {
-        alert('ya!')
-        }
+          if ($(".typeahead:focus") && (e.keyCode === 13)) {
+              $( "form:first" ).submit();
+          }
        });
-
-
-
 
     </script>
  

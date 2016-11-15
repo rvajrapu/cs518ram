@@ -99,7 +99,7 @@
 		$userid = verify_input($userid);
 		$query  = "SELECT user_id, email, first_name, user_image ";
 		$query .= "FROM ptl_users ";
-		$query .= "WHERE u_id = '$userid' ";
+		$query .= "WHERE u_id = '$userid' or user_id = '$userid'";
 		$query .= "LIMIT 1";
 		$result_id = mysqli_query($connection, $query);
 		confirm_query($result_id);
@@ -314,7 +314,7 @@
 														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
 														$query .= "FROM ptl_questions "; 
 														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
-														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.U_ID = '$u_id' GROUP BY ptl_questions.Q_ID ";
+														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.U_ID = '$u_id' or ptl_users.user_id = '$u_id'GROUP BY ptl_questions.Q_ID ";
 														$query .= "limit $offset, $rec_limit";	
 
 														}																			
@@ -548,7 +548,7 @@
 														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
 														$query .= "FROM ptl_questions "; 
 														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
-														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.U_ID = ".$p1_value." GROUP BY ptl_questions.Q_ID";
+														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.U_ID = '".$p1_value."' OR ptl_users.USER_ID = '".$p1_value."'  GROUP BY ptl_questions.Q_ID";
 														$query .= ") CNT";	
 
 													}
@@ -576,7 +576,7 @@
 											global $connection;
 											$query = get_query($query_name,$p1_name,$p1_value);														 
                                             $result = mysqli_query($connection,$query);										
-                                            if(!$result){die("Database query failed.");}
+                                            if(!$result){die("get_row_count: Database query failed.");}
                                             $row = mysqli_fetch_assoc($result);											
 											$cnt = $row["Q_CNT"];	
 											return ($cnt);

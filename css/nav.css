@@ -47,3 +47,19 @@ body {
 .help-block {
     color: red !important;
 }
+
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 13px 0 0 0;
+}
+
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 9px 0 0 0;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
