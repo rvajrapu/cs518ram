@@ -55,7 +55,9 @@ input, button, select, textarea {
     margin: 13px 0 0 0;
 }
 
-input, button, select, textarea {
+
+
+#Search_form {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
@@ -63,4 +65,10 @@ input, button, select, textarea {
     padding-bottom: 5px;
     padding-top: 5px;
     padding-left: 5px;
+}
+
+
+img {
+    vertical-align: middle;
+    margin: 5px 0 0 0;
 }

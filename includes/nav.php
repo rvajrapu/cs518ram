@@ -53,7 +53,7 @@
 -->                        
                         <li>
                             <form action="myprofile.php" method="get">
-                            <input name="uid" class="typeahead" type="text" data-provide="typeahead" autocomplete="off" placeholder = "Search Questra Users">
+                            <input name="uid" class="typeahead" id="Search_form" type="text" data-provide="typeahead" autocomplete="off" placeholder = "Search Questra Users">
                             </form>
                         </li>
 
