@@ -40,6 +40,8 @@ function checkpresence(a,id) {
   }
 }
 
+$("[name='freeze-checkbox']").bootstrapSwitch();
+
   function post_question(formdata){
 
     $.ajax({
