@@ -67,7 +67,8 @@
                  
 			      </div>
             <span>
-            <button type='edit' class='btn btn-default'>Edit</button>
+            <a class='btn btn-default' href='update_question.php?q_id=".$question_id."' >Edit</a>
+            
             <button type='edit' class='btn btn-default'>Delete</button>
             <input type='checkbox' name='freeze-checkbox' data-on-text='Freeze' data-off-text='Unfreeze' checked> 
             </span>

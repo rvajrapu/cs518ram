@@ -141,7 +141,7 @@
                                           <div class="col-sm-3"  style="background-color:#e0eaf1;">
                                               <p></p>
                                               <div style="background-color:#e0eaf1;width: 80%;">
-                                              <img src="userimages/' . $row_1["user_image"] . '" width="35" height="40" style="float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;">
+                                              <img src="userimages/' . $row_1["user_image"] . '" width="35" height="40" style="float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;"/>
                                               <div>Ans on: <a>' . $row_1["CREATION_DATE"] . '</a><br>Ans by: <a href = "myprofile.php?uid='.$row_1['U_ID'].'">' . $row_1["FIRST_NAME"] . '</a></div>
                                               </div>
                                               <p></p>

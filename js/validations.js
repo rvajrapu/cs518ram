@@ -78,14 +78,14 @@ $( "#postanswer" ).submit(function( event ) {
   makrup = $.trim(makrup);
   formData['answer'] = temp_makrup;
   
-  if ((!checkpresence(makrup,"textedit"))||(!validate_min_lengths(makrup,20,"textedit"))){
+  // if ((!checkpresence(makrup,"textedit"))||(!validate_min_lengths(makrup,20,"textedit"))){
 
-    return false;
-  }
-  else{
+  //   return false;
+  // }
+  // else{
     console.log("Form validated")
     event.preventDefault();
     post_answer(formData);
-  }
+  // }
 
   });
