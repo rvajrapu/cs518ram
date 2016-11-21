@@ -95,8 +95,19 @@
 
   ?>
 	</div>
-    <div role="tabpanel" class="tab-pane" id="myans">Coming Soon..</div>
-  </div>
+    <div role="tabpanel" class="tab-pane" id="myans">
+<?php  
+      $user_result = find_alluserdetails();
+      while($user_row = mysqli_fetch_assoc($user_result)) 
+    {
+      $first_name = $user_row["first_name"];
+      $score = $user_row["SCORE"];
+      //$q_id = $user_row["q_id"];
+      ?>
+    <?php echo $first_name; ?>
+    <?php echo $score; ?>
+    <?php }?>
+  </div></div>
 
 </div>
 <div class="col-sm-1"></div>

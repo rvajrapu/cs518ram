@@ -44,15 +44,28 @@ $( "#signin" ).submit(function( event ) {
     <?php echo message(); ?>
 
 
-   
-
-
- || $subject["user_id"] == $username
-
-
+<div class="col-xs-6 col-md-3" style="background-color:#e0eaf1;">
+                        <p></p><span>
+                                        <img src="userimages/201513.png" width="35" height="40" style="
+    float: left;
+    padding: 0 0px 0 0;
+    margin: 0 6% 0 0;
+">
+                                      <div>Posted on: <a>2016-10-18</a><br>Posted by: <a>Ram Manoj</a></div>
+  <p></p></span>
+                  </div>
      
-    
-
+<?php  
+      $user_result = find_alluserdetails();
+      while($user_result) 
+    {
+      $first_name = $row["first_name"];
+      $score = $row["SCORE"];
+      $q_id = $_GET["q_id"];
+      ?>
+    <?php echo $first_name ?>
+    <?php }?>
+                            
 
 
   
