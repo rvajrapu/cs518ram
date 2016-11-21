@@ -222,6 +222,24 @@
 			return false;
 		}
 	}
+	function update_state($q_id,$state) {
+		global $connection;
+		//$q_id = verify_input($q_id);
+		$query  = "UPDATE ptl_questions SET ";
+		$query .= "STATE = '$state' ";
+		$query .= "WHERE Q_ID = '$q_id' ";
+		$result_id = mysqli_query($connection, $query);
+		//error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		confirm_query($result_id);
+		// if($result_id) {
+		// 	$_SESSION["message"] = "User details updated";
+		// 	return true;
+
+		// } else {
+		// 	$_SESSION["message"] = "Database Error";
+		// 	return false;
+		// }
+	}
 	function insert_answer($answer,$qid,$uid) {
 		global $connection;
 		$answer = verify_input($answer);
@@ -372,7 +390,7 @@
 											$u_id = verify_input($user_id);
 											if(isset($user_id)) 
 														{														 
-														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID, ";
+														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, STATE, Q_TAG, ptl_questions.Q_ID, ";
 														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
 														$query .= "FROM ptl_questions "; 
 														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 

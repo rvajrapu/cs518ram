@@ -41,6 +41,35 @@ function checkpresence(a,id) {
 }
 
 $("[name='freeze-checkbox']").bootstrapSwitch();
+$("[name='freeze-checkbox']").on('switchChange.bootstrapSwitch', function (event, state) {
+  if (state == true){
+    new_state = "TRUE"
+  }
+  if (state == false){
+    new_state = "FALSE"
+  }
+  //console.log(this.value);
+  var formdata = {};
+  formdata["state"] = new_state;
+  formdata["q_id"] = this.value;
+
+
+      $.ajax({
+        url: 'admin_ajax.php',
+        type: 'post',
+        data: {myData:formdata,param:"freeze"},
+        success: function(data) {
+            
+            //location.reload();
+          
+        },
+        error: function(xhr, desc, err) {
+          console.log(xhr);
+          console.log("Details: " + desc + "\nError:" + err);
+        }
+      }); // end ajax call
+
+});
 
   function post_question(formdata){
 
