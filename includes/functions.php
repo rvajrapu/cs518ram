@@ -398,6 +398,26 @@
 														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
 														$query .= "FROM ptl_questions "; 
 														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
+														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.ACTIVE = 'TRUE' GROUP BY ptl_questions.Q_ID ";
+														$query .= "limit $offset, $rec_limit";		   
+														}																			
+														 
+                                            $result = mysqli_query($connection,$query);
+											
+                                            if(!$result){die("Database query failed.".$query);}
+											
+											return ($result);
+		
+	}
+	function get_allquestions_admin($user_id,$offset, $rec_limit) {
+											global $connection;
+											$u_id = verify_input($user_id);
+											if(isset($user_id)) 
+														{														 
+														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, STATE, ptl_questions.ACTIVE, Q_TAG, ptl_questions.Q_ID, ";
+														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
+														$query .= "FROM ptl_questions "; 
+														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
 														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID GROUP BY ptl_questions.Q_ID ";
 														$query .= "limit $offset, $rec_limit";		   
 														}																			

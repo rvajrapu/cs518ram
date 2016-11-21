@@ -44,7 +44,7 @@
          $offset = 0;
          }                     
 
-    $result = get_allquestions($user_id,$offset, $rec_limit);
+    $result = get_allquestions_admin($user_id,$offset, $rec_limit);
 		while($row = mysqli_fetch_assoc($result))	
 		{
 			$question_id = $row["Q_ID"];
