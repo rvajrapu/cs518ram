@@ -67,9 +67,13 @@
                  
 			      </div>
             <span>
-            <a class='btn btn-default' href='update_question.php?q_id=".$question_id."' >Edit</a>
+            <a class='btn btn-primary' href='update_question.php?q_id=".$question_id."' >Edit</a>";
             
-            <button type='edit' class='btn btn-default'>Delete</button>";
+            if ($row["ACTIVE"] == "TRUE"){
+            echo "<input type='checkbox' value = ".$question_id." name='delete-checkbox' data-on-text='Delete' data-off-text='Add' checked>"; 
+            } else {
+            echo "<input type='checkbox' value = ".$question_id." name='delete-checkbox' data-on-text='Delete' data-off-text='Add' >";  
+            };
             if ($row["STATE"] == "TRUE"){
             echo "<input type='checkbox' value = ".$question_id." name='freeze-checkbox' data-on-text='Freeze' data-off-text='Unfreeze' checked>"; 
             } else {

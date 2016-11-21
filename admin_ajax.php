@@ -6,12 +6,17 @@
 $obj = $_POST['myData'];
 $check = $_POST['param'];
 
-$state = $obj["state"];
+
 $q_id = $obj["q_id"];
 
 
 if ($check == "freeze"){
+	$state = $obj["state"];
 	update_state($q_id,$state);
+  }
+if ($check == "delete"){
+	$active = $obj["active"];
+	update_active($q_id,$active);
   }
 
 
