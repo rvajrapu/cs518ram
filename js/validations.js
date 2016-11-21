@@ -31,7 +31,25 @@ $( "#postquestion" ).submit(function( event ) {
 
   });
 
+$( "#updatequestion" ).submit(function( event ) {
+  var formData = $("#updatequestion").serializeObject();
+  var temp_makrup = $('.summernote').summernote('code');
+  var makrup = $('.note-editable.panel-body').text();
+  makrup = $.trim(makrup);
+  formData['question'] = temp_makrup;
+  
+  if ((!checkpresence(this[0].value,"questiontitle"))||(!validate_min_lengths(this[0].value,10,"questiontitle"))
+    ||(!checkpresence(makrup,"textedit"))||(!validate_min_lengths(makrup,20,"textedit"))){
 
+    return false;
+  }
+  else{
+    console.log("Form validated")
+    event.preventDefault();
+    update_question(formData);
+  }
+
+  });
 //For new user registration
 
 $( "#newuser" ).submit(function( event ) {

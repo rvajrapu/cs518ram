@@ -164,6 +164,29 @@
 		
 	}
 
+	function update_question($title,$question,$tag,$q_id) {
+		global $connection;
+		
+		$title = verify_input($title);
+		$question = verify_input($question);
+		$tag = verify_input($tag);
+		$query  = "UPDATE ptl_questions SET ";
+		$query .= "Q_TITLE = '$title', Q_TEXT = '$question', Q_TAG = '$tag' ";
+		$query .= "WHERE Q_ID = '$q_id' ";
+		$result_id = mysqli_query($connection, $query);
+		//error_log("Inside query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		confirm_query($result_id);
+		// if($result_id) {
+		// 	$_SESSION["message"] = "Question Posted";
+		// 	return true;
+
+		// } else {
+		// 	$_SESSION["message"] = "Database Error";
+		// 	return false;
+		// }
+		
+	}
+
 	function update_user($uid,$email,$userpic) {
 		global $connection;
 		//$q_id = verify_input($q_id);
