@@ -59,6 +59,23 @@ $("[name='freeze-checkbox']").bootstrapSwitch();
         }
       }); // end ajax call
   }
+  function update_question(formdata){
+
+    $.ajax({
+        url: 'update_question_ajax.php',
+        type: 'post',
+        data: {myData:formdata},
+        success: function(data) {
+            
+            window.location.href = "Admin.php";
+          
+        },
+        error: function(xhr, desc, err) {
+          console.log(xhr);
+          console.log("Details: " + desc + "\nError:" + err);
+        }
+      }); // end ajax call
+  }
 
     function post_answer(formdata){
 
