@@ -273,12 +273,20 @@
 		                                 	$query_1 = "SELECT 
 														Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, ptl_answers.A_ID, V_COUNT,
 														ptl_users.FIRST_NAME,ptl_users.user_image AS user_image, ptl_answers.CREATION_DATE, ptl_answers.A_ID, ptl_answers.U_ID,
-														CASE WHEN BA_ID = ptl_answers.A_ID THEN 1 ELSE NULL END AS TOP_AID
+														CASE WHEN BA_ID = ptl_answers.A_ID THEN 1 ELSE NULL END AS TOP_AID, SCORE
 														FROM ptl_answers 
 														LEFT OUTER JOIN ptl_questions ON ptl_answers.Q_ID = ptl_questions.Q_ID 
 														LEFT OUTER JOIN ptl_users ON ptl_answers.U_ID = ptl_users.U_ID
 														LEFT OUTER JOIN (SELECT  sum(VOTE) AS V_COUNT, A_ID FROM ptl_user_votes  GROUP BY A_ID) v_votes ON ptl_answers.A_ID = v_votes.A_ID
-														WHERE ptl_questions.Q_ID = $q_id ORDER BY TOP_AID desc , V_COUNT desc limit $offset, $rec_limit";
+														LEFT OUTER JOIN
+														(SELECT ptl_users.U_ID AS U_ID, 
+														CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+														FROM ptl_users 
+														LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
+														LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q') GROUP BY ptl_users.U_ID) USR_SCORE
+														ON ptl_users.U_ID = usr_score.U_ID
+														WHERE ptl_questions.Q_ID = $q_id ORDER BY TOP_AID desc , V_COUNT desc 
+														limit $offset, $rec_limit";
 
 
 											$result_1 = mysqli_query($connection,$query_1);
@@ -290,10 +298,17 @@
 	function get_result_2($ques_id) {
 											global $connection;
 											$q_id = verify_input($ques_id);
-											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, ptl_users.user_image AS user_image, ptl_questions.CREATION_DATE,FIRST_NAME,ptl_questions.U_ID,BA_ID ";
-											$query_2 .= "FROM ptl_questions "; 
-											$query_2 .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID =  ptl_users.U_ID ";
-											$query_2 .= "WHERE ptl_questions.Q_ID = $q_id ";
+											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, ptl_users.user_image AS user_image,        ptl_questions.CREATION_DATE,FIRST_NAME,ptl_questions.U_ID,BA_ID,SCORE
+														FROM ptl_questions
+														LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID =  ptl_users.U_ID
+														LEFT OUTER JOIN
+														(SELECT ptl_users.U_ID AS U_ID, 
+														CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+														FROM ptl_users 
+														LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
+														LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q') GROUP BY ptl_users.U_ID) USR_SCORE
+														ON ptl_users.U_ID = usr_score.U_ID
+														WHERE ptl_questions.Q_ID = $q_id ";
 
                                             $result_2 = mysqli_query($connection,$query_2);
 											
@@ -310,12 +325,21 @@
 											$u_id = verify_input($user_id);
 											if(isset($user_id)) 
 														{														 
-														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID, ";
-														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
-														$query .= "FROM ptl_questions "; 
-														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
-														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID WHERE ptl_questions.U_ID = '$u_id' or ptl_users.user_id = '$u_id'GROUP BY ptl_questions.Q_ID ";
-														$query .= "limit $offset, $rec_limit";	
+														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID,
+																	ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON, SCORE
+																	FROM ptl_questions 
+																	LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID
+																	LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID 
+																	LEFT OUTER JOIN
+																	(SELECT ptl_users.U_ID AS U_ID, 
+																	CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+																	FROM ptl_users 
+																	LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
+																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q') GROUP BY ptl_users.U_ID) USR_SCORE
+																	ON ptl_users.U_ID = usr_score.U_ID
+																	WHERE ptl_questions.U_ID = '$u_id' or ptl_users.user_id = '$u_id' 
+																	GROUP BY ptl_questions.Q_ID
+																	limit $offset, $rec_limit";	
 
 														}																			
 														 
@@ -332,13 +356,21 @@
 											global $connection;
 											$u_id = verify_input($user_id);
 											if(isset($user_id)) 
-														{														 
-														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, Q_TAG, ptl_questions.Q_ID, ";
-														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
-														$query .= "FROM ptl_questions "; 
-														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
-														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID GROUP BY ptl_questions.Q_ID ";
-														$query .= "limit $offset, $rec_limit";		   
+														{														
+														$query ="SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS,    Q_TITLE, Q_TAG, ptl_questions.Q_ID,
+																ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON , SCORE
+																FROM ptl_questions
+																LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID 
+																LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID 
+																LEFT OUTER JOIN
+																(SELECT ptl_users.U_ID AS U_ID, 
+																CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+																FROM ptl_users 
+																LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
+																LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q') GROUP BY ptl_users.U_ID) USR_SCORE
+																ON ptl_users.U_ID = usr_score.U_ID
+																GROUP BY ptl_questions.Q_ID 
+																limit $offset, $rec_limit";													   
 														}																			
 														 
                                             $result = mysqli_query($connection,$query);
@@ -356,13 +388,20 @@
 																	CASE WHEN A_ID IS NULL THEN 0 ELSE COUNT(*) END AS ANSWERS_COUNT, 
 																	VIEWS,ptl_questions.CREATION_DATE AS Q_CREATED_ON, 
 																	Q_TITLE, Q_TAG, ptl_questions.Q_ID,ptl_users.FIRST_NAME AS FIRST_NAME, 
-																	V_COUNT , ptl_users.user_image AS user_image
+																	V_COUNT , ptl_users.user_image AS user_image, SCORE
 																	FROM ptl_questions  
 																	LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID 
 																	LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID 
 																	LEFT OUTER JOIN 
 																	(SELECT  sum(VOTE) AS V_COUNT, Q_ID FROM ptl_user_votes  GROUP BY Q_ID) q_votes 
 																	ON ptl_questions.Q_ID = q_votes.Q_ID
+																	LEFT OUTER JOIN
+																	(SELECT ptl_users.U_ID AS U_ID, 
+																	CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+																	FROM ptl_users 
+																	LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
+																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q') GROUP BY ptl_users.U_ID) USR_SCORE
+																	ON ptl_users.U_ID = usr_score.U_ID
 																	GROUP BY ptl_questions.Q_ID
 																	ORDER BY V_COUNT desc limit $offset, $rec_limit";
 
@@ -609,6 +648,22 @@
 
 	}
 
+
+	function get_user_score($u_id) {
+											global $connection;
+											$u_id = verify_input($u_id);
+											$query  =  "SELECT ptl_users.U_ID AS U_ID, 
+														CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+														FROM ptl_users 
+														LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
+														LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q')
+														WHERE ptl_users.USER_ID = '$u_id' GROUP BY ptl_users.U_ID"; 
+
+                                            $result = mysqli_query($connection,$query);
+											
+                                            if(!$result){die("Database query failed.");}
+											
+											return ($result);}
 ?>
 
 

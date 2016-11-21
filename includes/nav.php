@@ -32,7 +32,7 @@
                         <a href="login.php">Sign In</a>
                         </li>
                         <li>
-                        <img src="pics/Logomakr_8qqzZC.png" width="35" height="40">
+                        <img src="pics/Logomakr_8qqzZC.png" width="35" height="40" alt="">
                         </li>                        
 
                     <?php } ?>
