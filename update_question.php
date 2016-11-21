@@ -7,28 +7,14 @@
 ?>
 <?php confirm_logged_in(); ?>
     
-    <script>
-    var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-      }
-    };
-    var qid = getUrlParameter('q_id');
-    if (qid != undefined && $.isNumeric( qid )){
-
-      
-    }
-
-  </script>
+<?php  $ques_id = trim($_GET["q_id"]);                    
+    $result = get_result_2($ques_id);
+    $row = mysqli_fetch_assoc($result);
+    $title = $row["Q_TITLE"];
+    $question = $row["Q_TEXT"];
+    $q_id = $_GET["q_id"];
+    
+?>
     <div class="container">
     <br><br>
 
@@ -37,10 +23,10 @@
     </div>
 
     <div class="bs-example" data-example-id="basic-forms"> 
-      <form class="form-horizontal" action="#" method ="post" id="postquestion" name = "myform">
+      <form class="form-horizontal" action="#" method ="post" id="updatequestion" name = "myform" >
       <div class="form-group">
         <label for="Title">Title</label>
-        <input type="text" class="form-control" placeholder="Enter Title" id="questiontitle" name="questiontitle" autofocus>
+        <input type="text" class="form-control" placeholder="Enter Title" id="questiontitle" name="questiontitle" value="<?php echo $title ?>" autofocus>
         <p class='help-block'></p>
       </div>
       <div class="form-group">
@@ -62,16 +48,22 @@
           <option>Other</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">Submit Question</button>  
+      <button type="submit" name="updatequestion" class="btn btn-primary">Submit Question</button>
+      <input type="hidden" id="questionid" name = "q_id" value="<?php echo $q_id ?>" >
+      <input type="hidden" id="questiontitle_1" value="<?php echo $question ?>" >  
       </form>  
       </div>
     </div> <!-- /container -->
     <script>
+    var str = $('#questiontitle_1').val();
     $(document).ready(function() {
         $('.summernote').summernote({
           height: 200,                 // set editor height
         });
+        //$('.summernote').code('insertText', 'Hello, world');
+        $('.note-editable.panel-body').text(str).html();
     });
+
   </script>
   <!-- Custom styles for this page -->
   <link href="css/postquestion.css" rel="stylesheet">
