@@ -67,11 +67,20 @@
                  
 			      </div>
             <span>
-            <a class='btn btn-default' href='update_question.php?q_id=".$question_id."' >Edit</a>
+            <a class='btn btn-primary' href='update_question.php?q_id=".$question_id."' >Edit</a>";
             
-            <button type='edit' class='btn btn-default'>Delete</button>
-            <input type='checkbox' name='freeze-checkbox' data-on-text='Freeze' data-off-text='Unfreeze' checked> 
-            </span>
+            if ($row["ACTIVE"] == "TRUE"){
+            echo "<input type='checkbox' value = ".$question_id." name='delete-checkbox' data-on-text='Delete' data-off-text='Add' checked>"; 
+            } else {
+            echo "<input type='checkbox' value = ".$question_id." name='delete-checkbox' data-on-text='Delete' data-off-text='Add' >";  
+            };
+            if ($row["STATE"] == "TRUE"){
+            echo "<input type='checkbox' value = ".$question_id." name='freeze-checkbox' data-on-text='Freeze' data-off-text='Unfreeze' checked>"; 
+            } else {
+            echo "<input type='checkbox' value = ".$question_id." name='freeze-checkbox' data-on-text='Freeze' data-off-text='Unfreeze' >";  
+            };
+
+      echo "</span>
 			      <div class='col-xs-6 col-md-3'>
 				        <p></p>
 				        <div style='background-color:#e0eaf1;width: 80%;'>
@@ -96,8 +105,19 @@
 
   ?>
 	</div>
-    <div role="tabpanel" class="tab-pane" id="myans">Coming Soon..</div>
-  </div>
+    <div role="tabpanel" class="tab-pane" id="myans">
+<?php  
+      $user_result = find_alluserdetails();
+      while($user_row = mysqli_fetch_assoc($user_result)) 
+    {
+      $first_name = $user_row["first_name"];
+      $score = $user_row["SCORE"];
+      //$q_id = $user_row["q_id"];
+      ?>
+    <?php echo $first_name; ?>
+    <?php echo $score; ?>
+    <?php }?>
+  </div></div>
 
 </div>
 <div class="col-sm-1"></div>

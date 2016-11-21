@@ -110,6 +110,22 @@
 		}
 		
 	}
+	function find_alluserdetails() {
+		global $connection;
+		
+		
+		$query  = "SELECT ptl_users.U_ID AS U_ID, ptl_users.user_id, ptl_users.first_name, ptl_users.user_image, ";
+		$query .= "	CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+					FROM ptl_users 
+					LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID 
+					LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q') GROUP BY ptl_users.U_ID";
+		$result_id = mysqli_query($connection, $query);
+		confirm_query($result_id);
+		
+		return $result_id;
+		
+		
+	}
 	
 	function redirect_to($new_location) {
 	  	header("Location: " . $new_location);
@@ -206,6 +222,28 @@
 			return false;
 		}
 	}
+	function update_state($q_id,$state) {
+		global $connection;
+		//$q_id = verify_input($q_id);
+		$query  = "UPDATE ptl_questions SET ";
+		$query .= "STATE = '$state' ";
+		$query .= "WHERE Q_ID = '$q_id' ";
+		$result_id = mysqli_query($connection, $query);
+		//error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		confirm_query($result_id);
+	}
+	function update_active($q_id,$active) {
+		global $connection;
+		//$q_id = verify_input($q_id);
+		$query  = "UPDATE ptl_questions SET ";
+		$query .= "ACTIVE = '$active' ";
+		$query .= "WHERE Q_ID = '$q_id' ";
+		$result_id = mysqli_query($connection, $query);
+		//error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		confirm_query($result_id);
+	}
+
+
 	function insert_answer($answer,$qid,$uid) {
 		global $connection;
 		$answer = verify_input($answer);
@@ -379,6 +417,7 @@
 											global $connection;
 											$u_id = verify_input($user_id);
 											if(isset($user_id)) 
+
 														{														
 														$query ="SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS,    Q_TITLE, Q_TAG, ptl_questions.Q_ID,
 																ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON , SCORE
@@ -394,11 +433,12 @@
 																ON ptl_users.U_ID = usr_score.U_ID
 																GROUP BY ptl_questions.Q_ID 
 																limit $offset, $rec_limit";													   
+
 														}																			
 														 
                                             $result = mysqli_query($connection,$query);
 											
-                                            if(!$result){die("Database query failed.");}
+                                            if(!$result){die("Database query failed.".$query);}
 											
 											return ($result);
 		
