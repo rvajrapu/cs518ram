@@ -80,6 +80,11 @@
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
         <h3><?php echo $result_user['user_id']; ?></h3>
+        <?php
+        $result_user_score = get_user_score($_GET['uid']);
+        $row_user_score = mysqli_fetch_assoc($result_user_score);
+        ?>
+        <div><i class='fa fa-certificate fa-2x' aria-hidden='true'> <?php echo $row_user_score["SCORE"] ?> </i></div>
         <?php if($_GET['uid'] == $_SESSION['uid']) { ?> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">Edit Details</button> <?php } ?>
         </div>
         
@@ -215,8 +220,9 @@
 			      <div class='col-xs-6 col-md-3'>
 				        <p></p>
 				        <div style='background-color:#e0eaf1;width: 80%;'>
-                        <img src='userimages/" . $row["user_image"] . "' width='35' height='40' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>
+                        <img src='userimages/" . $row["user_image"] . "' width='55' height='55' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>
                         <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a><br>Posted by: <a>" . $row["FIRST_NAME"] . "</a></div>
+                        <div><i class='fa fa-certificate' aria-hidden='true'> " . $row["SCORE"] . " </i></div>
                         <p></p></div>
 				  </div>	
 

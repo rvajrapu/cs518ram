@@ -86,8 +86,9 @@
                                   <div class="col-sm-3"  style="background-color:#e0eaf1;">
                                       <p></p>
                                       <div style='background-color:#e0eaf1;width: 80%;'>
-                                      <img src='userimages/<?php echo $row_2["user_image"] ?>' width='35' height='40' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>
-                                      <div>Posted on: <a><?php echo $row_2["CREATION_DATE"] ?></a><br>Posted by: <a href='myprofile.php?uid=<?php echo $row_2["U_ID"] ?>'><?php echo $row_2["FIRST_NAME"] ?></a></div>
+                                      <img src='userimages/<?php echo $row_2["user_image"] ?>' width='55' height='55' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>
+                                      <div>Posted on: <a><?php echo $row_2["CREATION_DATE"] ?></a><br>Posted by: <a href='myprofile.php?uid=<?php echo $row_2["U_ID"] ?>'><?php echo $row_2["FIRST_NAME"] ?></a>
+                                      <div><i class='fa fa-certificate' aria-hidden='true'> <?php echo $row_2["SCORE"] ?></i></div></div>
 
                                       <!-- <div>Posted on: <a><?php echo $row_2["CREATION_DATE"] ?></a></div>
                                       <div>Posted by: <a><?php echo $row_2["FIRST_NAME"] ?></a></div> -->
@@ -141,9 +142,10 @@
                                           <div class="col-sm-3"  style="background-color:#e0eaf1;">
                                               <p></p>
                                               <div style="background-color:#e0eaf1;width: 80%;">
-                                              <img src="userimages/' . $row_1["user_image"] . '" width="35" height="40" style="float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;"/>
+                                              <img src="userimages/' . $row_1["user_image"] . '" width="55" height="55" style="float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;">
                                               <div>Ans on: <a>' . $row_1["CREATION_DATE"] . '</a><br>Ans by: <a href = "myprofile.php?uid='.$row_1['U_ID'].'">' . $row_1["FIRST_NAME"] . '</a></div>
                                               </div>
+                                              <div><i class="fa fa-certificate" aria-hidden="true"> ' . $row_1["SCORE"] . ' </i></div>
                                               <p></p>
                                           </div>
                                           <div class="col-sm-1"> </div>
