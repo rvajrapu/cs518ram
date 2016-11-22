@@ -283,7 +283,7 @@
 		}
 		else return false;
 	}
-	function best_answer($a_id,$ba_id,$u_id,$q_id) {
+	function best_answer($a_id,$ba_id,$u_id,$q_id,$state) {
 
 		//error_log("\nbest_answer" . $ba_id . $u_id , 3, "C:/xampp/apache/logs/error.log");
 		if (verify_asker($u_id) && ($a_id == $ba_id)) {
@@ -293,7 +293,7 @@
 			$output .= '<input type="hidden" name="forid" id="q_id" value = '.$q_id.' />';
 			return $output;
 		}
-		if (verify_asker($u_id) && !($a_id == $ba_id)) {
+		if (verify_asker($u_id) && !($a_id == $ba_id) && ($state == "TRUE")) {
 			$output ='<i class="fa fa-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true" onclick="best_answer(this)"></i>';
 			$output .= '<input type="hidden" name="forid" id="a_id" value = '.$a_id.' />';
 			$output .= '<input type="hidden" name="forid" id="u_id" value = '.$ba_id.' />';
@@ -313,7 +313,7 @@
 		$query .= "BA_ID = '$a_id' ";
 		$query .= "WHERE Q_ID = '$q_id' AND U_ID = '$uid' ";
 		$result_id = mysqli_query($connection, $query);
-		error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		//error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
 		// confirm_query($result_id);
 		if($result_id) {
 			//$_SESSION["message"] = "Question Posted";
@@ -359,7 +359,7 @@
 	function get_result_2($ques_id) {
 											global $connection;
 											$q_id = verify_input($ques_id);
-											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, ptl_users.user_image AS user_image,        ptl_questions.CREATION_DATE,FIRST_NAME,ptl_questions.U_ID,BA_ID,SCORE
+											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, ptl_users.user_image AS user_image,        ptl_questions.CREATION_DATE,FIRST_NAME,ptl_questions.U_ID,BA_ID, STATE, SCORE
 														FROM ptl_questions
 														LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID =  ptl_users.U_ID
 														LEFT OUTER JOIN

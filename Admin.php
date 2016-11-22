@@ -114,6 +114,13 @@
       $score = $user_row["SCORE"];
       //$q_id = $user_row["q_id"];
       ?>
+  <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <a href="#" class="thumbnail">
+        <img src="userimages/<?php echo $user_row["user_image"]; ?>" alt="...">
+      </a>
+      </div>
+  </div>
     <?php echo $first_name; ?>
     <?php echo $score; ?>
     <?php }?>

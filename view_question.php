@@ -136,7 +136,7 @@
                                            <div class='col-sm-3'> 
                                            <p></p>";
                                     //echo $row_2["BA_ID"] . $row_2['U_ID'];
-                                    echo best_answer($row_1["A_ID"],$row_2["BA_ID"],$row_2['U_ID'],$ques_id);
+                                    echo best_answer($row_1["A_ID"],$row_2["BA_ID"],$row_2['U_ID'],$ques_id,$row_2['STATE']);
                                     echo  '</div>
                                           <div class="col-sm-5"> </div>
                                           <div class="col-sm-3"  style="background-color:#e0eaf1;">
@@ -165,7 +165,7 @@
 
                                     ?>
 
-                                    <?php if(logged_in()){ ?>
+                                    <?php if(logged_in() && $row_2['STATE'] == 'TRUE'){ ?>
                                     <p></p>
                                     <div class="row">                            
                                         <div class="col-sm-1">                                            
