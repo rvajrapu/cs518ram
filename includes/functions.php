@@ -705,7 +705,7 @@
 																	LEFT OUTER JOIN ptl_questions on (ptl_users.U_ID = ptl_questions.U_ID  AND ptl_questions.active = 'TRUE')
 																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q'  AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) USR_SCORE
 																	ON ptl_users.U_ID = usr_score.U_ID
-																	WHERE (ptl_questions.U_ID = ".$p1_value." or ptl_users.user_id = ".$p1_value.") AND ptl_questions.active = 'TRUE'
+																	WHERE (ptl_questions.U_ID = '".$p1_value."' or ptl_users.user_id = '".$p1_value."') AND ptl_questions.active = 'TRUE'
 																	GROUP BY ptl_questions.Q_ID) CNT";	
 
 													}
@@ -753,7 +753,7 @@
 
 	function get_row_count($query_name,$p1_name,$p1_value) {
 											global $connection;
-											$query = get_query($query_name,$p1_name,$p1_value);														 
+											$query = get_query($query_name,$p1_name,$p1_value);
                                             $result = mysqli_query($connection,$query);										
                                             if(!$result){die("get_row_count: Database query failed.");}
                                             $row = mysqli_fetch_assoc($result);											
