@@ -99,7 +99,7 @@
                     <li>
                         <a class="page-scroll" href="post_question.php">Ask Question</a>
                     </li>
-                    <?php if(logged_in()){ ?>
+                    <?php if(logged_in() && $result_user['user_role'] =="Admin"){ ?>
                     <li>
                         <a class="page-scroll"  href="Admin.php">Administration</a>
                     </li>
