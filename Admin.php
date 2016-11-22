@@ -106,6 +106,7 @@
   ?>
 	</div>
     <div role="tabpanel" class="tab-pane" id="myans">
+    <div class="row">
 <?php  
       $user_result = find_alluserdetails();
       while($user_row = mysqli_fetch_assoc($user_result)) 
@@ -114,17 +115,18 @@
       $score = $user_row["SCORE"];
       //$q_id = $user_row["q_id"];
       ?>
-  <div class="row">
-    <div class="col-xs-6 col-md-3">
+  
+    <div class="col-md-3" style="background-color: #fff;border: 1px solid #ddd;border-radius: 1.25rem;padding: 5px 5px 5px 5px;">
       <a href="#" class="thumbnail">
-        <img src="userimages/<?php echo $user_row["user_image"]; ?>" alt="...">
+        <img src="userimages/<?php echo $user_row["user_image"]; ?>" style="width: 200px; height: 200px;" alt="...">
       </a>
+      <p><?php echo $first_name; ?></p><p>SCORE:<?php echo $score; ?></p>
       </div>
-  </div>
-    <?php echo $first_name; ?>
-    <?php echo $score; ?>
+  
+    <!-- <?php echo $first_name; ?> -->
+    <!-- <?php echo $score; ?> -->
     <?php }?>
-  </div></div>
+  </div></div></div>
 
 </div>
 <div class="col-sm-1"></div>
