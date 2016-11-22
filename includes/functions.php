@@ -447,14 +447,25 @@
 											$u_id = verify_input($user_id);
 											if(isset($user_id)) 
 														{														 
-														$query  = "SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, STATE, ptl_questions.ACTIVE, Q_TAG, ptl_questions.Q_ID, ";
-														$query .= "ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON ";
-														$query .= "FROM ptl_questions "; 
-														$query .= "LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID "; 
-														$query .= "LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID GROUP BY ptl_questions.Q_ID ";
-														$query .= "limit $offset, $rec_limit";		   
-
-
+														$query  = "
+																	SELECT 
+																	ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, STATE, 
+																	ptl_questions.ACTIVE, Q_TAG, ptl_questions.Q_ID,ptl_users.FIRST_NAME AS FIRST_NAME,
+																	ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON,SCORE
+																	#CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE
+																	FROM ptl_questions
+																	LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID
+																	LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID 
+																	LEFT OUTER JOIN
+																	(SELECT ptl_users.U_ID AS U_ID, 
+																	CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+																	FROM ptl_users 
+																	LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
+																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q') GROUP BY ptl_users.U_ID) USR_SCORE
+																	ON ptl_users.U_ID = usr_score.U_ID
+																	GROUP BY ptl_questions.Q_ID
+																	limit $offset, $rec_limit														
+										           				 ";		   
 														}																			
 														 
                                             $result = mysqli_query($connection,$query);
