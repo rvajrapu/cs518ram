@@ -1,11 +1,12 @@
 <?php
   include("./includes/db_connection.php");
   include("./includes/session.php");
-  include("./includes/functions.php");
+  include("./includes/functions.php");?>
+  <?php confirm_logged_in();
   include("./htmlheader.php");
   include("./includes/nav.php");
-?>
-<?php confirm_logged_in(); ?>
+
+  ?>
     
     <script>
     var getUrlParameter = function getUrlParameter(sParam) {

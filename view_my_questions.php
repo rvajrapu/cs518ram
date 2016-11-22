@@ -1,13 +1,15 @@
 <?php
-  include("./includes/session.php");
   include("./includes/db_connection.php");
-  include("./includes/functions.php");
+  include("./includes/session.php");
+  include("./includes/functions.php");?>
+  <?php confirm_logged_in();
   include("./htmlheader.php");
-  include("./includes/nav.php");  
-?>
+  include("./includes/nav.php");
+
+  ?>
 <link href="css/pagination.css" rel="stylesheet">
 
-<?php confirm_logged_in(); ?>
+
 <div class="container-fluid">
   <p></p>
   <div class="row">

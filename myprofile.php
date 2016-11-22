@@ -2,17 +2,20 @@
   include("./includes/session.php");
   include("./includes/db_connection.php");
   include("./includes/functions.php");
-  include("./htmlheader.php");
-  include("./includes/nav.php");
-?>
-<link href="css/pagination.css" rel="stylesheet">
-<?php
-    if(!isset($_SESSION['uid'])) {
+
+  if(!isset($_SESSION['uid'])) {
       redirect_to('index.php');
     }
     if(!isset($_GET['uid'])) {
       redirect_to('index.php');
     }
+    
+  include("./htmlheader.php");
+  include("./includes/nav.php");
+?>
+<link href="css/pagination.css" rel="stylesheet">
+<?php
+    
 
     $result_user = find_userdetails($_GET['uid']);
 
