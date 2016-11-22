@@ -115,11 +115,12 @@
       $first_name = $user_row["first_name"];
       $score = $user_row["SCORE"];
       $Total_Q = $user_row["Q_COUNT"];
+
       //$q_id = $user_row["q_id"];
       ?>
   
     <div class="col-md-3" style="background-color: #fff;border: 1px solid #ddd;border-radius: 1.25rem;padding: 5px 5px 5px 5px;">
-      <a href="#" class="thumbnail">
+      <a href="myprofile.php?uid=<?php echo $user_row["U_ID"]; ?>" class="thumbnail">
         <img src="userimages/<?php echo $user_row["user_image"]; ?>" style="width: 200px; height: 200px;" alt="...">
       </a>
       <p><?php echo $first_name; ?></p><p>SCORE:<?php echo $score; ?></p><p>Total Questions:<?php echo $Total_Q; ?></p>
