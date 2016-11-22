@@ -41,7 +41,7 @@
   				<ul class="nav nav-tabs">
   				<p></p>
   				<br>
-    				<li class="active"><a href="#"><h4><b>View My Questions</b></h4></a></li>
+    				<li class="active"><a href="#"><h4><b>All Questions</b></h4></a></li>
     				<!--<li><a href="#">Un-Answered</a></li>-->
   				</ul>
   				<p></p>
