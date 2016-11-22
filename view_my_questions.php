@@ -81,7 +81,7 @@
 								        <p></p>
 								        <div style='background-color:#e0eaf1;width: 80%;'>
                                         <img src='userimages/" . $row["user_image"] . "' width='55' height='55' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>
-	                                    <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a><br>Posted by: <a>" . $row["FIRST_NAME"] . "</a></div>
+	                                    <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a ><br>Posted by: <a href = 'myprofile.php?uid=".$row["U_ID"]."'>" . $row["FIRST_NAME"] . "</a></div>
 	                                    <div><i class='fa fa-certificate' aria-hidden='true'> " . $row["SCORE"] . " </i></div>
 	                                    <p></p></div>
 								  </div>	

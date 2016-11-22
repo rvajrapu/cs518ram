@@ -22,8 +22,8 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#myhome" aria-controls="home" role="tab" data-toggle="tab">My Questions</a></li>
-    <li role="presentation"><a href="#myans" aria-controls="profile" role="tab" data-toggle="tab">My Answered Questions</a></li>
+    <li role="presentation" class="active"><a href="#myhome" aria-controls="home" role="tab" data-toggle="tab">Questions</a></li>
+    <li role="presentation"><a href="#myans" aria-controls="profile" role="tab" data-toggle="tab">User Details</a></li>
 
   </ul>
 
@@ -49,6 +49,13 @@
 		while($row = mysqli_fetch_assoc($result))	
 		{
 			$question_id = $row["Q_ID"];
+      if ($row["ACTIVE"] == "TRUE"){
+        $question_id_url = $row["Q_ID"];
+        $url = 'view_question.php?q_id='.$question_id_url ;
+      } else {
+          $question_id_url = '#';
+          $url = $question_id_url ;
+      }
 
 		echo "<div class='row'>
 
@@ -61,7 +68,7 @@
 
 			      <div class='col-xs-12 col-md-6'> 
 			           <div> 
-			               <a href='view_question.php?q_id=".$question_id."'>" . verify_output($row["Q_TITLE"]) . "</a> 
+			               <a href='".$url."'>" . verify_output($row["Q_TITLE"]) . "</a> 
 			           </div> 
 			           <br>  
 			           <button type='button' class='btn btn-sm' style='background-color:#d6ecff;'>" . $row["Q_TAG"] . " </button>
@@ -86,7 +93,7 @@
 				        <p></p>
 				        <div style='background-color:#e0eaf1;width: 80%;'>
                         <img src='userimages/" . $row["user_image"] . "' width='55' height='55' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>     
-                        <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a><br>Posted by: <a>" . $row["FIRST_NAME"] . "</a></div>
+                        <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a><br>Posted by: <a href ='myprofile.php?uid=".$row['U_ID']."'>" . $row["FIRST_NAME"] . "</a></div>
                         <div><i class='fa fa-certificate' aria-hidden='true'> " . $row["SCORE"] . " </i></div>
                         <p></p></div>
 				  </div>	
