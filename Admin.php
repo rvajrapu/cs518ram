@@ -22,8 +22,9 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#myhome" aria-controls="home" role="tab" data-toggle="tab">Questions</a></li>
-    <li role="presentation"><a href="#myans" aria-controls="profile" role="tab" data-toggle="tab">User Details</a></li>
+
+    <li role="presentation" class="active"><a href="#myhome" aria-controls="home" role="tab" data-toggle="tab"><h4>Questions</h4></a></li>
+    <li role="presentation"><a href="#myans" aria-controls="profile" role="tab" data-toggle="tab"><h4>Users</h4></a></li>
 
   </ul>
 
@@ -103,7 +104,7 @@
 
 
               $page_name = 'Admin.php';
-              $query_name = 'get_questions';     
+              $query_name = 'get_allquestions_admin';     
               $p1_name = 'uid';
               $p1_value = $user_id;
 
