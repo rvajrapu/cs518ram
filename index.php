@@ -14,8 +14,8 @@
 
   	<div class="col-sm-1"> </div>
 
-    <div class="col-sm-10" style="background-color:#fff;>    
-   		 <div class="col-sm-12">
+    <div class="col-sm-10" style="background-color:#fff">    
+
     		<div class="col-sm-12"> 
     		
                         <?php  
@@ -36,7 +36,7 @@
 				<p>
 				</p>
   				<ul class="nav nav-tabs">
-  				<br>
+  				
     				<li class="active"><a href="#"><h4><b>Top Portal Questions</b></h4></a></li>
     				<!--<li><a href="#">Un-Answered</a></li>-->
   				</ul>
@@ -59,7 +59,7 @@
 	  							  <div class='col-xs-6 col-md-3'> 
 							           <button type='button' class='btn btn-sm'  > " . $row["V_COUNT"] . "<br>" . "Votes" . " </button> 
 							           <button type='button' class='btn btn-sm' style='background-color:rgba(127, 230, 161, 0.77);border-color: #eeeeee;' >" . $row["ANSWERS_COUNT"] . "<br>" . "Answers" . " </button> 
-							           <button type='button' class='btn btn-sm' border-color: #eeeeee;>" . $row["VIEWS"] . "<br>" . "Views" . " </button> 
+							           <button type='button' class='btn btn-sm' style='border-color: #eeeeee;'>" . $row["VIEWS"] . "<br>" . "Views" . " </button> 
 						          </div>
 
 
@@ -75,7 +75,7 @@
 							      <div class='col-xs-6 col-md-3'>
 								        <p></p>								        
 								        <div style='background-color:#e0eaf1;width: 80%;'>
-                                        <img src='userimages/" . $row["user_image"] . "' width='55' height='55' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'> 
+                                        <img src='userimages/" . $row["user_image"] . "' width='55' height='55' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;' alt=''> 
 	                                    <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a><br>Posted by: <a>" . $row["FIRST_NAME"] . "</a></div>
 	                                    <div><i class='fa fa-certificate' aria-hidden='true'> " . $row["SCORE"] . " </i></div>
 	                                    <p></p>
@@ -106,14 +106,9 @@
     </div>
 
 
-    <div class="col-sm-1" "> 
-
+    <div class="col-sm-1" > 
 
     </div>
-
-    
-
-  </div>
 </div>
 
     <!-- Custom styles for this page -->

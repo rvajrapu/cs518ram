@@ -221,7 +221,7 @@ $("[name='delete-checkbox']").on('switchChange.bootstrapSwitch', function (event
 
 
       $(".increment").click(function( event )
-        {
+        { alert("Clicked");
           var element = $(this).siblings();
 
           var data_ques = {};

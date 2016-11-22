@@ -1,7 +1,7 @@
     <!-- <link href="./assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link href="./assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"> -->
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
 
@@ -61,7 +61,7 @@
                         <a href="logout.php">Sign Out</a>
                         </li>
                         <li>
-                        <img src="userimages/<?php echo $result_user['user_image']; ?>" width="35" height="40">
+                        <img src="userimages/<?php echo $result_user['user_image']; ?>" width="35" height="40" alt="">
                         </li>
                         <li>
                         <a href="myprofile.php?uid=<?php echo $userid ?>"><?php echo $user_name ?></a>
