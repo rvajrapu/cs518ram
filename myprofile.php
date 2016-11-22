@@ -174,8 +174,8 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#myhome" role="tab" data-toggle="tab">My Questions</a></li>
-    <li role="presentation"><a href="#myans" role="tab" data-toggle="tab">My Answered Questions</a></li>
+    <li role="presentation" class="active"><a href="#myhome" role="tab" data-toggle="tab"><h4><b>User Questions</b></h4></a></li>
+    <li role="presentation"><a href="#myans" role="tab" data-toggle="tab"><h4><b>User's Answered Questions</b></h4></a></li>
 
   </ul>
 
@@ -183,6 +183,7 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="myhome">
 		<p></p>
+    <br>
 
  		<?php
 		$user_id= $_GET['uid'];
@@ -244,7 +245,9 @@
 
   ?>
 	</div>
-    <div role="tabpanel" class="tab-pane" id="myans">Coming Soon..</div>
+    <div role="tabpanel" class="tab-pane" id="myans">
+    <br>
+    Coming Soon..</div>
   </div>
 
 </div>
