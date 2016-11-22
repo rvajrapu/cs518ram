@@ -187,12 +187,19 @@
 
  		<?php
 		$user_id= $_GET['uid'];
-    $page = '';
+    $page = ''; 
     $rec_limit = 5;
-    if( isset($_GET{'page'} ) ) {
+
+
+    if( isset($_GET{'page'} ) AND $_GET{'page'}>0) {
         $page = $_GET{'page'};
         $offset = $rec_limit * $page ;
+
         }
+    elseif (isset($_GET{'page'} ) AND $_GET{'page'}<0) {
+         $page = 0;
+         $offset = 0;             
+        }    
     else {
          $page = 0;
          $offset = 0;
