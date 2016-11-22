@@ -295,6 +295,7 @@
 			$output .= '<input type="hidden" name="forid" class="a_id" value = '.$a_id.' />';
 			$output .= '<input type="hidden" name="forid" class="u_id" value = '.$ba_id.' />';
 			$output .= '<input type="hidden" name="forid" class="q_id" value = '.$q_id.' />';
+			$output .= '<input type="hidden" name="forid" class="q_id" value = '.$state.' />';
 			return $output;
 		}
 		if (verify_asker($u_id) && !($a_id == $ba_id) && ($state == "TRUE")) {
@@ -302,6 +303,7 @@
 			$output .= '<input type="hidden" name="forid" class="a_id" value = '.$a_id.' />';
 			$output .= '<input type="hidden" name="forid" class="u_id" value = '.$ba_id.' />';
 			$output .= '<input type="hidden" name="forid" class="q_id" value = '.$q_id.' />';
+			$output .= '<input type="hidden" name="forid" class="q_id" value = '.$state.' />';
 			return $output;
 		}
 		if (!verify_asker($u_id) && ($a_id == $ba_id)) {

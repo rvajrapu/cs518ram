@@ -134,7 +134,7 @@ function checkpresence(a,id) {
         data_answer['ba_id'] = element[2].value;
         data_answer['q_id'] = element[3].value;
         console.log(data_answer);
-
+        if (element[4].value != 'FALSE'){
         
         $.ajax({
         url: 'post_bestanswer_ajax.php',
@@ -157,6 +157,7 @@ function checkpresence(a,id) {
           console.log("Details: " + desc + "\nError:" + err);
         }
       }); // end ajax call
+      }
   } 
 
 
