@@ -350,7 +350,7 @@
 														CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
 														FROM ptl_users 
 														LEFT OUTER JOIN ptl_questions on (ptl_users.U_ID = ptl_questions.U_ID  AND ptl_questions.active = 'TRUE')
-														LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q'  AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) USR_SCORE
+														LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q'  AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) usr_score
 														ON ptl_users.U_ID = usr_score.U_ID
 														WHERE ptl_questions.Q_ID = $q_id ORDER BY TOP_AID desc , V_COUNT desc 
 														limit $offset, $rec_limit";
@@ -373,7 +373,7 @@
 														CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
 														FROM ptl_users 
 														LEFT OUTER JOIN ptl_questions on (ptl_users.U_ID = ptl_questions.U_ID AND ptl_questions.active = 'TRUE')
-														LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) USR_SCORE
+														LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) usr_score
 														ON ptl_users.U_ID = usr_score.U_ID
 														WHERE ptl_questions.Q_ID = $q_id ";
 
@@ -402,7 +402,7 @@
 																	CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
 																	FROM ptl_users 
 																	LEFT OUTER JOIN ptl_questions on (ptl_users.U_ID = ptl_questions.U_ID  AND ptl_questions.active = 'TRUE')
-																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q'  AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) USR_SCORE
+																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q'  AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) usr_score
 																	ON ptl_users.U_ID = usr_score.U_ID
 																	WHERE (ptl_questions.U_ID = '$u_id' or ptl_users.user_id = '$u_id') AND ptl_questions.active = 'TRUE' 
 																	GROUP BY ptl_questions.Q_ID
@@ -435,7 +435,7 @@
 																CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
 																FROM ptl_users 
 																LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
-																LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE' ) GROUP BY ptl_users.U_ID) USR_SCORE
+																LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE' ) GROUP BY ptl_users.U_ID) usr_score
 																ON ptl_users.U_ID = usr_score.U_ID
 																WHERE ptl_questions.active = 'TRUE'
 																GROUP BY ptl_questions.Q_ID 
@@ -499,7 +499,7 @@
 																	CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
 																	FROM ptl_users 
 																	LEFT OUTER JOIN ptl_questions on (ptl_users.U_ID = ptl_questions.U_ID AND ptl_questions.active = 'TRUE')
-																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) USR_SCORE
+																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) usr_score
 																	ON ptl_users.U_ID = usr_score.U_ID
 																	GROUP BY ptl_questions.Q_ID
 																	ORDER BY V_COUNT desc limit $offset, $rec_limit";
@@ -673,7 +673,7 @@
 																	CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
 																	FROM ptl_users 
 																	LEFT OUTER JOIN ptl_questions on (ptl_users.U_ID = ptl_questions.U_ID AND ptl_questions.active = 'TRUE')
-																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) USR_SCORE
+																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) usr_score
 																	ON ptl_users.U_ID = usr_score.U_ID
 																	GROUP BY ptl_questions.Q_ID) CNT";
 														}
@@ -707,7 +707,7 @@
 																	CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
 																	FROM ptl_users 
 																	LEFT OUTER JOIN ptl_questions on (ptl_users.U_ID = ptl_questions.U_ID  AND ptl_questions.active = 'TRUE')
-																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q'  AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) USR_SCORE
+																	LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q'  AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) usr_score
 																	ON ptl_users.U_ID = usr_score.U_ID
 																	WHERE (ptl_questions.U_ID = '".$p1_value."' or ptl_users.user_id = '".$p1_value."') AND ptl_questions.active = 'TRUE'
 																	GROUP BY ptl_questions.Q_ID) CNT";	
@@ -728,7 +728,7 @@
 														CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
 														FROM ptl_users 
 														LEFT OUTER JOIN ptl_questions on (ptl_users.U_ID = ptl_questions.U_ID  AND ptl_questions.active = 'TRUE')
-														LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q'  AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) USR_SCORE
+														LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q'  AND ptl_questions.active = 'TRUE') GROUP BY ptl_users.U_ID) usr_score
 														ON ptl_users.U_ID = usr_score.U_ID
 														WHERE ptl_questions.Q_ID = ".$p1_value.") CNT";
 			}																															
@@ -745,7 +745,7 @@
 																CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
 																FROM ptl_users 
 																LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
-																LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE' ) GROUP BY ptl_users.U_ID) USR_SCORE
+																LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE' ) GROUP BY ptl_users.U_ID) usr_score
 																ON ptl_users.U_ID = usr_score.U_ID
 																GROUP BY ptl_questions.Q_ID) CNT";
 															}	
