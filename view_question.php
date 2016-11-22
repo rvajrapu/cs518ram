@@ -112,7 +112,8 @@
 
 
                                     echo "<div class = 'row' >
-                                          <div class='col-sm-1' id='votes'>";
+                                          <div class='col-sm-1'>
+                                          <div class='votes'>";
                                                                         
                                     
 
@@ -120,6 +121,7 @@
                                     echo user_votes($a_id,$v_type);                                    
                                                                              
                                     echo "
+                                          </div>
                                           </div>
 
                                           <div class='col-sm-10' style='background-color:#eee;'> <br>" .

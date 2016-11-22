@@ -162,7 +162,7 @@ function checkpresence(a,id) {
 
 
       $(".increment").click(function( event )
-        { alert("Clicked");
+        { 
           var element = $(this).siblings();
 
           var data_ques = {};

@@ -114,11 +114,15 @@
 		global $connection;
 		
 		
-		$query  = "SELECT ptl_users.U_ID AS U_ID, ptl_users.user_id, ptl_users.first_name, ptl_users.user_image, ";
-		$query .= "	CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+		$query  = " SELECT 
+					ptl_users.U_ID AS U_ID, ptl_users.user_id, ptl_users.first_name, ptl_users.user_image,
+					CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE, 
+					CASE WHEN TOTAL_Q IS NULL THEN 0 ELSE TOTAL_Q END Q_COUNT 
 					FROM ptl_users 
 					LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID 
-					LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q') GROUP BY ptl_users.U_ID";
+					LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q') 
+					LEFT OUTER JOIN  (SELECT SUM(1) TOTAL_Q, ptl_questions.U_ID FROM ptl_questions GROUP BY U_ID) T_Q on ptl_users.U_ID = T_Q.U_ID
+					GROUP BY ptl_users.U_ID";
 		$result_id = mysqli_query($connection, $query);
 		confirm_query($result_id);
 		
@@ -288,16 +292,16 @@
 		//error_log("\nbest_answer" . $ba_id . $u_id , 3, "C:/xampp/apache/logs/error.log");
 		if (verify_asker($u_id) && ($a_id == $ba_id)) {
 			$output  = '<i class="fa fa-check-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true" onclick="best_answer(this)"></i>';
-			$output .= '<input type="hidden" name="forid" id="a_id" value = '.$a_id.' />';
-			$output .= '<input type="hidden" name="forid" id="u_id" value = '.$ba_id.' />';
-			$output .= '<input type="hidden" name="forid" id="q_id" value = '.$q_id.' />';
+			$output .= '<input type="hidden" name="forid" class="a_id" value = '.$a_id.' />';
+			$output .= '<input type="hidden" name="forid" class="u_id" value = '.$ba_id.' />';
+			$output .= '<input type="hidden" name="forid" class="q_id" value = '.$q_id.' />';
 			return $output;
 		}
 		if (verify_asker($u_id) && !($a_id == $ba_id) && ($state == "TRUE")) {
 			$output ='<i class="fa fa-square-o fa-3x" style = "color: #1d9d74" aria-hidden="true" onclick="best_answer(this)"></i>';
-			$output .= '<input type="hidden" name="forid" id="a_id" value = '.$a_id.' />';
-			$output .= '<input type="hidden" name="forid" id="u_id" value = '.$ba_id.' />';
-			$output .= '<input type="hidden" name="forid" id="q_id" value = '.$q_id.' />';
+			$output .= '<input type="hidden" name="forid" class="a_id" value = '.$a_id.' />';
+			$output .= '<input type="hidden" name="forid" class="u_id" value = '.$ba_id.' />';
+			$output .= '<input type="hidden" name="forid" class="q_id" value = '.$q_id.' />';
 			return $output;
 		}
 		if (!verify_asker($u_id) && ($a_id == $ba_id)) {
@@ -512,13 +516,13 @@
 
 	function user_votes($id,$v_type) {
 											$id      = $id;
-											//$u_id    = $_SESSION['uid'];
+										
 											$v_type  = $v_type;
 
 											$votes   = get_vote_count($id,$v_type);
 											$output  = '<div class="vote roundrect" >';
 											$output .= '<input type="hidden" name="forid" value = '.$id.' />';
-											//$output .= '<input type="hidden" name="forid" id="u_id" value = '.$u_id.' />';
+											
 											$output .= '<input type="hidden" name="forid" value = '.$v_type.' />';
 											$output .= '<div class="increment up"></div>';
 											$output .= '<div class="increment down"></div>';

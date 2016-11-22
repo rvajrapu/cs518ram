@@ -114,6 +114,7 @@
     {
       $first_name = $user_row["first_name"];
       $score = $user_row["SCORE"];
+      $Total_Q = $user_row["Q_COUNT"];
       //$q_id = $user_row["q_id"];
       ?>
   
@@ -121,7 +122,7 @@
       <a href="#" class="thumbnail">
         <img src="userimages/<?php echo $user_row["user_image"]; ?>" style="width: 200px; height: 200px;" alt="...">
       </a>
-      <p><?php echo $first_name; ?></p><p>SCORE:<?php echo $score; ?></p>
+      <p><?php echo $first_name; ?></p><p>SCORE:<?php echo $score; ?></p><p>Total Questions:<?php echo $Total_Q; ?></p>
       </div>
   
     <!-- <?php echo $first_name; ?> -->
