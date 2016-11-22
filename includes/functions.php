@@ -506,9 +506,9 @@
 
 											$votes   = get_vote_count($id,$v_type);
 											$output  = '<div class="vote roundrect" >';
-											$output .= '<input type="hidden" name="forid" id="id" value = '.$id.' />';
+											$output .= '<input type="hidden" name="forid" value = '.$id.' />';
 											//$output .= '<input type="hidden" name="forid" id="u_id" value = '.$u_id.' />';
-											$output .= '<input type="hidden" name="forid" id="v_type" value = '.$v_type.' />';
+											$output .= '<input type="hidden" name="forid" value = '.$v_type.' />';
 											$output .= '<div class="increment up"></div>';
 											$output .= '<div class="increment down"></div>';
 											$output .= '<div class="count">'.$votes.'</div>';
