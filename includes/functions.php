@@ -466,7 +466,7 @@
 																	LEFT OUTER JOIN (SELECT ptl_users.U_ID AS U_ID, CASE WHEN SUM(ptl_user_votes.vote) IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE FROM ptl_users 
 																	                                    LEFT OUTER JOIN ptl_questions on (ptl_users.U_ID = ptl_questions.U_ID AND ptl_questions.ACTIVE = 'TRUE') 
 																	                                    LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.ACTIVE = 'TRUE') 
-																	                                    GROUP BY ptl_users.U_ID) USR_SCORE 
+																	                                    GROUP BY ptl_users.U_ID) usr_score 
 																	ON ptl_users.U_ID = usr_score.U_ID GROUP BY ptl_questions.Q_ID limit $offset, $rec_limit
 										           				 ";		   
 														}																			
