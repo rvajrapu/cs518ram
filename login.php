@@ -28,6 +28,7 @@
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" />
         <p class='help-block'></p>
         </div>
+        <div class="g-recaptcha" data-sitekey="6Lf8Ag4UAAAAADLgLXhSsJWko6yUcNkuptqcwrVw"></div>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
