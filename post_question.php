@@ -53,6 +53,7 @@
         </div>
         <p class='help-block'></p>
       </div>
+<!--
       <div class="form-group">
         <label for="Title">Tags</label>
         <select class="form-control" name="questiontag">
@@ -63,10 +64,15 @@
           <option>Other</option>
         </select>
       </div>
+-->
+      <label for="Question">Enter Multiple Delimeters using Space</label>
+      <input type="text" class="form-control" placeholder="Enter Question Tags" id="questiontitle" name="questiontag" autofocus>
+
+      <br>
       <button type="submit" class="btn btn-primary">Submit Question</button>  
       </form>  
       </div>
-    </div> <!-- /container -->
+    </div> 
     <script>
     $(document).ready(function() {
         $('.summernote').summernote({

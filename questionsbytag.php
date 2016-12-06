@@ -38,8 +38,10 @@
 					         $page = 0;
 					         $offset = 0;
 					         }
-                                 
-                        $result = get_allquestions($user_id,$offset, $rec_limit);
+				$q_tag = ''	;         
+
+                $q_tag = $_GET{'q_tag'};           
+                $result = get_all_tag_questions($user_id,$offset, $rec_limit,$q_tag);
 
 				?>
 
@@ -47,7 +49,7 @@
   				<ul class="nav nav-tabs">
   				<p></p>
   				<br>
-    				<li class="active"><a href="#"><h4><b>All Questions</b></h4></a></li>
+    				<li class="active"><a href="#"><h4><b>Topic wise Questions</b></h4></a></li>
     				<!--<li><a href="#">Un-Answered</a></li>-->
   				</ul>
   				<p></p>
@@ -97,12 +99,12 @@
 		  				?>
 
 		  				<?php
-		  				    $page_name = 'view_my_questions.php';
-		  				    $query_name = 'get_allquestions';
-		  				    $p1_name = 1;
+		  				    $page_name = 'questionsbytag.php';
+		  				    $query_name = 'questionsbytag';
+		  				    $p1_name = $q_tag;
 		  				    $p1_value = 1;
 							$cnt = get_row_count($query_name,$p1_name,$p1_value);
-							echo generate_pagination_buttons($rec_limit,$cnt,$page,$page_name,$p1_name,$p1_value);
+							echo generate_pagination_buttons($rec_limit,$cnt,$page,$page_name,'q_tag',$q_tag);
 						?>
 
 		  				</div>

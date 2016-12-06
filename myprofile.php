@@ -205,10 +205,14 @@
          $offset = 0;
          }                     
 
+
     $result = get_questions($user_id,$offset, $rec_limit);
 		while($row = mysqli_fetch_assoc($result))	
 		{
 			$question_id = $row["Q_ID"];
+
+                                                            
+
 
 		echo "<div class='row'>
 
@@ -223,11 +227,21 @@
 			           <div> 
 			               <a href='view_question.php?q_id=".$question_id."'>" . verify_output($row["Q_TITLE"]) . "</a> 
 			           </div> 
-			           <br>  
-			           <button type='button' class='btn btn-sm' style='background-color:#d6ecff;'>" . $row["Q_TAG"] . " </button> 
+			           <br>";
+
+                                                     $Tag_String = $row['Q_TAG'];
+                                    
+                                    $Tag_Array = explode(' ', $Tag_String);
+                                    $i=0;
+                                             for($i=0;$i<=(count($Tag_Array)-1);$i++)
+                                              {
+                                                echo "<button type='button' class='btn btn-sm' >
+                                                       <a href='questionsbytag.php?q_tag=".$Tag_Array[$i]."'>".$Tag_Array[$i]."</a></button>";
+
+                                              }    
+			           //<button type='button' class='btn btn-sm' style='background-color:#d6ecff;'>" . $row["Q_TAG"] . " </button> 
+echo "
 			      </div>
-
-
 			      <div class='col-xs-6 col-md-3'>
 				        <p></p>
 				        <div style='background-color:#e0eaf1;width: 80%;'>

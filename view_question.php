@@ -75,9 +75,16 @@
 
                                     echo verify_output($row_2["Q_TEXT"]);
                                     echo "<p></p>";
-
+                                    $Tag_String = $row_2['Q_TAG'];
+                                    $Tag_Array = explode(' ', $Tag_String);
+                                    $i=0;
+                                             for($i=0;$i<=(count($Tag_Array)-1);$i++)
+                                              {
+                                                echo "<button type='button' class='btn btn-sm' >
+                                                       <a href='questionsbytag.php?q_tag=".$Tag_Array[$i]."'>".$Tag_Array[$i]."</a></button>";
+                                                                                                           
+                                              }                                  
                                     ?>
-
                                 </div>
 
                                 <div class="row">
