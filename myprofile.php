@@ -15,14 +15,14 @@
 ?>
 <link href="css/pagination.css" rel="stylesheet">
 <?php
-    
 
-    $result_user = find_userdetails($_GET['uid']);
+$result_user = find_userdetails($_GET['uid']);
 
    if(isset($_POST['updatedetails']))
     {
     $email = $_POST['email'];// user email
-      
+    $uid = $_GET['uid'];
+    $gravatar = $_POST['optradio'];
     $imgFile = $_FILES['user_image']['name'];
     $tmp_dir = $_FILES['user_image']['tmp_name'];
     $imgSize = $_FILES['user_image']['size'];
@@ -58,7 +58,8 @@
 
     if(!isset($_SESSION["message"]))
     {
-      update_user($_SESSION['uid'],$email,$userpic);
+      update_user($_SESSION['uid'],$email,$userpic,$gravatar);
+      echo("<script>location.href = '/Questra/myprofile.php?uid=".$uid."';</script>");
       redirect_to("myprofile.php");
     }
   }
@@ -75,7 +76,14 @@
         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"></div>
         <div class="col-lg-5 col-md-4 col-sm-6 col-xs-12">
         <div class="hovereffect">
-          <img src="userimages/<?php echo $result_user['user_image']; ?>" alt="" width="175" height="175" class="img-circle">
+          <?php if ($result_user['gravatar'] == "TRUE"){
+            $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $result_user['email'] ) ) ) . "?d=" . urlencode( 'http://placehold.it/350x150' );
+            ?>
+          <img src="<?php echo $grav_url; ?>" alt="" width="175" height="175" class="img-circle">
+          <?php } else { ?>
+            <img src="userimages/<?php echo $result_user['user_image']; ?>" alt="" width="175" height="175" class="img-circle">
+          <?php } ?>
+          
           <div class="overlay">
              <a class="info" href="#aboutModal" data-toggle="modal" data-target="#myModal">Click here</a>
           </div>
@@ -149,6 +157,12 @@
                       <p><img src="userimages/<?php echo $result_user['user_image']; ?>" height="150" width="150" alt=""/></p>
                       <input class="input-group" type="file" name="user_image" accept="image/*" />
                       <p class='help-block'></p>
+                      <div class="radio">
+                        <label><input type="radio" name="optradio" value="TRUE">Gravatar</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="optradio" value="FALSE">Portal</label>
+                      </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-primary" name="updatedetails">Questra!</button>
                     </div>

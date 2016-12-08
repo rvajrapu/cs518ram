@@ -14,10 +14,11 @@
     $imgFile = $_FILES['user_image']['name'];
     $tmp_dir = $_FILES['user_image']['tmp_name'];
     $imgSize = $_FILES['user_image']['size'];
+    $userpic = '';
     
     if(find_user($_POST['username']) != null){
       $_SESSION["message"] = "Username already exists";
-      redirect_to('newuser_register.php');
+      //echo("<script>location.href = 'newuser_register.php';</script>");
     }
     
 
@@ -52,7 +53,7 @@
     if(!isset($_SESSION["message"]))
     {
       insert_user($username,$email,$_POST['password'],$userpic);
-      redirect_to('login.php');
+      //exit(header("Location: login.php"));
     }
   }
 ?>

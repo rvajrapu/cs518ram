@@ -37,8 +37,7 @@
 
                     <?php } ?>
 
-                    <?php 
-
+                    <?php
                     if(logged_in()){ 
                     $userid= $_SESSION["uid"];
                     $uname = find_username($userid);

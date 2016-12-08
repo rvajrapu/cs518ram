@@ -97,7 +97,7 @@
 		global $connection;
 		
 		$userid = verify_input($userid);
-		$query  = "SELECT user_id, email, first_name, user_image, user_role ";
+		$query  = "SELECT user_id, email, first_name, user_image, gravatar, user_role ";
 		$query .= "FROM ptl_users ";
 		$query .= "WHERE u_id = '$userid' or user_id = '$userid'";
 		$query .= "LIMIT 1";
@@ -166,10 +166,11 @@
 		$password = verify_input($password);
 		if($userpic == ''){
 			$userpic = 'default.png';
+
 		}
 		$query  = "INSERT INTO ptl_users ";
-		$query .= "(USER_ID, EMAIL, PASS_CODE, FIRST_NAME, CREATION_DATE, USER_IMAGE) ";
-		$query .= "VALUES ('$username', '$email', '$password', '$username', CURDATE(),'$userpic') ";
+		$query .= "(USER_ID, EMAIL, PASS_CODE, FIRST_NAME, CREATION_DATE, USER_IMAGE, GRAVATAR) ";
+		$query .= "VALUES ('$username', '$email', '$password', '$username', CURDATE(),'$userpic', 'TRUE') ";
 		$result_id = mysqli_query($connection, $query);
 		//error_log("Inside query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
 		confirm_query($result_id);
@@ -207,15 +208,15 @@
 		
 	}
 
-	function update_user($uid,$email,$userpic) {
+	function update_user($uid,$email,$userpic,$gravatar) {
 		global $connection;
 		//$q_id = verify_input($q_id);
 		$email = verify_input($email);
 		$query  = "UPDATE ptl_users SET ";
-		$query .= "EMAIL = '$email',USER_IMAGE = '$userpic'  ";
+		$query .= "EMAIL = '$email',USER_IMAGE = '$userpic',GRAVATAR = '$gravatar'  ";
 		$query .= "WHERE U_ID = '$uid' ";
 		$result_id = mysqli_query($connection, $query);
-		error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
+		//error_log("Inside update query\n" . $query , 3, "C:/xampp/apache/logs/error.log");
 		// confirm_query($result_id);
 		if($result_id) {
 			$_SESSION["message"] = "User details updated";
