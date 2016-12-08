@@ -448,8 +448,45 @@
                                             if(!$result){die("Database query failed.".$query);}
 											
 											return ($result);
+}
+
+
+	function get_all_tag_questions($user_id,$offset, $rec_limit,$q_tag) {
+											global $connection;
+											$u_id = verify_input($user_id);
+											if(isset($user_id)) 
+
+														{														 
+														$query ="SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS,    Q_TITLE, Q_TAG, ptl_questions.Q_ID, ptl_questions.U_ID AS U_ID,
+																ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON , SCORE
+																FROM ptl_questions
+																LEFT OUTER JOIN ptl_users ON (ptl_questions.U_ID=ptl_users.U_ID  AND ptl_questions.active = 'TRUE')
+																LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID 
+																LEFT OUTER JOIN
+																(SELECT ptl_users.U_ID AS U_ID, 
+																CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+																FROM ptl_users 
+																LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
+																LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE' ) GROUP BY ptl_users.U_ID) usr_score
+																ON ptl_users.U_ID = usr_score.U_ID
+																WHERE ptl_questions.active = 'TRUE'
+																AND (ptl_questions.Q_TAG = '".$q_tag."' 
+																  OR ptl_questions.Q_TAG LIKE '% ".$q_tag." %' 
+																  OR ptl_questions.Q_TAG LIKE '% ".$q_tag."' 
+																  OR ptl_questions.Q_TAG LIKE '".$q_tag." %') 
+																GROUP BY ptl_questions.Q_ID 
+																limit $offset, $rec_limit";		   
+															//	echo $query;
+														}																			
+														 
+                                            $result = mysqli_query($connection,$query);
+											
+                                            if(!$result){die("Database query failed.".$query);}
+											
+											return ($result);
 		
 	}
+
 	function get_allquestions_admin($user_id,$offset, $rec_limit) {
 											global $connection;
 											$u_id = verify_input($user_id);
@@ -750,6 +787,30 @@
 																ON ptl_users.U_ID = usr_score.U_ID
 																GROUP BY ptl_questions.Q_ID) CNT";
 															}	
+			elseif ($query_name == 'questionsbytag') {
+														$query  = "SELECT COUNT(*) Q_CNT FROM (";
+														$query .="SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS,    Q_TITLE, Q_TAG, ptl_questions.Q_ID, ptl_questions.U_ID AS U_ID,
+																ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON , SCORE
+																FROM ptl_questions
+																LEFT OUTER JOIN ptl_users ON (ptl_questions.U_ID=ptl_users.U_ID  AND ptl_questions.active = 'TRUE')
+																LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID 
+																LEFT OUTER JOIN
+																(SELECT ptl_users.U_ID AS U_ID, 
+																CASE WHEN SUM(ptl_user_votes.vote)  IS NULL THEN 0 ELSE SUM(ptl_user_votes.vote) END AS SCORE 
+																FROM ptl_users 
+																LEFT OUTER JOIN ptl_questions on ptl_users.U_ID = ptl_questions.U_ID
+																LEFT OUTER JOIN ptl_user_votes on (ptl_questions.Q_ID = ptl_user_votes.Q_ID and ptl_user_votes.V_TYPE = 'Q' AND ptl_questions.active = 'TRUE' ) GROUP BY ptl_users.U_ID) usr_score
+																ON ptl_users.U_ID = usr_score.U_ID
+																WHERE ptl_questions.active = 'TRUE'
+																AND (ptl_questions.Q_TAG = '".$p1_name."' 
+																  OR ptl_questions.Q_TAG LIKE '% ".$p1_name." %' 
+																  OR ptl_questions.Q_TAG LIKE '% ".$p1_name."' 
+																  OR ptl_questions.Q_TAG LIKE '".$p1_name." %') 
+																GROUP BY ptl_questions.Q_ID) Q"; 
+																	
+
+															
+													 }																
 			else {}
 			
 
