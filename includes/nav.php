@@ -43,7 +43,7 @@
                     $uname = find_username($userid);
                     $row = mysqli_fetch_assoc($uname);
                     $user_name = $row["first_name"];
-                    $result_user = find_userdetails($_SESSION['uid']);
+                    $result_user_nav = find_userdetails($_SESSION['uid']);
                         ?>
 <!--
                         <li>
@@ -60,7 +60,7 @@
                         <a href="logout.php">Sign Out</a>
                         </li>
                         <li>
-                        <?php $image_urlnav = getimageurl($result_user['gravatar'], $result_user['email'], $result_user['user_image']);?>
+                        <?php $image_urlnav = getimageurl($result_user_nav['gravatar'], $result_user_nav['email'], $result_user_nav['user_image']);?>
                         <img src="<?php echo $image_urlnav; ?>" width="35" height="40" alt="">
                         </li>
                         <li>
@@ -99,7 +99,7 @@
                     <li>
                         <a class="page-scroll" href="post_question.php">Ask Question</a>
                     </li>
-                    <?php if(logged_in() && $result_user['user_role'] =="Admin"){ ?>
+                    <?php if(logged_in() && $result_user_nav['user_role'] =="Admin"){ ?>
                     <li>
                         <a class="page-scroll"  href="Admin.php">Administration</a>
                     </li>
@@ -118,7 +118,6 @@
     <script type="text/javascript">
     var USER_ID = $('#userid').html()
     ga('set', 'userId', USER_ID);
-    
       $(document).ready(function() {
         $('input.typeahead').typeahead({
           source: function (query, process) {

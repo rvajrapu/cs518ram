@@ -337,7 +337,7 @@ function getimageurl($gravatar,$email,$image){
 		$image_url = $_SESSION["git_image"];
 	}
 	elseif ($gravatar == "TRUE"){
-            $image_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( 'http://placehold.it/350x150' );
+            $image_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( 'https://s23.postimg.org/aqy6npbob/default.png' );
            } else {
            	$image_url = "userimages/" . $image ;
 	}
