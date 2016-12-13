@@ -31,7 +31,6 @@ if(isset($_GET['code']))
             $access_token = $r['access_token'];
             $scope = $r['scope']; 
 
-            /*- Get User Details -*/
     $url = "https://api.github.com/user?access_token=".$access_token."";
     $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
     $context  = stream_context_create($options);
