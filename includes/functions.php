@@ -333,7 +333,10 @@
 		}
 	}
 function getimageurl($gravatar,$email,$image){
-	if ($gravatar == "TRUE"){
+	if (isset($_SESSION["git_user"]) && $_SESSION["git_user"] == "True"){
+		$image_url = $_SESSION["git_image"];
+	}
+	elseif ($gravatar == "TRUE"){
             $image_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( 'http://placehold.it/350x150' );
            } else {
            	$image_url = "userimages/" . $image ;

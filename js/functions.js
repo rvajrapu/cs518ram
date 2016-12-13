@@ -58,6 +58,12 @@ function checkpresence(a,id) {
           console.log("Details: " + desc + "\nError:" + err);
         }
       }); // end ajax call
+    ga('send', {
+        hitType: 'event',
+        eventCategory: 'Questions',
+        eventAction: 'Post',
+        eventLabel: 'New Question'
+      });
   }
   function update_question(formdata){
 

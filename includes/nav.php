@@ -64,7 +64,7 @@
                         <img src="<?php echo $image_urlnav; ?>" width="35" height="40" alt="">
                         </li>
                         <li>
-                        <a href="myprofile.php?uid=<?php echo $userid ?>"><?php echo $user_name ?></a>
+                        <a id="userid" href="myprofile.php?uid=<?php echo $userid ?>"><?php echo $user_name ?></a>
                         </li>
                     <?php } ?>
                     
@@ -116,6 +116,9 @@
     <script src="./assets/bootstrap/js/bootstrap3-typeahead.js"></script>
  
     <script type="text/javascript">
+    var USER_ID = $('#userid').html()
+    ga('set', 'userId', USER_ID);
+    
       $(document).ready(function() {
         $('input.typeahead').typeahead({
           source: function (query, process) {
@@ -130,6 +133,7 @@
               }
             });
           }
+
         });
       });
 
@@ -137,6 +141,13 @@
           if ($(".typeahead:focus") && (e.keyCode === 13)) {
               $( "form:first" ).submit();
           }
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'Search',
+            eventAction: 'Search',
+            eventLabel: 'New Search'
+          });
        });
+
 
     </script>
