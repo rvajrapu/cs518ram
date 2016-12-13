@@ -469,7 +469,7 @@ function getimageurl($gravatar,$email,$image){
 
 														{														 
 														$query ="SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS,    Q_TITLE, Q_TAG, ptl_questions.Q_ID, ptl_questions.U_ID AS U_ID,
-																ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON , SCORE
+																ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON , SCORE,ptl_users.gravatar,ptl_users.email
 																FROM ptl_questions
 																LEFT OUTER JOIN ptl_users ON (ptl_questions.U_ID=ptl_users.U_ID  AND ptl_questions.active = 'TRUE')
 																LEFT OUTER JOIN ptl_answers ON ptl_questions.Q_ID = ptl_answers.Q_ID 
@@ -537,7 +537,7 @@ function getimageurl($gravatar,$email,$image){
 																	VIEWS,ptl_questions.CREATION_DATE AS Q_CREATED_ON, 
 																	Q_TITLE, Q_TAG, ptl_questions.Q_ID,ptl_users.FIRST_NAME AS FIRST_NAME,
 																	ptl_questions.U_ID AS U_ID,  
-																	V_COUNT , ptl_users.user_image AS user_image, SCORE
+																	V_COUNT , ptl_users.user_image AS user_image, SCORE, ptl_users.gravatar, ptl_users.email
 																	FROM ptl_questions  
 																	LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID 
 																	LEFT OUTER JOIN ptl_answers ON (ptl_questions.Q_ID = ptl_answers.Q_ID AND ptl_questions.active = 'TRUE')

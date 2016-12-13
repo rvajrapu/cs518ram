@@ -31,13 +31,13 @@ if(isset($_GET['code']))
             $access_token = $r['access_token'];
             $scope = $r['scope']; 
 
-    $url = "https://api.github.com/user?access_token=".$access_token."";
-    $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
-    $context  = stream_context_create($options);
-    $data = file_get_contents($url, false, $context); 
-    $user_data  = json_decode($data, true);
-    $username = $user_data['login'];
-    $username_1 = $user_data['login'];
+            $url = "https://api.github.com/user?access_token=".$access_token."";
+            $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
+            $context  = stream_context_create($options);
+            $data = file_get_contents($url, false, $context); 
+            $user_data  = json_decode($data, true);
+            $username = $user_data['login'];
+            $username_1 = $user_data['login'];
 
 
             /*- Get User e-mail Details -*/                
