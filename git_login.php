@@ -74,7 +74,8 @@ if(isset($_GET['code']))
                     $_SESSION["uid"] = (int)$row_new["u_id"];
                     $_SESSION["username"] = $row_new["user_id"]; 
                     $_SESSION["git_user"] = 'True';
-                    $_SESSION["git_image"] = 'https://github.com/'.$row["user_id"].'.png';         
+                    $_SESSION["git_image"] = 'https://github.com/'.$row["user_id"].'.png';
+                             
                     redirect_to("index.php");
                 }
     }
