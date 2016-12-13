@@ -140,6 +140,7 @@
 		global $connection;
 		
 		$title = verify_input($title);
+		//$title = mysqli_real_escape_string($title);
 		$question = verify_input($question);
 		$tag = verify_input($tag);
 		$query  = "INSERT INTO ptl_questions ";
@@ -331,7 +332,14 @@
 			return false;
 		}
 	}
-
+function getimageurl($gravatar,$email,$image){
+	if ($gravatar == "TRUE"){
+            $image_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( 'http://placehold.it/350x150' );
+           } else {
+           	$image_url = "userimages/" . $image ;
+	}
+	return $image_url;
+}
 	function get_result_1($ques_id,$offset, $rec_limit) {
 		                                 	global $connection;
 
@@ -340,7 +348,7 @@
 
 		                                 	$query_1 = "SELECT 
 														Q_TITLE, Q_TEXT, Q_TAG, A_TEXT, ptl_answers.A_ID, V_COUNT,
-														ptl_users.FIRST_NAME,ptl_users.user_image AS user_image, ptl_answers.CREATION_DATE, ptl_answers.A_ID, ptl_answers.U_ID,
+														ptl_users.FIRST_NAME,ptl_users.user_image AS user_image, ptl_users.gravatar AS gravatar, ptl_users.email AS email, ptl_answers.CREATION_DATE, ptl_answers.A_ID, ptl_answers.U_ID,
 														CASE WHEN BA_ID = ptl_answers.A_ID THEN 1 ELSE NULL END AS TOP_AID, SCORE
 														FROM ptl_answers 
 														LEFT OUTER JOIN ptl_questions ON (ptl_answers.Q_ID = ptl_questions.Q_ID  AND ptl_questions.active = 'TRUE')
@@ -366,7 +374,7 @@
 	function get_result_2($ques_id) {
 											global $connection;
 											$q_id = verify_input($ques_id);
-											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, ptl_users.user_image AS user_image,        ptl_questions.CREATION_DATE,FIRST_NAME,ptl_questions.U_ID,BA_ID, STATE, SCORE
+											$query_2  = "SELECT Q_TITLE, Q_TEXT, Q_TAG, ptl_users.user_image AS user_image,        ptl_questions.CREATION_DATE, ptl_users.gravatar AS gravatar, ptl_users.email AS email,FIRST_NAME,ptl_questions.U_ID,BA_ID, STATE, SCORE
 														FROM ptl_questions
 														LEFT OUTER JOIN ptl_users ON (ptl_questions.U_ID =  ptl_users.U_ID) 
 														LEFT OUTER JOIN
@@ -426,7 +434,7 @@
 											if(isset($user_id)) 
 
 														{														 
-														$query ="SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS,    Q_TITLE, Q_TAG, ptl_questions.Q_ID, ptl_questions.U_ID AS U_ID,
+														$query ="SELECT ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS,    Q_TITLE, Q_TAG, ptl_questions.Q_ID, ptl_questions.U_ID AS U_ID,  ptl_users.gravatar AS gravatar, ptl_users.email AS email,
 																ptl_users.FIRST_NAME AS FIRST_NAME,ptl_users.user_image AS user_image,ptl_questions.CREATION_DATE AS Q_CREATED_ON , SCORE
 																FROM ptl_questions
 																LEFT OUTER JOIN ptl_users ON (ptl_questions.U_ID=ptl_users.U_ID  AND ptl_questions.active = 'TRUE')
@@ -496,7 +504,8 @@
 																	SELECT 
 
 																	ptl_questions.UP_VOTE, COUNT(*) AS ANSWERS_COUNT, VIEWS, Q_TITLE, STATE, ptl_questions.ACTIVE, Q_TAG, ptl_questions.U_ID AS U_ID, 
-																	ptl_questions.Q_ID, ptl_users.FIRST_NAME AS FIRST_NAME, ptl_users.user_image AS user_image, 
+																	ptl_questions.Q_ID, ptl_users.FIRST_NAME AS FIRST_NAME, ptl_users.user_image AS user_image,
+																	ptl_users.gravatar AS gravatar, ptl_users.email AS email, 
 																	ptl_questions.CREATION_DATE AS Q_CREATED_ON, SCORE 
 																	FROM ptl_questions 
 																	LEFT OUTER JOIN ptl_users ON ptl_questions.U_ID=ptl_users.U_ID 
