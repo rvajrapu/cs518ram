@@ -16,6 +16,24 @@
     <link href="css/bootstrap-switch.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-88745904-1', 'none');
+
+    // Replace the following lines with the plugins you want to use.
+    ga('require', 'eventTracker');
+    ga('require', 'outboundLinkTracker');
+    ga('require', 'urlChangeTracker');
+    // ...
+
+    ga('send', 'pageview');
+    ga(function(tracker) {
+      // Logs the tracker created above to the console.
+      console.log(tracker);
+    });
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script async src='js/autotrack.js'></script>
     
 
     
