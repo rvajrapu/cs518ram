@@ -3,6 +3,7 @@
   include("./includes/db_connection.php");
   include("./includes/functions.php");
 
+
   if(!isset($_SESSION['uid'])) {
       redirect_to('index.php');
     }
