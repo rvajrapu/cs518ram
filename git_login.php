@@ -83,7 +83,7 @@ if(isset($_GET['code']))
                   //  echo $_SESSION["username"]; 
                     $_SESSION["git_user"] = 'True';
                    // echo $_SESSION["git_user"];
-                    $_SESSION["git_image"] = 'https://github.com/'.$row["user_id"].'.png';
+                    $_SESSION["git_image"] = 'https://github.com/'.$row_new["user_id"].'.png';
                    // echo $_SESSION["git_image"];
 
                    redirect_to("index.php");
