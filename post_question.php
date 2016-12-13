@@ -44,7 +44,7 @@
         </select>
       </div>
 -->
-      <label for="Question">Enter Multiple Delimeters using Space</label>
+      <label for="Question">Please Use Space Delimeter</label>
       <input type="text" class="form-control" placeholder="Enter Question Tags" id="questiontitle" name="questiontag" autofocus>
 
       <br>

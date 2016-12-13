@@ -49,7 +49,9 @@
   				<ul class="nav nav-tabs">
   				<p></p>
   				<br>
-    				<li class="active"><a href="#"><h4><b>Topic wise Questions</b></h4></a></li>
+  				<?php
+    				echo "<li class='active'><a href='#''><h4><b>".$q_tag." Questions</b></h4></a></li>";
+    			?>	
     				<!--<li><a href="#">Un-Answered</a></li>-->
   				</ul>
   				<p></p>
@@ -87,9 +89,10 @@
 
 							      <div class='col-xs-6 col-md-3'>
 								        <p></p>
-								        <div style='background-color:#e0eaf1;width: 80%;'>
-                                        <img src='userimages/" . $row["user_image"] . "' width='55' height='55' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>
-	                                    <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a ><br>Posted by: <a href = 'myprofile.php?uid=".$row["U_ID"]."'>" . $row["FIRST_NAME"] . "</a></div>
+								        <div style='background-color:#e0eaf1;width: 80%;'>";
+                                    $image_url = getimageurl($row["gravatar"], $row["email"], $row["user_image"]);
+                                        echo "<img src='" . $image_url . "' width='55' height='55' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>";
+	                                  echo "<div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a ><br>Posted by: <a href = 'myprofile.php?uid=".$row["U_ID"]."'>" . $row["FIRST_NAME"] . "</a></div>
 	                                    <div><i class='fa fa-certificate' aria-hidden='true'> " . $row["SCORE"] . " </i></div>
 	                                    <p></p></div>
 								  </div>	

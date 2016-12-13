@@ -116,6 +116,29 @@
                                 <hr/>
 
                                     <?php
+                                    function bbc2html($content) {
+              $search = array (
+                '/(\[b\])(.*?)(\[\/b\])/',
+                '/(\[i\])(.*?)(\[\/i\])/',
+                '/(\[u\])(.*?)(\[\/u\])/',
+                '/(\[ul\])(.*?)(\[\/ul\])/',
+                '/(\[li\])(.*?)(\[\/li\])/',
+                '/(\[url=)(.*?)(\])(.*?)(\[\/url\])/',
+                '/(\[url\])(.*?)(\[\/url\])/'
+              );
+
+              $replace = array (
+                '<strong>$2</strong>',
+                '<em>$2</em>',
+                '<u>$2</u>',
+                '<ul>$2</ul>',
+                '<li>$2</li>',
+                '<a href="$2" target="_blank">$4</a>',
+                '<a href="$2" target="_blank">$2</a>'
+              );
+
+              return preg_replace($search, $replace, $content);
+            }
 
                                     while($row_1 = mysqli_fetch_assoc($result_1))
                                     {
@@ -137,7 +160,7 @@
 
                                           <div class='col-sm-10' style='background-color:#eee;'> <br>" .
                                    
-                                          verify_output($row_1["A_TEXT"]) .
+                                          bbc2html(verify_output($row_1["A_TEXT"])) .
                                 
                                          " <br>
                                            <br>
