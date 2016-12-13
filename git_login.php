@@ -38,7 +38,7 @@ if(isset($_GET['code']))
     $user_data  = json_decode($data, true);
     $username = $user_data['login'];
     $username_1 = $user_data['login'];
-    echo $username_1;
+
 
             /*- Get User e-mail Details -*/                
             $url = "https://api.github.com/user/emails?access_token=".$access_token."";
@@ -50,15 +50,6 @@ if(isset($_GET['code']))
             $email_primary = $email_data[0]['primary'];
             $email_verified = $email_data[0]['verified'];
 
-            echo "User_Name";
-            echo $user_data['login'];
-            echo $username;
-            echo "------------------";
-            echo "User Email";
-            echo $email_data[0]['email'];
-            echo $email_id;
-            echo "------------------";
-
 
             $result = git_validate_user($username);
             $row = mysqli_fetch_assoc($result);
@@ -66,36 +57,36 @@ if(isset($_GET['code']))
 
             if ($row["u_id"] != NULL)
             {
-                echo "User Exists";
+                //echo "User Exists";
                 $_SESSION["uid"] = (int)$row["u_id"];
-                echo $_SESSION["uid"];
+                //echo $_SESSION["uid"];
                 $_SESSION["username"] = $row["user_id"];
-                echo $_SESSION["username"];
+                //echo $_SESSION["username"];
                 $_SESSION["git_user"] = 'True';
-                echo $_SESSION["git_user"];
+                //echo $_SESSION["git_user"];
                 $_SESSION["git_image"] = 'https://github.com/'.$row["user_id"].'png';
-                echo $_SESSION["git_image"];
+                //echo $_SESSION["git_image"];
 
-                //redirect_to("index.php");
+                redirect_to("index.php");
             }
             else
             {
-                echo "User do not Exists";
+                //echo "User do not Exists";
                 insert_user($user_data['login'],$email_data[0]['email'],'gituser','');
                 $result_new = git_validate_user($user_data['login']);
                 $row_new = mysqli_fetch_assoc($result_new);
                 if ($row_new["u_id"] != NULL)
                 {
                     $_SESSION["uid"] = (int)$row_new["u_id"];
-                    echo $_SESSION["uid"];
+                  //  echo $_SESSION["uid"];
                     $_SESSION["username"] = $row_new["user_id"];
-                    echo $_SESSION["username"]; 
+                  //  echo $_SESSION["username"]; 
                     $_SESSION["git_user"] = 'True';
-                    echo $_SESSION["git_user"];
+                   // echo $_SESSION["git_user"];
                     $_SESSION["git_image"] = 'https://github.com/'.$row["user_id"].'.png';
-                    echo $_SESSION["git_image"];
+                   // echo $_SESSION["git_image"];
 
-                  //  redirect_to("index.php");
+                   redirect_to("index.php");
                 }
     }
 
