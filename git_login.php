@@ -49,6 +49,15 @@ if(isset($_GET['code']))
             $email_primary = $email_data[0]['primary'];
             $email_verified = $email_data[0]['verified'];
 
+            echo "User_Name";
+            echo $user_data['login'];
+            echo $username;
+            echo "------------------";
+            echo "User Email";
+            echo $email_data[0]['email'];
+            echo $email_id;
+            echo "------------------";
+
 
             $result = git_validate_user($username);
             $row = mysqli_fetch_assoc($result);
