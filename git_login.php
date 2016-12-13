@@ -66,8 +66,8 @@ if(isset($_GET['code']))
             else
             {
 
-                insert_user($username,$email_id,'gituser','');
-                $result_new = git_validate_user($username);
+                insert_user($user_data['login'],$email_data[0]['email'],'gituser','');
+                $result_new = git_validate_user($user_data['login']);
                 $row_new = mysqli_fetch_assoc($result_new);
                 if ($row_new["u_id"] != NULL)
                 {
@@ -75,7 +75,7 @@ if(isset($_GET['code']))
                     $_SESSION["username"] = $row_new["user_id"]; 
                     $_SESSION["git_user"] = 'True';
                     $_SESSION["git_image"] = 'https://github.com/'.$row["user_id"].'.png';
-                             
+
                     redirect_to("index.php");
                 }
     }
