@@ -49,7 +49,9 @@
   				<ul class="nav nav-tabs">
   				<p></p>
   				<br>
-    				<li class="active"><a href="#"><h4><b>Topic wise Questions</b></h4></a></li>
+  				<?php
+    				echo "<li class='active'><a href='#''><h4><b>".$q_tag." Questions</b></h4></a></li>";
+    			?>	
     				<!--<li><a href="#">Un-Answered</a></li>-->
   				</ul>
   				<p></p>

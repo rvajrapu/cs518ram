@@ -9,7 +9,7 @@
   include("./includes/nav.php");   
 ?>
 
-<br><br><br>
+<br>
     <div  id="errormsg" role="alert">
        <?php echo message(); ?>
     </div>
@@ -30,14 +30,24 @@
         </div>
         <div class="g-recaptcha" data-sitekey="6Lf8Ag4UAAAAADLgLXhSsJWko6yUcNkuptqcwrVw"></div>
         <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
+         <label> <input type="checkbox" value="remember-me"> Remember me </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
+    <center>
+        <h3>OR</h3> 
+    </center>
+    <br>  
     </div> <!-- /container -->
-    <center> <p> <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=b981ea758eaf4d37d9f4">Login with Github </a></p> </center>
+
+    <center>  
+    <!--  
+    <p><a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=b981ea758eaf4d37d9f4">Login with Github </a></p> 
+    -->
+    <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=b981ea758eaf4d37d9f4"><button class="btn btn-success" type="button">
+    Login with Github</button></a>
+    </center>
+    
 
     <!-- Custom styles for this page -->
     <link href="css/signin.css" rel="stylesheet">
