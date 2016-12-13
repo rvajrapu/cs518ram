@@ -36,8 +36,8 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
-
     </div> <!-- /container -->
+    <center> <p> <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=a5160dfe6fa2708500fd">Login with Github </a></p> </center>
 
     <!-- Custom styles for this page -->
     <link href="css/signin.css" rel="stylesheet">

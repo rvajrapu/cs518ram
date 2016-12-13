@@ -78,8 +78,23 @@
 	  						           <div> 
 	  						               <a href='view_question.php?q_id=".$question_id."'>" . verify_output($row["Q_TITLE"]) . "</a> 
 	  						           </div> 
-	  						           <br>  
-	  						           <button type='button' class='btn btn-sm' style='background-color:#d6ecff;'>" . $row["Q_TAG"] . " </button> 
+	  						           <br>";
+
+	  					               $Tag_String = $row['Q_TAG'];
+                                    
+                                       $Tag_Array = explode(' ', $Tag_String);
+                                       $i=0;
+
+                                             for($i=0;$i<=(count($Tag_Array)-1);$i++)
+                                              {
+                                                echo "<button type='button' class='btn btn-sm' >
+                                                       <a href='questionsbytag.php?q_tag=".$Tag_Array[$i]."'>".$Tag_Array[$i]."</a></button>";
+
+                                              } 
+
+                                   echo "           
+
+
 	  						      </div>
 
 

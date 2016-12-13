@@ -54,7 +54,6 @@
 		$query  = "SELECT first_name ";
 		$query .= "FROM ptl_users ";
 		$query .= "WHERE u_id = $userid ";
-
 		$result_username = mysqli_query($connection, $query);
 		confirm_query($result_username);
 		return ($result_username);
@@ -99,8 +98,9 @@
 		$userid = verify_input($userid);
 		$query  = "SELECT user_id, email, first_name, user_image, gravatar, user_role ";
 		$query .= "FROM ptl_users ";
-		$query .= "WHERE u_id = '$userid' or user_id = '$userid'";
+		$query .= "WHERE u_id = '$userid' or user_id = '$userid' ";
 		$query .= "LIMIT 1";
+
 		$result_id = mysqli_query($connection, $query);
 		confirm_query($result_id);
 		if($result_uid = mysqli_fetch_assoc($result_id)) {
@@ -870,6 +870,19 @@
                                             if(!$result){die("Database query failed.");}
 											
 											return ($result);}
+
+
+	function git_validate_user($user_name) {
+		                                 	global $connection;
+		                                 	$user_name = verify_input($user_name);
+		                                 	$query = "SELECT u_id,user_id from ptl_users where user_id = '$user_name'";
+											$result = mysqli_query($connection,$query);
+											if(!$result){die(" git_validate_user: Database query failed.");}
+											
+											return ($result);	
+										}
+
+
 ?>
 
 
