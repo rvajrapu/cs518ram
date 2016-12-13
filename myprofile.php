@@ -10,10 +10,9 @@
       redirect_to('index.php');
     }
     
-  include("./htmlheader.php");
-  include("./includes/nav.php");
+  
 ?>
-<link href="css/pagination.css" rel="stylesheet">
+
 <?php
 
 $result_user = find_userdetails($_GET['uid']);
@@ -59,12 +58,14 @@ $result_user = find_userdetails($_GET['uid']);
     if(!isset($_SESSION["message"]))
     {
       update_user($_SESSION['uid'],$email,$userpic,$gravatar);
-      echo("<script>location.href = '/Questra/myprofile.php?uid=".$uid."';</script>");
-      redirect_to("myprofile.php");
+      //echo("<script>location.href = '/Questra/myprofile.php?uid=".$uid."';</script>");
+      redirect_to("myprofile.php?uid=".$uid);
     }
   }
+  include("./htmlheader.php");
+  include("./includes/nav.php");
 ?>
-
+<link href="css/pagination.css" rel="stylesheet">
 <div class="container">
 <div  id="errormsg" role="alert">
        <?php echo message(); ?>
