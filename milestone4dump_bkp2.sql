@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2016 at 09:07 AM
+-- Generation Time: Dec 13, 2016 at 08:05 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -189,7 +189,12 @@ INSERT INTO `ptl_users` (`U_ID`, `USER_ID`, `PASS_CODE`, `ACTIVE`, `CREATED_BY`,
 (16, 'keymaster', 'n0D@na', '', NULL, NULL, NULL, NULL, NULL, 'User', 'keymaster', '', NULL, 'default.png', '0'),
 (17, 'gatekeeper', '$l0r', '', NULL, NULL, NULL, NULL, NULL, 'User', 'gatekeeper', '', NULL, 'default.png', '0'),
 (18, 'staypuft', 'm@r$hM@ll0w', '', NULL, NULL, NULL, NULL, NULL, 'User', 'staypuft', '', NULL, 'default.png', '0'),
-(19, 'SQL_Ingection', 'UPDATE PTL_USERS SET FIRST_NAME = USER_ID, USER_RO', '', NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, 'default.png', '0');
+(19, 'SQL_Ingection', 'UPDATE PTL_USERS SET FIRST_NAME = USER_ID, USER_RO', '', NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, 'default.png', '0'),
+(20, 'rajaharsha', 'rajaharsha', '', NULL, NULL, NULL, NULL, '0000-00-00', '', 'Raja Harsha', 'Chinta', 'rajaharsha.c@gmail.com', 'default.png', '0'),
+(23, 'sbima', 'gituser', '', NULL, '2016-12-13', NULL, NULL, NULL, '', 'sbima', '', 'sbima001@odu.edu', 'default.png', 'TRUE'),
+(27, 'Yasaswini92', 'gituser', '', NULL, '2016-12-13', NULL, NULL, NULL, '', 'Yasaswini92', '', 'ysura001@odu.edu', 'default.png', 'TRUE'),
+(29, 'rajaharshach', 'gituser', '', NULL, '2016-12-13', NULL, NULL, NULL, '', 'rajaharshach', '', 'rajaharsha.ch@outlook.com', 'default.png', 'TRUE'),
+(30, 'rvajrapu', 'gituser', '', NULL, '2016-12-13', NULL, NULL, NULL, '', 'rvajrapu', '', 'rvajr001@odu.edu', 'default.png', 'TRUE');
 
 -- --------------------------------------------------------
 
@@ -249,9 +254,7 @@ INSERT INTO `ptl_user_votes` (`V_ID`, `V_TYPE`, `Q_ID`, `A_ID`, `U_ID`, `VOTE`, 
 (32, 'A', 0, 5, 2, -1, NULL, '2016-11-11', NULL, '2016-11-11'),
 (33, 'Q', 2, 0, 2, 1, NULL, '2016-11-22', NULL, NULL),
 (34, 'A', 0, 6, 2, -1, NULL, '2016-11-22', NULL, NULL),
-(35, 'Q', 4, 0, 2, 1, NULL, '2016-11-22', NULL, NULL),
-(36, 'Q', 2, 0, 32, 1, NULL, '2016-12-13', NULL, NULL),
-(37, 'A', 0, 6, 32, -1, NULL, '2016-12-13', NULL, NULL);
+(35, 'Q', 4, 0, 2, 1, NULL, '2016-11-22', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -302,12 +305,12 @@ ALTER TABLE `ptl_questions`
 -- AUTO_INCREMENT for table `ptl_users`
 --
 ALTER TABLE `ptl_users`
-  MODIFY `U_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `U_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `ptl_user_votes`
 --
 ALTER TABLE `ptl_user_votes`
-  MODIFY `V_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `V_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- Constraints for dumped tables
 --
