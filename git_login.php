@@ -8,9 +8,9 @@ if(isset($_GET['code']))
     {
             $code = $_GET['code'];
             $post = http_build_query(array(
-                'client_id' => 'b981ea758eaf4d37d9f4',
-                'redirect_url' => 'http://rvajrapu.cs518.cs.odu.edu/git_login.php',
-                'client_secret' => 'a8a4af5d33caa01d04966449f63b6d6650d89b2e',
+                'client_id' => 'my_client_id',
+                'redirect_url' => 'redirect_url',
+                'client_secret' => 'client_secret',
                 'code' => $code,
             ));
 
@@ -32,12 +32,12 @@ if(isset($_GET['code']))
             $scope = $r['scope']; 
 
             /*- Get User Details -*/
-            $url = "https://api.github.com/user?access_token=".$access_token."";
-            $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
-            $context  = stream_context_create($options);
-            $data = file_get_contents($url, false, $context); 
-            $user_data  = json_decode($data, true);
-            $username = $user_data['login'];
+    $url = "https://api.github.com/user?access_token=".$access_token."";
+    $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
+    $context  = stream_context_create($options);
+    $data = file_get_contents($url, false, $context); 
+    $user_data  = json_decode($data, true);
+    $username = $user_data['login'];
 
             /*- Get User e-mail Details -*/                
             $url = "https://api.github.com/user/emails?access_token=".$access_token."";
@@ -97,9 +97,6 @@ if(isset($_GET['code']))
                   //  redirect_to("index.php");
                 }
     }
-      ?>
-    </div>
-      <?php
 
     }
  ?>   
