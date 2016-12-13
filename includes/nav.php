@@ -60,7 +60,8 @@
                         <a href="logout.php">Sign Out</a>
                         </li>
                         <li>
-                        <img src="userimages/<?php echo $result_user['user_image']; ?>" width="35" height="40" alt="">
+                        <?php $image_urlnav = getimageurl($result_user['gravatar'], $result_user['email'], $result_user['user_image']);?>
+                        <img src="<?php echo $image_urlnav; ?>" width="35" height="40" alt="">
                         </li>
                         <li>
                         <a href="myprofile.php?uid=<?php echo $userid ?>"><?php echo $user_name ?></a>

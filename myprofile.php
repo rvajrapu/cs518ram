@@ -76,13 +76,9 @@ $result_user = find_userdetails($_GET['uid']);
         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"></div>
         <div class="col-lg-5 col-md-4 col-sm-6 col-xs-12">
         <div class="hovereffect">
-          <?php if ($result_user['gravatar'] == "TRUE"){
-            $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $result_user['email'] ) ) ) . "?d=" . urlencode( 'http://placehold.it/350x150' );
-            ?>
-          <img src="<?php echo $grav_url; ?>" alt="" width="175" height="175" class="img-circle">
-          <?php } else { ?>
-            <img src="userimages/<?php echo $result_user['user_image']; ?>" alt="" width="175" height="175" class="img-circle">
-          <?php } ?>
+
+          <?php $image_url = getimageurl($result_user['gravatar'], $result_user['email'], $result_user['user_image']);?>
+          <img src="<?php echo $image_url; ?>" alt="" width="175" height="175" class="img-circle">
           
           <div class="overlay">
              <a class="info" href="#aboutModal" data-toggle="modal" data-target="#myModal">Click here</a>
@@ -154,7 +150,7 @@ $result_user = find_userdetails($_GET['uid']);
                     </div>
                     <div class="form-group">
                       <label>Avatar</label>
-                      <p><img src="userimages/<?php echo $result_user['user_image']; ?>" height="150" width="150" alt=""/></p>
+                      <p><img src="<?php echo $image_url; ?>" height="150" width="150" alt=""/></p>
                       <input class="input-group" type="file" name="user_image" accept="image/*" />
                       <p class='help-block'></p>
                       <div class="radio">
@@ -258,11 +254,7 @@ echo "
 			      </div>
 			      <div class='col-xs-6 col-md-3'>
 				        <p></p>
-				        <div style='background-color:#e0eaf1;width: 80%;'>
-                        <img src='userimages/" . $row["user_image"] . "' width='55' height='55' alt='' style='float: left;padding: 0 0px 0 0;margin: 0 6% 0 0;'>
-                        <div>Posted on: <a>" . $row["Q_CREATED_ON"] . "</a><br>Posted by: <a>" . $row["FIRST_NAME"] . "</a></div>
-                        <div><i class='fa fa-certificate' aria-hidden='true'> " . $row["SCORE"] . " </i></div>
-                        <p></p></div>
+				          
 				  </div>	
 
 			  </div> <hr/>";
