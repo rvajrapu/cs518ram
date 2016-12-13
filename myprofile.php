@@ -275,7 +275,7 @@ echo "
 	</div>
     <div role="tabpanel" class="tab-pane" id="myans">
     <br>
-    Coming Soon..</div>
+    Not as per requirement.</div>
   </div>
 
 </div>
