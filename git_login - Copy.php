@@ -8,9 +8,9 @@ if(isset($_GET['code']))
     {
             $code = $_GET['code'];
             $post = http_build_query(array(
-                'client_id' => '57e53f036e1261d0c6d3',
-                'redirect_url' => 'http://rvajrapu.cs518.cs.odu.edu/git_login.php',
-                'client_secret' => '516011766e8ec313e6cb24784a3e5aa074156fcc',
+                'client_id' => 'a5160dfe6fa2708500fd',
+                'redirect_url' => 'http://localhost/GIT/git_login.php',
+                'client_secret' => '00c582ee80465ae3c4925fe40eabdf9ad4aba9d1',
                 'code' => $code,
             ));
 
