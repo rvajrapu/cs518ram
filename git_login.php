@@ -9,7 +9,7 @@ if(isset($_GET['code']))
             $code = $_GET['code'];
             $post = http_build_query(array(
                 'client_id' => 'b981ea758eaf4d37d9f4',
-                'redirect_url' => 'http://rvajrapu.cs518.cs.odu.edu/git_login.php',
+                'redirect_url' => 'http://rvajrapu.cs518.cs.odu.edu/login.php',
                 'client_secret' => 'a8a4af5d33caa01d04966449f63b6d6650d89b2e',
                 'code' => $code,
             ));
@@ -37,6 +37,8 @@ if(isset($_GET['code']))
     $data = file_get_contents($url, false, $context); 
     $user_data  = json_decode($data, true);
     $username = $user_data['login'];
+    $username_1 = $user_data['login'];
+    echo $username_1;
 
             /*- Get User e-mail Details -*/                
             $url = "https://api.github.com/user/emails?access_token=".$access_token."";
